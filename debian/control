@@ -1,8 +1,8 @@
 Source: digihelfer-espt
 Section: misc
 Priority: optional
-Maintainer: Johannes Theiner <kontakt@joethei.xyz>
-Build-Depends: debhelper-compat (= 13), dh-sequence-iserv, dh-sequence-stsbl
+Maintainer: Hochschule Emden/Leer DigiHelfer <johannes.theiner@informatik-emden.de>
+Build-Depends: debhelper-compat (= 13), dh-sequence-iserv
 Standards-Version: 4.5.0
 Homepage: https://pdf.joethei.space/Abgaben/Projektarbeit/index.pdf
 
@@ -10,9 +10,7 @@ Package: digihelfer-espt
 Architecture: all
 Depends: iserv-portal,
          iserv3-core,
-         libgd-graph-perl,
-         ${misc:Depends},
-         ${perl:Depends}
+         ${misc:Depends}
 Xb-Private-Iserv-Revision: ${iserv:Revision}
 Description: Elternsprechtags Terminverwaltung
 Tag: suite::iserv:portal, role::plugin, implemented-in::php, status::highlighted, status::recommended
