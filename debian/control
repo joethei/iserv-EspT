@@ -2,7 +2,7 @@ Source: digihelfer-espt
 Section: misc
 Priority: optional
 Maintainer: Johannes Theiner <kontakt@joethei.xyz>
-Build-Depends: debhelper-compat (= 13), dh-sequence-iserv, dh-sequence-stsbl
+Build-Depends: debhelper-compat (= 13), dh-sequence-iserv
 Standards-Version: 4.5.0
 Homepage: https://pdf.joethei.space/Abgaben/Projektarbeit/index.pdf
 
