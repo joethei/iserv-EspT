@@ -35,6 +35,6 @@ class DH_EspTBundle extends Bundle implements AutoloadRoutingBundleInterface
      */
     public function getContainerExtension()
     {
-        return new EspTExtension();
+        return new EsptExtension();
     }
 }
