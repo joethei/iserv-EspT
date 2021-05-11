@@ -2,7 +2,6 @@
 namespace DigiHelfer\EspT;
 
 use IServ\CoreBundle\Routing\AutoloadRoutingBundleInterface;
-use Stsbl\EximStatsBundle\DependencyInjection\EspTExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /*
