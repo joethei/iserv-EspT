@@ -1,0 +1,18 @@
+{%  extends "@IServCore/page.html.twig" %}
+
+{% block stylesheets %}
+
+    {% if app.environment != 'prod' %}
+        <!-- {{ _self }} => espt.css -->
+    {% endif %}
+    <link rel="stylesheets" href="{{ asset("css/espt.css", "espt") }}"/>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if app.environment != 'prod' %}
+        <!-- {{ _self }} => espt.js -->
+    {% endif %}
+    <script type="text/javascript" src="{{ asset('js/espt.js', 'demo') }}"></script>
+{% endblock %}
