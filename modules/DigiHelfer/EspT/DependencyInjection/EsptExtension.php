@@ -33,6 +33,6 @@ use IServ\CoreBundle\DependencyInjection\IServBaseExtension;
  *
  * @link http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class EspTExtension extends IServBaseExtension
+class EsptExtension extends IServBaseExtension
 {
 }
