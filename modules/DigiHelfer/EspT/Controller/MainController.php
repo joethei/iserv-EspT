@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DigiHelfer\EspT\Controller;
 
-use IServ\CrudBundle\Controller\AbstractBaseController;
+use IServ\CoreBundle\Controller\AbstractPageController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package DigiHelfer\EspT\Controller
  * @Route("/espt")
  */
-final class MainController extends AbstractBaseController {
+final class MainController extends AbstractPageController {
 
     /**
      * @return array
