@@ -1,7 +1,7 @@
 Source: digihelfer-espt
 Section: misc
 Priority: optional
-Maintainer: Hochschule Emden/Leer DigiHelfer <johannes.theiner@informatik-emden.de>
+Maintainer: Hochschule Emden/Leer DigiHelfer <kontakt@joethei.de>
 Build-Depends: debhelper-compat (= 13), dh-sequence-iserv
 Standards-Version: 4.5.0
 Homepage: https://pdf.joethei.space/Abgaben/Projektarbeit/index.pdf

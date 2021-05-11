@@ -1,0 +1,7 @@
+{
+  "name": "DH_EspT",
+  "version": "1.0.0",
+  "dependencies": {
+    "webpack-merge": "^5.7.3"
+  }
+}
