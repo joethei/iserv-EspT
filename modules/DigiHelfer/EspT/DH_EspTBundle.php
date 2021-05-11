@@ -2,7 +2,6 @@
 namespace DigiHelfer\EspT;
 
 use IServ\CoreBundle\Routing\AutoloadRoutingBundleInterface;
-use Stsbl\EximStatsBundle\DependencyInjection\EspTExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /*
@@ -36,6 +35,6 @@ class DH_EspTBundle extends Bundle implements AutoloadRoutingBundleInterface
      */
     public function getContainerExtension()
     {
-        return new EspTExtension();
+        return new EsptExtension();
     }
 }
