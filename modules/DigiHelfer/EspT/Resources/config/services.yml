@@ -3,3 +3,10 @@ services:
         autoconfigure: true
         autowire: true
         public: false
+
+    DigiHelfer\EspT\:
+        resource: '../../*'
+
+    DigiHelfer\EspT\EventListener\MenuListener:
+        tags:
+            - { name: kernel.event_listener, event: iserv_portal.menu_main, method: onBuildMainMenu }
