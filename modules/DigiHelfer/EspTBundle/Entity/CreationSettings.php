@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class CreationSettings
- * @package DigiHelfer\EspT\Entity
+ * @package DigiHelfer\EspTBundle\Entity
  * @ORM\Entity
  * @ORM\Table(name="espt_settings")
  * @ORM\HasLifecycleCallbacks
@@ -72,13 +72,6 @@ class CreationSettings implements CrudInterface{
      * @Assert\Positive()
      */
     private $maxNumberOfInvites;
-
-    /**
-     * @ORM\Column(name="event_type", type="integer")
-     * @var EventType
-     * @Assert\NotBlank()
-     */
-    private $eventType;
 
     public function __toString() {
         return "";

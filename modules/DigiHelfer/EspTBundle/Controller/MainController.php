@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace DigiHelfer\EspT\Controller;
 
+use DigiHelfer\EspT\Entity\CreationSettingsType;
 use IServ\CoreBundle\Controller\AbstractPageController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class MainController
- * @package DigiHelfer\EspT\Controller
+ * @package DigiHelfer\EspTBundle\Controller
  * @Route("/espt")
  */
 final class MainController extends AbstractPageController {
@@ -21,7 +23,14 @@ final class MainController extends AbstractPageController {
      * @Template("@DH_EspT/Default/index.html.twig")
      */
     public function index(): array {
-        $this->addBreadcrumb("Elternsprechtag");
-        return [];
+        $this->addBreadcrumb(_("EspT"));
+
+        $settings = new CreationSettingsType();
+
+        $form = $this->createForm(CreationSettingsType::class, $settings);
+
+        return [
+            'form' => $form->createView(),
+        ];
     }
 }
