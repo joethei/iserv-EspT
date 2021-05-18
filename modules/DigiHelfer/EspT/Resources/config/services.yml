@@ -3,8 +3,6 @@ services:
         autoconfigure: true
         autowire: true
         public: false
-        bind:
-            $connectionFactory: '@doctrine.dbal.connection_factory'
 
     DigiHelfer\EspT\:
         resource: '../../*'
