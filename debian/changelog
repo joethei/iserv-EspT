@@ -1,3 +1,8 @@
+digihelfer-espt (21.04.07-8) experimental; urgency=medium
+  * one file rename missed
+ -- Johannes Theiner <kontakt@joethei.de>  Thu, 18 May 2021 11:55:58 +0200
+
+
 digihelfer-espt (21.04.07-7) experimental; urgency=medium
   * fix wrong namespacing
  -- Johannes Theiner <kontakt@joethei.de>  Thu, 18 May 2021 11:49:58 +0200

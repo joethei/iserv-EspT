@@ -4,10 +4,10 @@ services:
         autowire: true
         public: false
 
-    DigiHelfer\EspT\:
+    DigiHelfer\EspTBundle\:
         resource: '../../*'
 
 
-    DigiHelfer\EspT\EventListener\MenuListener:
+    DigiHelfer\EspTBundle\EventListener\MenuListener:
         tags:
             - { name: kernel.event_listener, event: iserv_portal.menu_main, method: onBuildMainMenu }
