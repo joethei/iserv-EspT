@@ -18,7 +18,7 @@ class MenuListener implements MainMenuListenerInterface
             'route' => 'espt_index',
             'label' => _('EspT'),
             'extras' => [
-                'icon' => 'conference-room',
+                'icon' => 'group',
                 'icon_style' => 'pro',
             ],
         ]);

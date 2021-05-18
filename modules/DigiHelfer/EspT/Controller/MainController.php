@@ -18,7 +18,7 @@ final class MainController extends AbstractPageController {
     /**
      * @return array
      * @Route("", name="espt_index")
-     * @Template("@EspT/index.html.twig")
+     * @Template("@DH_EspT/Default/index.html.twig")
      */
     public function index(): array {
         $this->addBreadcrumb("Elternsprechtag");
