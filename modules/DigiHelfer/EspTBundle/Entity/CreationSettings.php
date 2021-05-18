@@ -29,28 +29,35 @@ class CreationSettings implements CrudInterface{
      * @var DateTime
      * @Assert\NotBlank()
      */
-    private $startDate;
+    private $date;
 
     /**
      * @ORM\Column(name="end_date", type="datetime")
      * @var DateTime
      * @Assert\NotBlank()
      */
-    private $endDate;
+    private $start;
+
+    /**
+     * @ORM\Column(name="end_date", type="datetime")
+     * @var DateTime
+     * @Assert\NotBlank()
+     */
+    private $end;
 
     /**
      * @ORM\Column(name="registration_start", type="datetime")
      * @var DateTime
      * @Assert\NotBlank()
      */
-    private $registrationStart;
+    private $regStart;
 
     /**
      * @ORM\Column(name="registration_end", type="datetime")
      * @var DateTime
      * @Assert\NotBlank()
      */
-    private $registrationEnd;
+    private $regEnd;
 
     /**
      * @ORM\Column(name="normal_length", type="integer")
@@ -80,4 +87,5 @@ class CreationSettings implements CrudInterface{
     public function getId() : ?int {
         return $this->id;
     }
+
 }
