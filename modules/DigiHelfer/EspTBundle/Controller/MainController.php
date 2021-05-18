@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DigiHelfer\EspT\Controller;
+namespace DigiHelfer\EspTBundle\Controller;
 
-use DigiHelfer\EspT\Entity\CreationSettingsType;
+use DigiHelfer\EspTBundle\Entity\CreationSettingsType;
 use IServ\CoreBundle\Controller\AbstractPageController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;

@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
-namespace DigiHelfer\EspT;
+namespace DigiHelfer\EspTBundle;
 
 use IServ\CoreBundle\Routing\AutoloadRoutingBundleInterface;
-use DigiHelfer\EspT\DependencyInjection\EsptExtension;
+use DigiHelfer\EspTBundle\DependencyInjection\EsptExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /*

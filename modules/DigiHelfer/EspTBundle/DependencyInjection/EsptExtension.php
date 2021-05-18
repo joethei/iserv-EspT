@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace DigiHelfer\EspT\DependencyInjection;
+namespace DigiHelfer\EspTBundle\DependencyInjection;
 
 use IServ\CoreBundle\DependencyInjection\IServBaseExtension;
 

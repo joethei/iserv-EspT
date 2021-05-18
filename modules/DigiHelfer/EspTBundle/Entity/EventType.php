@@ -1,7 +1,7 @@
 <?php
 
 
-namespace DigiHelfer\EspT\Entity;
+namespace DigiHelfer\EspTBundle\Entity;
 
 
 abstract class EventType {

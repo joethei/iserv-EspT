@@ -1,6 +1,6 @@
 <?php
 
-namespace DigiHelfer\EspT\Entity;
+namespace DigiHelfer\EspTBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;

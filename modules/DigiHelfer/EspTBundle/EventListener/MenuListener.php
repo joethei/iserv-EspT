@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DigiHelfer\EspT\EventListener;
+namespace DigiHelfer\EspTBundle\EventListener;
 
 use IServ\CoreBundle\Event\MenuEvent;
 use IServ\CoreBundle\EventListener\MainMenuListenerInterface;
