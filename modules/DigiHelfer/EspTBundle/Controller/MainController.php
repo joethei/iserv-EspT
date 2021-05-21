@@ -8,9 +8,6 @@ use DigiHelfer\EspTBundle\Entity\CreationSettings;
 use DigiHelfer\EspTBundle\Entity\CreationSettingsType;
 use IServ\CoreBundle\Controller\AbstractPageController;
 use IServ\CoreBundle\Repository\GroupRepository;
-use IServ\CoreBundle\Service\GroupManager;
-use IServ\GroupViewBundle\GroupViewable\GroupViewableRepository;
-use IServ\Library\User\User\BasicUser;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -48,6 +45,7 @@ final class MainController extends AbstractPageController {
     }
 
     /**
+     * @param GroupRepository $repository
      * @return array
      * @Route("/teachers", name="espt_teachers")
      * @Template("@DH_EspT/Default/teachers.html.twig")
