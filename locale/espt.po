@@ -1,8 +1,6 @@
-# TRANSLATION CATALOG OF STSBL-ISERV-EXIMSTATS.
-# Copyright (C) 2017 Stadtteilschule Blankenese
+# TRANSLATION CATALOG OF DIGIHELFER-ESPT
+# Copyright (C) 2021 Johanens Theiner
 # This file is distributed under the same license as the digihelfer-espt package.
-# Stadtteilschule Blankenese <repository@stsbl.de>, 2017.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: digihelfer-espt\n"
@@ -18,4 +16,4 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "EspT"
-msgstr "Elternpsprechtag"
+msgstr "Elternsprechtag"

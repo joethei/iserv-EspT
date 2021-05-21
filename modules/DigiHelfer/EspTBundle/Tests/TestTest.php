@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace DigiHelfer\EspT\Tests;
+namespace DigiHelfer\EspTBundle\Tests;
 
 use PHPUnit\Framework\TestCase;
 

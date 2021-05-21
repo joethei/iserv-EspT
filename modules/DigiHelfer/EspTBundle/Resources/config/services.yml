@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        public: false
+
+    DigiHelfer\EspTBundle\:
+        resource: '../../*'
+
+
+    DigiHelfer\EspTBundle\EventListener\MenuListener:
+        tags:
+            - { name: kernel.event_listener, event: iserv_portal.menu_main, method: onBuildMainMenu }
