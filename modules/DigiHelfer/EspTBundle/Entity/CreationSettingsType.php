@@ -3,6 +3,7 @@
 namespace DigiHelfer\EspTBundle\Entity;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -19,8 +20,8 @@ class CreationSettingsType extends AbstractType {
             ->add('end', TimeType::class)
             ->add('regStart', DateTimeType::class)
             ->add('regEnd', DateTimeType::class)
-            ->add('normalLength', TimeType::class)
-            ->add('inviteLength', TimeType::class)
+            ->add('normalLength', DateIntervalType::class)
+            ->add('inviteLength', DateIntervalType::class)
             ->add('maxNumberOfInvites', IntegerType::class);
     }
 
