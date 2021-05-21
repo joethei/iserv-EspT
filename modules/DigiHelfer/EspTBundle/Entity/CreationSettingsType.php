@@ -20,6 +20,7 @@ class CreationSettingsType extends AbstractType {
             ->add('regStart', DateTimeType::class)
             ->add('regEnd', DateTimeType::class)
             ->add('normalLength', TimeType::class)
+            ->add('inviteLength', TimeType::class)
             ->add('maxNumberOfInvites', IntegerType::class);
     }
 

@@ -3,6 +3,8 @@ let baseConfig = require(process.env.WEBPACK_BASE_PATH + '/webpack.config.base.j
 let webpackConfig = {
     entry: {
         'css/espt': './assets/less/espt.less',
+
+        'img/interview.png': './assets/img/interview.png',
     },
 };
 

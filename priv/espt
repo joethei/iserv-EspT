@@ -1,0 +1,4 @@
+priv.espt_admin:
+module      EspT
+title       Elternsprechtag Administration
+description Erstellen & Verwalten von Sprechterminen

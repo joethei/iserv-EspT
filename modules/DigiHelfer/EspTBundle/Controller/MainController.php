@@ -30,6 +30,7 @@ final class MainController extends AbstractPageController {
         $settings->setDate(new \DateTime('tomorrow'));
         $settings->setStart(new \DateTime('tomorrow'));
         $settings->setEnd(new \DateTime('tomorrow'));
+        $settings->setNormalLength(15);
         $settings->setInviteLength(6);
         $settings->setMaxNumberOfInvites(15);
         $settings->setRegStart(new \DateTime('tomorrow'));
