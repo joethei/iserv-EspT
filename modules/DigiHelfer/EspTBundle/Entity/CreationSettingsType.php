@@ -54,7 +54,9 @@ class CreationSettingsType extends AbstractType {
                 ]
             ])
             ->add('maxNumberOfInvites', IntegerType::class, [
-                'label' => _("MaxNumberOfInvites")
+                'label' => _("MaxNumberOfInvites"),
+                'icon' => 'ok',
+                'buttonClass' => 'btn-success',
             ])
         ->add('save', SubmitType::class, [
             'label' => _("save")
