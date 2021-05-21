@@ -1,0 +1,6 @@
+EsptInviteAll:
+name        Frei wählbare Einladungstermine
+description Einladungstermine sind frei wählbar
+type        bool
+group	    Module: EspT
+default	    true

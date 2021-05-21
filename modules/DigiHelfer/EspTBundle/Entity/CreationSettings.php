@@ -3,6 +3,7 @@
 namespace DigiHelfer\EspTBundle\Entity;
 
 use DateTime;
+use Doctrine\DBAL\Types\TimeType;
 use Doctrine\ORM\Mapping as ORM;
 use IServ\CrudBundle\Entity\CrudInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -61,14 +62,14 @@ class CreationSettings implements CrudInterface{
 
     /**
      * @ORM\Column(name="normal_length", type="integer")
-     * @var int
+     * @var DateTime
      * @Assert\Positive()
      */
     private $normalLength;
 
     /**
      * @ORM\Column(name="invite_length", type="integer")
-     * @var integer
+     * @var DateTime
      * @Assert\Positive()
      */
     private $inviteLength;
@@ -161,7 +162,7 @@ class CreationSettings implements CrudInterface{
     /**
      * @return int
      */
-    public function getNormalLength(): int {
+    public function getNormalLength(): DateTime {
         return $this->normalLength;
     }
 
@@ -175,7 +176,7 @@ class CreationSettings implements CrudInterface{
     /**
      * @return int
      */
-    public function getInviteLength(): int {
+    public function getInviteLength(): DateTime {
         return $this->inviteLength;
     }
 
