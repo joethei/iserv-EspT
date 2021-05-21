@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace DigiHelfer\EspTBundle\Controller;
 
+use DigiHelfer\EspTBundle\Entity\CreationSettings;
 use DigiHelfer\EspTBundle\Entity\CreationSettingsType;
 use IServ\CoreBundle\Controller\AbstractPageController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -25,7 +25,7 @@ final class MainController extends AbstractPageController {
     public function index(): array {
         $this->addBreadcrumb(_("EspT"));
 
-        $settings = new CreationSettingsType();
+        $settings = new CreationSettings();
 
         $form = $this->createForm(CreationSettingsType::class, $settings);
 

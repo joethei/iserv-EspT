@@ -88,4 +88,116 @@ class CreationSettings implements CrudInterface{
         return $this->id;
     }
 
+    /**
+     * @return DateTime
+     */
+    public function getDate(): DateTime {
+        return $this->date;
+    }
+
+    /**
+     * @param DateTime $date
+     */
+    public function setDate(DateTime $date): void {
+        $this->date = $date;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getStart(): DateTime {
+        return $this->start;
+    }
+
+    /**
+     * @param DateTime $start
+     */
+    public function setStart(DateTime $start): void {
+        $this->start = $start;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getEnd(): DateTime {
+        return $this->end;
+    }
+
+    /**
+     * @param DateTime $end
+     */
+    public function setEnd(DateTime $end): void {
+        $this->end = $end;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getRegStart(): DateTime {
+        return $this->regStart;
+    }
+
+    /**
+     * @param DateTime $regStart
+     */
+    public function setRegStart(DateTime $regStart): void {
+        $this->regStart = $regStart;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getRegEnd(): DateTime {
+        return $this->regEnd;
+    }
+
+    /**
+     * @param DateTime $regEnd
+     */
+    public function setRegEnd(DateTime $regEnd): void {
+        $this->regEnd = $regEnd;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNormalLength(): int {
+        return $this->normalLength;
+    }
+
+    /**
+     * @param int $normalLength
+     */
+    public function setNormalLength(int $normalLength): void {
+        $this->normalLength = $normalLength;
+    }
+
+    /**
+     * @return int
+     */
+    public function getInviteLength(): int {
+        return $this->inviteLength;
+    }
+
+    /**
+     * @param int $inviteLength
+     */
+    public function setInviteLength(int $inviteLength): void {
+        $this->inviteLength = $inviteLength;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMaxNumberOfInvites(): int {
+        return $this->maxNumberOfInvites;
+    }
+
+    /**
+     * @param int $maxNumberOfInvites
+     */
+    public function setMaxNumberOfInvites(int $maxNumberOfInvites): void {
+        $this->maxNumberOfInvites = $maxNumberOfInvites;
+    }
+
 }
