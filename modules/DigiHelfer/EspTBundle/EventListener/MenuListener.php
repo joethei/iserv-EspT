@@ -18,8 +18,8 @@ class MenuListener implements MainMenuListenerInterface
             'route' => 'espt_index',
             'label' => _('EspT'),
             'extras' => [
-                'icon' => 'pro-parents',
-                'icon_style' => 'pro',
+                'icon' => 'interview',
+                'icon_style' => 'iserv',
             ],
         ]);
     }
