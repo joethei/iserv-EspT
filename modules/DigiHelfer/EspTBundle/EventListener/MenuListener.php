@@ -25,6 +25,8 @@ class MenuListener implements MainMenuListenerInterface
             'extras' => [
                 'icon' => 'interview',
                 'icon_style' => 'iserv',
+                'icon_fallback' => 'users',
+                'icon_fallback_style' => 'fugue'
             ],
         ]);
     }
