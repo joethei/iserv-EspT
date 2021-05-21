@@ -5,7 +5,7 @@
     {% if app.environment != 'prod' %}
         <!-- {{ _self }} => espt.css -->
     {% endif %}
-    <link rel="stylesheets" href="{{ asset('css/espt.css', 'dh_espt') }}"/>
+    <!--<link rel="stylesheets" href="{{ asset('css/espt.css', 'dh_espt') }}"/>-->
 {% endblock %}
 
 {% block javascripts %}
@@ -14,5 +14,5 @@
     {% if app.environment != 'prod' %}
         <!-- {{ _self }} => espt.js -->
     {% endif %}
-    <script type="text/javascript" src="{{ asset('js/espt.js', 'dh_espt') }}"></script>
+    <!--<script type="text/javascript" src="{{ asset('js/espt.js', 'dh_espt') }}"></script>-->
 {% endblock %}

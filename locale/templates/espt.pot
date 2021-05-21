@@ -19,3 +19,36 @@ msgstr ""
 
 msgid "EspT"
 msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "StartTime"
+msgstr ""
+
+msgid "EndTime"
+msgstr ""
+
+msgid "RegStart"
+msgstr ""
+
+msgid "RegEnd"
+msgstr ""
+
+msgid "NormalLength"
+msgstr ""
+
+msgid "InviteLength"
+msgstr ""
+
+msgid "MaxNumberOfInvites"
+msgstr ""
+
+msgid "save"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "hours"
+msgstr ""

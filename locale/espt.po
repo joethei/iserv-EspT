@@ -17,3 +17,36 @@ msgstr ""
 
 msgid "EspT"
 msgstr "Elternsprechtag"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "StartTime"
+msgstr "Beginn um"
+
+msgid "EndTime"
+msgstr "Ende um"
+
+msgid "RegStart"
+msgstr "Beginn der Registrierung"
+
+msgid "RegEnd"
+msgstr "Ende der Registrierung"
+
+msgid "NormalLength"
+msgstr "Länge eines normalen Termins"
+
+msgid "InviteLength"
+msgstr "Länge eines Einladungstermins"
+
+msgid "MaxNumberOfInvites"
+msgstr "maximale Anzahl an Einladungsterminen"
+
+msgid "save"
+msgstr "Erstellen"
+
+msgid "hours"
+msgstr "Stunden"
+
+msgid "minutes"
+msgstr "Minuten"
