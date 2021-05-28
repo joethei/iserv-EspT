@@ -17,19 +17,24 @@ class CreationSettingsType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options): void {
         $builder
             ->add('date', DateType::class, [
-                'label' => _("Date")
+                'label' => _("Date"),
+                'help' => "An welchem Tag soll der Sprechtag stattfinden?"
             ])
             ->add('start', TimeType::class, [
-                'label' => _('StartTime')
+                'label' => _('StartTime'),
+                'help' => "Um welche Uhrzeit soll der Sprechtag starten?"
             ])
             ->add('end', TimeType::class, [
-                'label' => _("EndTime")
+                'label' => _("EndTime"),
+                'help' => "Um welche Uhrzeit soll der Sprechtag enden?"
             ])
             ->add('regStart', DateTimeType::class, [
-                'label' => _("RegStart")
+                'label' => _("RegStart"),
+                'help' => "Ab wann soll die Anmeldung möglich sein?"
             ])
             ->add('regEnd', DateTimeType::class, [
-                'label' => _("RegEnd")
+                'label' => _("RegEnd"),
+                'help' => "Bis wann soll die Anmeldung möglich sein?"
             ])
             ->add('normalLength', DateIntervalType::class, [
                 'label' => _("NormalLength"),
@@ -38,9 +43,11 @@ class CreationSettingsType extends AbstractType {
                 'with_days' => false,
                 'with_hours' => false,
                 'with_minutes' => true,
+                'widget' => 'integer',
                 'labels' => [
                     'minutes' => _("minutes")
-                ]
+                ],
+                'help' => "Wie lang ist ein normaler Termin?"
             ])
             ->add('inviteLength', DateIntervalType::class, [
                 'label' => _("InviteLength"),
@@ -49,12 +56,15 @@ class CreationSettingsType extends AbstractType {
                 'with_days' => false,
                 'with_hours' => false,
                 'with_minutes' => true,
+                'widget' => 'integer',
                 'labels' => [
                     'minutes' => _("minutes")
-                ]
+                ],
+                'help' => "Wie lang ist ein Einladungstermin?"
             ])
             ->add('maxNumberOfInvites', IntegerType::class, [
                 'label' => _("MaxNumberOfInvites"),
+                'help' => "Wie viele Einladungstermine können maximal vergeben werden?"
             ])
         ->add('save', SubmitType::class, [
             'label' => _("save"),

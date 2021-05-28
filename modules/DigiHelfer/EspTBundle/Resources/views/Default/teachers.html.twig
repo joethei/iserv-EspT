@@ -12,8 +12,11 @@
         </div>
     </div>
 
+    <div class="teacher-list">
     {% for teacher in teachers %}
-        <li>{{ teacher.name }}</li>
+        <div class="teacher">{{ teacher.name }}</div>
+        <div class="teacher-blocks"></div>
     {% endfor %}
+    </div>
 
 {% endblock %}
