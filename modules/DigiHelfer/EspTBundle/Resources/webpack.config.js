@@ -13,7 +13,7 @@ let webpackConfig = {
         'img/interview.png': './assets/img/interview.png',
     },
     output: {
-        path: path.resolve(__dirname, 'public/assets/dh-espt'),
+        path: path.resolve(__dirname, '../../../../public/assets/dh-espt'),
     },
 };
 
