@@ -24,14 +24,14 @@ class CreationSettings implements CrudInterface{
     private $id;
 
     /**
-     * @ORM\Column(name="start_date", type="datetime")
+     * @ORM\Column(name="date", type="datetime")
      * @var \DateTime
      * @Assert\NotBlank()
      */
     private $date;
 
     /**
-     * @ORM\Column(name="end_date", type="datetime")
+     * @ORM\Column(name="start_date", type="datetime")
      * @var \DateTime
      * @Assert\NotBlank()
      */

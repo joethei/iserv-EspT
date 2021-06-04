@@ -8,6 +8,8 @@ use DigiHelfer\EspTBundle\Entity\CreationSettings;
 use DigiHelfer\EspTBundle\Entity\CreationSettingsType;
 use IServ\CoreBundle\Controller\AbstractPageController;
 use IServ\CoreBundle\Repository\GroupRepository;
+use Knp\Menu\FactoryInterface;
+use Knp\Menu\ItemInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -41,6 +43,7 @@ final class MainController extends AbstractPageController {
 
         return [
             'form' => $form->createView(),
+            'menu' => $this->getMenu('Erstellung')
         ];
     }
 
@@ -56,5 +59,22 @@ final class MainController extends AbstractPageController {
         $teachers = $repository->findByNameOrAccount("Lehrer")->getUsers();
 
         return ['teachers' => $teachers];
+    }
+
+    private function getMenu(?string $current = null): ItemInterface
+    {
+        $menu = $this->get(FactoryInterface::class)->createItem('root');
+        $menu->addChild('Erstellung', ['route' => 'espt_index']);
+        $menu->addChild('Lehrkräfte', ['route' => 'espt_teachers']);
+
+        if (null !== $current) {
+            if (null === $item = $menu->getChild($current)) {
+                throw new \LogicException(sprintf('No child "%s" found!', $current));
+            }
+
+            $item->setCurrent(true);
+        }
+
+        return $menu;
     }
 }

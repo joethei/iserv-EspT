@@ -4,19 +4,15 @@
 
 {% block content %}
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="page-header">
-                <h1>Lehrkräfte</h1>
-            </div>
-        </div>
-    </div>
+    <div id="schedule"></div>
 
-    <div class="teacher-list">
-    {% for teacher in teachers %}
-        <div class="teacher">{{ teacher.name }}</div>
-        <div class="teacher-blocks"></div>
-    {% endfor %}
-    </div>
+{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if app.environment != 'prod' %}
+        <!-- {{ _self }} => schedule.js -->
+    {% endif %}
+    <script type="text/javascript" src="{{ asset('js/schedule.js', 'espt') }}"></script>
 {% endblock %}
