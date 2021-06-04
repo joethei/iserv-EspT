@@ -30,6 +30,7 @@ final class MainController extends AbstractPageController {
 
         $settings = new CreationSettings();
 
+        //set default form values
         $settings->setDate(new \DateTime('tomorrow'));
         $settings->setStart(new \DateTime('tomorrow'));
         $settings->setEnd(new \DateTime('tomorrow'));
@@ -76,5 +77,16 @@ final class MainController extends AbstractPageController {
         }
 
         return $menu;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public static function getSubscribedServices(): array {
+        // Take all subscribed services from the parent classes.
+        $services = parent::getSubscribedServices();
+        // Add services we commonly use and don't want to inject in each controller or action.
+        $services[] = FactoryInterface::class;
+        return $services;
     }
 }
