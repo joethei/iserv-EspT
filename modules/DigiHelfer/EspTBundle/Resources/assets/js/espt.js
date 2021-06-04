@@ -2,16 +2,10 @@
 
 import App from 'IServ.App';
 
-import {Calendar} from '@fullcalendar/core';
-import fcInteraction from '@fullcalendar/interaction';
-import fcDayGrid from '@fullcalendar/daygrid';
-import fcTimeGrid from '@fullcalendar/timegrid';
-import fcList from '@fullcalendar/list';
-
-DigiHelfer.EspT = IServ.register(function() {
+IServ.EspT = IServ.register(function() {
 
     function initialize() {
-
+        console.log(App.isDebug());
     }
 
     // Public API
@@ -21,4 +15,4 @@ DigiHelfer.EspT = IServ.register(function() {
 
 }());
 
-export default DigiHelfer.EspT;
+export default IServ.EspT;
