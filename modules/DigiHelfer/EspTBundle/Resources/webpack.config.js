@@ -12,6 +12,9 @@ let webpackConfig = {
 
         'img/interview.png': './assets/img/interview.png',
     },
+    output: {
+        path: path.resolve(__dirname, 'public/assets/dh-espt'),
+    },
 };
 
 module.exports = merge(baseConfig.get(__dirname), webpackConfig);
