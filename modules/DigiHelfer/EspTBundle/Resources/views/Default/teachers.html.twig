@@ -1,0 +1,24 @@
+{% extends "@DH_EspT/Default/base.html.twig" %}
+
+{% block page_title 'Elternsprechtag' %}
+
+{% block content %}
+
+    <div id="schedule"></div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if app.environment != 'prod' %}
+        <!-- {{ _self }} => vue-scheduler-lite.js -->
+    {% endif %}
+    <script type="text/javascript" src="{{ asset('js/scheduler.js', 'espt') }}"></script>
+
+    {% if app.environment != 'prod' %}
+        <!-- {{ _self }} => schedule.js -->
+    {% endif %}
+    <script type="text/javascript" src="{{ asset('js/schedule.js', 'espt') }}"></script>
+
+{% endblock %}

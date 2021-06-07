@@ -2,8 +2,6 @@
 
 namespace DigiHelfer\EspTBundle\Entity;
 
-use DateTime;
-use Doctrine\DBAL\Types\TimeType;
 use Doctrine\ORM\Mapping as ORM;
 use IServ\CrudBundle\Entity\CrudInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -26,50 +24,50 @@ class CreationSettings implements CrudInterface{
     private $id;
 
     /**
-     * @ORM\Column(name="start_date", type="datetime")
-     * @var DateTime
+     * @ORM\Column(name="date", type="datetime")
+     * @var \DateTime
      * @Assert\NotBlank()
      */
     private $date;
 
     /**
-     * @ORM\Column(name="end_date", type="datetime")
-     * @var DateTime
+     * @ORM\Column(name="start_date", type="datetime")
+     * @var \DateTime
      * @Assert\NotBlank()
      */
     private $start;
 
     /**
      * @ORM\Column(name="end_date", type="datetime")
-     * @var DateTime
+     * @var \DateTime
      * @Assert\NotBlank()
      */
     private $end;
 
     /**
      * @ORM\Column(name="registration_start", type="datetime")
-     * @var DateTime
+     * @var \DateTime
      * @Assert\NotBlank()
      */
     private $regStart;
 
     /**
      * @ORM\Column(name="registration_end", type="datetime")
-     * @var DateTime
+     * @var \DateTime
      * @Assert\NotBlank()
      */
     private $regEnd;
 
     /**
      * @ORM\Column(name="normal_length", type="integer")
-     * @var DateTime
+     * @var \DateInterval
      * @Assert\Positive()
      */
     private $normalLength;
 
     /**
      * @ORM\Column(name="invite_length", type="integer")
-     * @var DateTime
+     * @var \DateInterval
      * @Assert\Positive()
      */
     private $inviteLength;
@@ -90,100 +88,100 @@ class CreationSettings implements CrudInterface{
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
-    public function getDate(): DateTime {
+    public function getDate(): \DateTime {
         return $this->date;
     }
 
     /**
-     * @param DateTime $date
+     * @param \DateTime $date
      */
-    public function setDate(DateTime $date): void {
+    public function setDate(\DateTime $date): void {
         $this->date = $date;
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
-    public function getStart(): DateTime {
+    public function getStart(): \DateTime {
         return $this->start;
     }
 
     /**
-     * @param DateTime $start
+     * @param \DateTime $start
      */
-    public function setStart(DateTime $start): void {
+    public function setStart(\DateTime $start): void {
         $this->start = $start;
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
-    public function getEnd(): DateTime {
+    public function getEnd(): \DateTime {
         return $this->end;
     }
 
     /**
-     * @param DateTime $end
+     * @param \DateTime $end
      */
-    public function setEnd(DateTime $end): void {
+    public function setEnd(\DateTime $end): void {
         $this->end = $end;
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
-    public function getRegStart(): DateTime {
+    public function getRegStart(): \DateTime {
         return $this->regStart;
     }
 
     /**
-     * @param DateTime $regStart
+     * @param \DateTime $regStart
      */
-    public function setRegStart(DateTime $regStart): void {
+    public function setRegStart(\DateTime $regStart): void {
         $this->regStart = $regStart;
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
-    public function getRegEnd(): DateTime {
+    public function getRegEnd(): \DateTime {
         return $this->regEnd;
     }
 
     /**
-     * @param DateTime $regEnd
+     * @param \DateTime $regEnd
      */
-    public function setRegEnd(DateTime $regEnd): void {
+    public function setRegEnd(\DateTime $regEnd): void {
         $this->regEnd = $regEnd;
     }
 
     /**
-     * @return int
+     * @return \DateInterval
      */
-    public function getNormalLength(): DateTime {
+    public function getNormalLength(): \DateInterval {
         return $this->normalLength;
     }
 
     /**
-     * @param int $normalLength
+     * @param \DateInterval $normalLength
      */
-    public function setNormalLength(int $normalLength): void {
+    public function setNormalLength(\DateInterval $normalLength): void {
         $this->normalLength = $normalLength;
     }
 
     /**
-     * @return int
+     * @return \DateInterval
      */
-    public function getInviteLength(): DateTime {
+    public function getInviteLength(): \DateInterval {
         return $this->inviteLength;
     }
 
     /**
-     * @param int $inviteLength
+     * @param \DateInterval $inviteLength
      */
-    public function setInviteLength(int $inviteLength): void {
+    public function setInviteLength(\DateInterval $inviteLength): void {
         $this->inviteLength = $inviteLength;
     }
 
