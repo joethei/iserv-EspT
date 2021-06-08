@@ -1,5 +1,5 @@
 import Schedule from './vue/schedule';
-import {vueSchedulerLite} from './vue-scheduler-lite';
+import vueSchedulerLite from './vue-scheduler-lite';
 import Vue from 'vue';
 
 new Vue({
