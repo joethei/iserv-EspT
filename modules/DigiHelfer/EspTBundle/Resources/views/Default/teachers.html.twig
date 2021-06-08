@@ -8,6 +8,29 @@
 
 {% endblock %}
 
+{% block stylesheets %}
+
+    {% if app.environment != 'prod' %}
+        <!-- {{ _self }} => jquery-ui.css -->
+    {% endif %}
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.css', 'espt') }}">
+
+    {% if app.environment != 'prod' %}
+        <!-- {{ _self }} => jquery-ui.structure.css -->
+    {% endif %}
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure.css', 'espt') }}">
+
+    {% if app.environment != 'prod' %}
+        <!-- {{ _self }} => jquery-ui.theme.css -->
+    {% endif %}
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.theme.css', 'espt') }}">
+
+    {% if app.environment != 'prod' %}
+        <!-- {{ _self }} => jq.schedule.css -->
+    {% endif %}
+    <link rel="stylesheet" href="{{ asset('css/jq.schedule.css', 'espt') }}">
+{% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
 
@@ -15,6 +38,16 @@
         <!-- {{ _self }} => vue-scheduler-lite.js -->
     {% endif %}
     <script type="text/javascript" src="{{ asset('js/scheduler.js', 'espt') }}"></script>
+
+    {% if app.environment != 'prod' %}
+        <!-- {{ _self }} => jquery-ui.js -->
+    {% endif %}
+    <script type="text/javascript" src="{{ asset('js/jquery-ui.js', 'espt') }}"></script>
+
+    {% if app.environment != 'prod' %}
+        <!-- {{ _self }} => jq.schedule.js -->
+    {% endif %}
+    <script type="text/javascript" src="{{ asset('js/jq.schedule.js', 'espt') }}"></script>
 
     {% if app.environment != 'prod' %}
         <!-- {{ _self }} => schedule.js -->
