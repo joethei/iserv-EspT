@@ -6,6 +6,6 @@ new Vue({
     el: '#schedule',
     render: h => h(Schedule),
     components: {
-        'scheduler': vueSchedulerLite
+        'vue-scheduler-lite': vueSchedulerLite
     }
 });
