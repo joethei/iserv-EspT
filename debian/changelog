@@ -1,3 +1,7 @@
+digihelfer-espt (21.06.08-2) experimental; urgency=medium
+  * testing different asset path
+ -- Johannes Theiner <kontakt@joethei.de>  Thu, 08 Jun 2021 09:37:26 +0200
+
 digihelfer-espt (21.06.08-1) experimental; urgency=medium
   * fixing asset paths
  -- Johannes Theiner <kontakt@joethei.de>  Thu, 08 Jun 2021 08:17:54 +0200
