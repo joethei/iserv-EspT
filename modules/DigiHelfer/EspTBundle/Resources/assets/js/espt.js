@@ -5,7 +5,7 @@ import App from 'IServ.App';
 IServ.EspT = IServ.register(function() {
 
     function initialize() {
-        console.log(App.isDebug());
+        console.log("debug mode enabled? " + App.isDebug());
     }
 
     // Public API

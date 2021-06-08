@@ -13,7 +13,7 @@ let webpackConfig = {
         'img/interview.svg': './assets/img/interview.svg'
     },
     output: {
-        path: path.resolve(__dirname, 'public/assets/espt'),
+        path: path.resolve(__dirname, 'public/assets/espt/'),
     },
 };
 
