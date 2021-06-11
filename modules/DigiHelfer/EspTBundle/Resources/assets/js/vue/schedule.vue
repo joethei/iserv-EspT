@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import VueSchedulerLite from './../vue-scheduler-lite';
+import VueSchedulerLite from 'vue3-scheduler-lite';
 
 export default {
   name: "schedule",

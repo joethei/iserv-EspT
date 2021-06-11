@@ -1,6 +1,6 @@
 let merge = require('webpack-merge');
 let path = require('path');
-let baseConfig = require(path.join(process.env.WEBPACK_BASE_PATH, 'webpack.config.base.js'));
+let base = require(path.join(process.env.WEBPACK_BASE_PATH, 'webpack.config.base.js'));
 
 let webpackConfig = {
     entry: {
@@ -18,9 +18,11 @@ let webpackConfig = {
 
         'img/interview.svg': './assets/img/interview.svg'
     },
-    output: {
-        path: path.resolve(__dirname, 'public/assets/espt/'),
+    resolve: {
+        modules: [path.resolve(__dirname, './assets/node_modules'), 'node_modules'],
     },
 };
 
-module.exports = merge(baseConfig.get(__dirname), webpackConfig);
+let baseConfig = base.get(__dirname);
+baseConfig.module.rules.find(rule => rule.test.test("any.js")).exclude = /(node_modules\/(?!matrix-js-sdk)|public\/components)/;
+module.exports = merge.smart(baseConfig, webpackConfig);

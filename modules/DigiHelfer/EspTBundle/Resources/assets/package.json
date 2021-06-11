@@ -1,0 +1,10 @@
+{
+  "name": "DH_EspT",
+  "version": "1.0.0",
+  "dependencies": {
+    "webpack-merge": "^5.8.0"
+  },
+  "devDependencies": {
+    "vue3-scheduler-lite": "^1.0.0"
+  }
+}
