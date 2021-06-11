@@ -1,3 +1,7 @@
+digihelfer-espt (21.06.08-10) experimental; urgency=medium
+  * fixing webpack import paths
+ -- Johannes Theiner <kontakt@joethei.de>  Fri, 11 Jun 2021 09:02:16 +0200
+
 digihelfer-espt (21.06.08-9) experimental; urgency=medium
   * adding support for node.js modules
  -- Johannes Theiner <kontakt@joethei.de>  Fri, 11 Jun 2021 09:02:16 +0200
