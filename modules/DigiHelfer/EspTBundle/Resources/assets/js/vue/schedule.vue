@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import VueSchedulerLite from 'vue3-scheduler-lite';
+import VueSchedulerLite from 'vue3-scheduler-lite'
 
 export default {
   name: "schedule",
@@ -33,7 +33,7 @@ export default {
     }
   },
   components: {
-    VueSchedulerLite
+    'vue-scheduler-lite': VueSchedulerLite
   }
 }
 </script>
