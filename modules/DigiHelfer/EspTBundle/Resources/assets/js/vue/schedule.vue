@@ -12,11 +12,28 @@ import VueSchedulerLite from 'vue3-scheduler-lite'
 
 export default {
   name: "schedule",
-  data: function() {
+  data: function () {
     return {
       data: {
         title: "Test",
-
+        noBusinessDate: ['Sun', 'Sat'],
+        businessHours: [
+          {
+            start: "08:00",
+            end: "12:00"
+          },
+          {
+            start: "14:00",
+            end: "20:00"
+          }
+        ],
+        schedule: [
+          {
+            start: "14:00",
+            end: "15:00",
+            text: "Hello World"
+          }
+        ]
       },
       settings: {
         startDate: '2020/04/20',
