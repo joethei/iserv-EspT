@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import VueSchedulerLite from './../vue-scheduler-lite';
+
 export default {
   name: "schedule",
   data: function() {
@@ -30,5 +32,8 @@ export default {
       }
     }
   },
+  components: {
+    VueSchedulerLite
+  }
 }
 </script>

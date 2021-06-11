@@ -1,17 +1,13 @@
 import Schedule from './vue/schedule';
-import VueSchedulerLite from './vue-scheduler-lite';
 import Vue from 'vue';
 
 new Vue({
-    el: '#schedule',
-    render: h => h(Schedule),
-    components: {
-        VueSchedulerLite
-    }
+    el: '#schedule1',
+    render: h => h(Schedule)
 });
 
 $(function() {
-   var $sc = jQuery("#schedule").timeSchedule({
+   var $sc = jQuery("#schedule2").timeSchedule({
        startTime: "07:00", // schedule start time(HH:ii)
        endTime: "21:00",   // schedule end time(HH:ii)
        widthTime: 60 * 10,  // cell timestamp example 10 minutes
