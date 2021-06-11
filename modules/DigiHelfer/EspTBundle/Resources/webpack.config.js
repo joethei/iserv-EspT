@@ -23,7 +23,7 @@ let webpackConfig = {
     },
     output: {
         path: path.join(__dirname, '/public/assets/dh-espt/'),
-        publicPath: path.resolve(__dirname, 'public/assets/dh-espt/'),
+        publicPath: path.resolve('public/assets/dh-espt/'),
     },
 };
 
