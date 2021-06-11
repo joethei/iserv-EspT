@@ -2,7 +2,7 @@
   <div>
     <h2>Termine</h2>
 
-    <vue-scheduler-lite :schedule-data="data" :setting="settings"/>
+    <vue3-scheduler-lite :schedule-data="data" :setting="settings"/>
 
   </div>
 </template>
