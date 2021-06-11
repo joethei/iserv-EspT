@@ -1,7 +1,13 @@
-import Schedule from './vue/schedule';
 import Vue from 'vue';
+import Schedule from './vue/schedule';
 
-new Vue({
-    el: '#schedule1',
-    render: h => h(Schedule)
+IServ.register({
+    init: () => {
+        if (document.getElementById('schedule')) {
+            new Vue({
+                el: '#schedule',
+                render: h => h(Schedule)
+            });
+        }
+    }
 });
