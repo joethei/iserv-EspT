@@ -1,6 +1,10 @@
 {
-  "name": "DH_EspT",
+  "name": "dhespt",
+  "description": "",
+  "author": "Johannes Theiner <kontakt@joethei.xyz>",
   "version": "1.0.0",
+  "repository": "https://github.com/joethei/iserv-EspT",
+  "license": "MIT",
   "dependencies": {
     "webpack-merge": "^5.8.0"
   },

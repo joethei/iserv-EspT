@@ -21,6 +21,10 @@ let webpackConfig = {
     resolve: {
         modules: [path.resolve(__dirname, './assets/node_modules'), 'node_modules'],
     },
+    output: {
+        path: path.join(__dirname, '/public/assets/dh-espt/'),
+        publicPath: path.resolve(__dirname, 'public/assets/dh-espt/'),
+    },
 };
 
 let baseConfig = base.get(__dirname);
