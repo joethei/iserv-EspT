@@ -1,6 +1,8 @@
 # Elternsprechtagterminvereinbarung für IServ
 [![Build Status](https://teamcity.joethei.xyz/app/rest/builds/buildType:(id:Studium_Programming_DigiHelferElternsprechtag)/statusIcon)](https://teamcity.joethei.xyz/viewType.html?buildTypeId=Studium_Programming_DigiHelferElternsprechtag&guest=1)
 
+**In Entwicklung, nicht für den Produktivbetrieb geeignet**
+
 Entstanden als Projektarbeit im Rahmen des [DigiHelfer](https://www.hs-emden-leer.de/studierende/fachbereiche/technik/projekte/neo-mint/digihelfer) Projekts
 
 ## Dokumentation

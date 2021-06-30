@@ -50,7 +50,7 @@ export default {
     }
   },
   components: {
-    'vue-scheduler-lite': VueSchedulerLite
+    'vue3-scheduler-lite': VueSchedulerLite
   }
 }
 </script>
