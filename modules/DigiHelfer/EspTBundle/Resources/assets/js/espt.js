@@ -1,5 +1,5 @@
 "use strict";
-import Schedule from "Schedule.vue";
+import Schedule from "./Schedule.vue";
 
 IServ.EspT = IServ.register(function ($) {
     'use strict';
@@ -7,7 +7,7 @@ IServ.EspT = IServ.register(function ($) {
     return {
         init: function () {
             new Vue({
-                el: '#espt',
+                el: '#espt-schedule',
                 template: '<Schedule/>',
                 components: {Schedule},
                 data: {
