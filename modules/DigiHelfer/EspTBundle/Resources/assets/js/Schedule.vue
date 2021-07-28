@@ -1,0 +1,171 @@
+<template>
+  <ScheduleTimelineView v-bind:schedules="schedules" v-bind:settings="settings" @onClickEvent="(id) => onClickEvent(id)"/>
+</template>
+
+<script>
+
+import ScheduleTimelineView from 'vue-schedule-timeline-view';
+
+export default {
+  components: {ScheduleTimelineView},
+  methods: {
+    onClickEvent: function(id) {
+      console.log("clicked event #" + id);
+    }
+  },
+  data: function () {
+    return {
+      settings: {
+        start: new Date(2021, 8, 20, 15, 30, 0),
+        end: new Date(2021, 8, 20, 18, 0, 0),
+        scaleFactor: 2
+      },
+      schedules: [
+        {
+          id: 0,
+          title: "Max Mustermann",
+          subtitle: "206",
+          events: [
+            {
+              id: 1,
+              name: "",
+              start: new Date(2021, 8, 20, 15, 30, 0),
+              end: new Date(2021, 8, 20, 15, 40, 0),
+              color: "red",
+            },
+            {
+              id: 2,
+              name: "",
+              start: new Date(2021, 8, 20, 15, 40, 0),
+              end: new Date(2021, 8, 20, 16, 0, 0),
+              color: "red",
+            },
+            {
+              id: 3,
+              name: "",
+              start: new Date(2021, 8, 20, 16, 0, 0),
+              end: new Date(2021, 8, 20, 16, 20, 0),
+              color: "gray",
+            },
+            {
+              id: 4,
+              name: "",
+              start: new Date(2021, 8, 20, 16, 20, 0),
+              end: new Date(2021, 8, 20, 16, 40, 0),
+              color: "gray",
+            },
+            {
+              id: 5,
+              name: "",
+              start: new Date(2021, 8, 20, 16, 40, 0),
+              end: new Date(2021, 8, 20, 17, 0, 0),
+              color: "gray",
+            },
+            {
+              id: 6,
+              name: "",
+              start: new Date(2021, 8, 20, 17, 0, 0),
+              end: new Date(2021, 8, 20, 17, 10, 0),
+              color: "green",
+            },
+            {
+              id: 7,
+              name: "",
+              start: new Date(2021, 8, 20, 17, 10, 0),
+              end: new Date(2021, 8, 20, 17, 30, 0),
+              color: "red",
+            },
+            {
+              id: 8,
+              name: "",
+              start: new Date(2021, 8, 20, 17, 30, 0),
+              end: new Date(2021, 8, 20, 17, 40, 0),
+              color: "green",
+            },
+            {
+              id: 9,
+              name: "",
+              start: new Date(2021, 8, 20, 17, 40, 0),
+              end: new Date(2021, 8, 20, 18, 0, 0),
+              color: "green",
+            },
+
+          ]
+        },
+        {
+          id: 1,
+          title: "Maria Mustermann & Test Lehrer",
+          subtitle: "303",
+          events: [
+            {
+              id: 1,
+              name: "BELEGT",
+              start: new Date(2021, 8, 20, 15, 30, 0),
+              end: new Date(2021, 8, 20, 15, 40, 0),
+              color: "red",
+            },
+            {
+              id: 2,
+              name: "BELEGT",
+              start: new Date(2021, 8, 20, 15, 40, 0),
+              end: new Date(2021, 8, 20, 16, 0, 0),
+              color: "red",
+            },
+            {
+              id: 3,
+              name: "PAUSE",
+              start: new Date(2021, 8, 20, 16, 0, 0),
+              end: new Date(2021, 8, 20, 16, 20, 0),
+              color: "gray",
+            },
+            {
+              id: 4,
+              name: "PAUSE",
+              start: new Date(2021, 8, 20, 16, 20, 0),
+              end: new Date(2021, 8, 20, 16, 40, 0),
+              color: "gray",
+            },
+            {
+              id: 5,
+              name: "PAUSE",
+              start: new Date(2021, 8, 20, 16, 40, 0),
+              end: new Date(2021, 8, 20, 17, 0, 0),
+              color: "gray",
+            },
+            {
+              id: 6,
+              name: "RESERVIERT",
+              start: new Date(2021, 8, 20, 17, 0, 0),
+              end: new Date(2021, 8, 20, 17, 10, 0),
+              color: "green",
+            },
+            {
+              id: 7,
+              name: "BELEGT",
+              start: new Date(2021, 8, 20, 17, 10, 0),
+              end: new Date(2021, 8, 20, 17, 30, 0),
+              color: "red",
+            },
+            {
+              id: 8,
+              name: "FREI",
+              start: new Date(2021, 8, 20, 17, 30, 0),
+              end: new Date(2021, 8, 20, 17, 40, 0),
+              color: "lightgreen",
+            },
+            {
+              id: 9,
+              name: "FREI",
+              start: new Date(2021, 8, 20, 17, 40, 0),
+              end: new Date(2021, 8, 20, 18, 0, 0),
+              color: "lightgreen",
+            },
+
+          ]
+        },
+      ]
+    };
+  }
+}
+
+</script>

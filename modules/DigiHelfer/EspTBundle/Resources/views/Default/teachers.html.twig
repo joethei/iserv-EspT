@@ -4,7 +4,18 @@
 
 {% block content %}
 
-    <div id="schedule"></div>
+    <p>Der nächste Sprechtag ist am {{ date }} von {{ startTime }} - {{ endTime }}</p>
+    <p>Hier können Sie sich bis zum {{ regEnd }}  ihren Termin reservieren</p>
+
+    {#
+    {% for group in groups %}
+        * {{ group.name }}
+    {% else %}
+        Keine Gruppen vorhanden
+    {% endfor %}
+    #}
+
+
 
 {% endblock %}
 

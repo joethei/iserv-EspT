@@ -6,9 +6,8 @@
   "repository": "https://github.com/joethei/iserv-EspT",
   "license": "MIT",
   "dependencies": {
+    "vue-schedule-timeline-view": "^0.1.2",
     "webpack-merge": "^5.8.0"
   },
-  "devDependencies": {
-    "vue3-scheduler-lite": "^1.0.0"
-  }
+  "devDependencies": {}
 }

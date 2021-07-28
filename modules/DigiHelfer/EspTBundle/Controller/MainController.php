@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace DigiHelfer\EspTBundle\Controller;
 
 use DigiHelfer\EspTBundle\Entity\CreationSettings;
+use DigiHelfer\EspTBundle\Entity\CreationSettingsRepository;
 use DigiHelfer\EspTBundle\Entity\CreationSettingsType;
 use IServ\CoreBundle\Controller\AbstractPageController;
-use IServ\CoreBundle\Repository\GroupRepository;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -49,17 +49,23 @@ final class MainController extends AbstractPageController {
     }
 
     /**
-     * @param GroupRepository $repository
+     * @param CreationSettingsRepository $creationSettingsRepository
      * @return array
      * @Route("/teachers", name="espt_teachers")
      * @Template("@DH_EspT/Default/teachers.html.twig")
      */
-    public function teachers(GroupRepository $repository): array {
+    public function teachers(CreationSettingsRepository $creationSettingsRepository): array {
         $this->addBreadcrumb(_("EspT"));
 
-        $teachers = $repository->findByNameOrAccount("Lehrer")->getUsers();
+        $settings = $creationSettingsRepository->findFirst();
 
-        return ['teachers' => $teachers];
+        return [
+            "date" => $settings->getDate(),
+            "startTime" => $settings->getStart(),
+            "endTime" => $settings->getEnd(),
+            "regEnd" => $settings->getRegEnd(),
+            "groups" => []
+        ];
     }
 
     private function getMenu(?string $current = null): ItemInterface

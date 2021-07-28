@@ -1,18 +1,21 @@
 "use strict";
+import Schedule from "Schedule.vue";
 
-import App from 'IServ.App';
+IServ.EspT = IServ.register(function ($) {
+    'use strict';
 
-IServ.EspT = IServ.register(function() {
-
-    function initialize() {
-        console.log("debug mode enabled? " + App.isDebug());
-    }
-
-    // Public API
     return {
-        init: initialize,
+        init: function () {
+            new Vue({
+                el: '#espt',
+                template: '<Schedule/>',
+                components: {Schedule},
+                data: {
+                },
+            })
+        }
     };
+}(jQuery));
 
-}());
 
 export default IServ.EspT;

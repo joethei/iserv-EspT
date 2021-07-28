@@ -3,9 +3,14 @@
 
 namespace DigiHelfer\EspTBundle\Entity;
 
+use IServ\CrudBundle\Entity\CrudInterface;
 
+/**
+ * Class EventType
+ * @package DigiHelfer\EspTBundle\Entity
+ */
 abstract class EventType {
-    const book = 0;
-    const Invite = 1;
-    const break = 2;
+    const BOOK = 0;
+    const INVITE = 1;
+    const BLOCKED = 2;
 }
