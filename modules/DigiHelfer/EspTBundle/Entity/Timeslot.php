@@ -5,18 +5,17 @@ namespace DigiHelfer\EspTBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
-use IServ\CoreBundle\Entity\User;
 use IServ\CrudBundle\Entity\CrudInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class Event
+ * Class Timeslot
  * @package DigiHelfer\EspTBundle\Entity
  * @ORM\Entity
  * @ORM\Table(name="espt_event")
  * @ORM\HasLifecycleCallbacks
  */
-class Event implements CrudInterface {
+class Timeslot implements CrudInterface {
 
     /**
      * @ORM\Column(type="integer")
@@ -42,7 +41,7 @@ class Event implements CrudInterface {
 
     /**
      * @ORM\Column(type="integer")
-     * @var integer
+     * @var EventType
      * @Assert\NotBlank()
      */
     private $type;
@@ -52,12 +51,6 @@ class Event implements CrudInterface {
      * @var TeacherGroup
      */
     private $group;
-
-    /**
-     * @var User
-     * @Assert\NotBlank()
-     */
-    private $user;
 
     public function __toString() {
         return "";
@@ -122,19 +115,4 @@ class Event implements CrudInterface {
     public function setGroup(TeacherGroup $group): void {
         $this->group = $group;
     }
-
-    /**
-     * @return User
-     */
-    public function getUser(): User {
-        return $this->user;
-    }
-
-    /**
-     * @param User $user
-     */
-    public function setUser(User $user): void {
-        $this->user = $user;
-    }
-
 }

@@ -24,13 +24,6 @@ class CreationSettings implements CrudInterface{
     private $id;
 
     /**
-     * @ORM\Column(name="date", type="datetime")
-     * @var \DateTime
-     * @Assert\NotBlank()
-     */
-    private $date;
-
-    /**
      * @ORM\Column(name="start_date", type="datetime")
      * @var \DateTime
      * @Assert\NotBlank()
@@ -58,47 +51,12 @@ class CreationSettings implements CrudInterface{
      */
     private $regEnd;
 
-    /**
-     * @ORM\Column(name="normal_length", type="integer")
-     * @var \DateInterval
-     * @Assert\Positive()
-     */
-    private $normalLength;
-
-    /**
-     * @ORM\Column(name="invite_length", type="integer")
-     * @var \DateInterval
-     * @Assert\Positive()
-     */
-    private $inviteLength;
-
-    /**
-     * @ORM\Column(name="max_number_of_invites", type="integer")
-     * @var integer
-     * @Assert\Positive()
-     */
-    private $maxNumberOfInvites;
-
     public function __toString() {
         return "";
     }
 
     public function getId() : ?int {
         return $this->id;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDate(): \DateTime {
-        return $this->date;
-    }
-
-    /**
-     * @param \DateTime $date
-     */
-    public function setDate(\DateTime $date): void {
-        $this->date = $date;
     }
 
     /**
@@ -155,48 +113,6 @@ class CreationSettings implements CrudInterface{
      */
     public function setRegEnd(\DateTime $regEnd): void {
         $this->regEnd = $regEnd;
-    }
-
-    /**
-     * @return \DateInterval
-     */
-    public function getNormalLength(): \DateInterval {
-        return $this->normalLength;
-    }
-
-    /**
-     * @param \DateInterval $normalLength
-     */
-    public function setNormalLength(\DateInterval $normalLength): void {
-        $this->normalLength = $normalLength;
-    }
-
-    /**
-     * @return \DateInterval
-     */
-    public function getInviteLength(): \DateInterval {
-        return $this->inviteLength;
-    }
-
-    /**
-     * @param \DateInterval $inviteLength
-     */
-    public function setInviteLength(\DateInterval $inviteLength): void {
-        $this->inviteLength = $inviteLength;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMaxNumberOfInvites(): int {
-        return $this->maxNumberOfInvites;
-    }
-
-    /**
-     * @param int $maxNumberOfInvites
-     */
-    public function setMaxNumberOfInvites(int $maxNumberOfInvites): void {
-        $this->maxNumberOfInvites = $maxNumberOfInvites;
     }
 
 }

@@ -31,12 +31,8 @@ final class MainController extends AbstractPageController {
         $settings = new CreationSettings();
 
         //set default form values
-        $settings->setDate(new \DateTime('tomorrow'));
         $settings->setStart(new \DateTime('tomorrow'));
         $settings->setEnd(new \DateTime('tomorrow'));
-        $settings->setNormalLength(\DateInterval::createFromDateString('15 minutes'));
-        $settings->setInviteLength(\DateInterval::createFromDateString('15 minutes'));
-        $settings->setMaxNumberOfInvites(15);
         $settings->setRegStart(new \DateTime('tomorrow'));
         $settings->setRegEnd(new \DateTime('tomorrow'));
 
@@ -60,7 +56,6 @@ final class MainController extends AbstractPageController {
         $settings = $creationSettingsRepository->findFirst();
 
         return [
-            "date" => $settings->getDate(),
             "startTime" => $settings->getStart(),
             "endTime" => $settings->getEnd(),
             "regEnd" => $settings->getRegEnd(),
