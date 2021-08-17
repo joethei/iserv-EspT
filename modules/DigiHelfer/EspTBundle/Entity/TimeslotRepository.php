@@ -11,6 +11,9 @@ class TimeslotRepository extends ServiceEntityRepository {
         parent::__construct($registry, $entityClass);
     }
 
+    /**
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function find($id, $lockMode = null, $lockVersion = null) {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s WHERE id=$id");
@@ -23,6 +26,17 @@ class TimeslotRepository extends ServiceEntityRepository {
         $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s");
 
         return $query->getArrayResult();
+    }
+
+    /**
+     * @throws \Doctrine\DBAL\Exception
+     */
+    public function clear() {
+        //based on https://blog.nevercodealone.de/symfony-doctrine-truncate-table/
+        $connection = parent::getEntityManager()->getConnection();
+        $platform   = $connection->getDatabasePlatform();
+
+        $connection->executeStatement($platform->getTruncateTableSQL('espt_timeslot', true));
     }
 
 }

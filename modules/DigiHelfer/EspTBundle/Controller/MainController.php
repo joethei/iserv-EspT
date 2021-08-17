@@ -4,17 +4,11 @@ declare(strict_types=1);
 
 namespace DigiHelfer\EspTBundle\Controller;
 
-use DigiHelfer\EspTBundle\Entity\CreationSettings;
 use DigiHelfer\EspTBundle\Entity\CreationSettingsRepository;
-use DigiHelfer\EspTBundle\Entity\EventSettingsType;
-use DigiHelfer\EspTBundle\Entity\TeacherGroupRepository;
-use DigiHelfer\EspTBundle\Entity\Timeslot;
-use Doctrine\ORM\EntityManagerInterface;
+use DigiHelfer\EspTBundle\Entity\State;
 use IServ\CoreBundle\Controller\AbstractPageController;
 use Knp\Menu\FactoryInterface;
-use Knp\Menu\ItemInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -25,70 +19,28 @@ use Symfony\Component\Routing\Annotation\Route;
 final class MainController extends AbstractPageController {
 
     /**
-     * @return array
-     * @Route("", name="espt_index")
-     * @Template("@DH_EspT/Default/index.html.twig")
-     */
-    public function index(Request $request, EntityManagerInterface $entityManager, TeacherGroupRepository $repository): array {
-        $this->addBreadcrumb(_("EspT"));
-
-        $settings = new CreationSettings();
-
-        //set default form values
-        $settings->setStart(new \DateTime('tomorrow'));
-        $settings->setEnd(new \DateTime('tomorrow'));
-        $settings->setRegStart(new \DateTime('tomorrow'));
-        $settings->setRegEnd(new \DateTime('tomorrow'));
-
-        $form = $this->createForm(EventSettingsType::class, $settings);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($settings);
-            $entityManager->flush();
-        }
-
-        return [
-            'form' => $form->createView(),
-            'menu' => $this->getMenu('Erstellung')
-        ];
-    }
-
-    /**
      * @param CreationSettingsRepository $creationSettingsRepository
      * @return array
-     * @Route("/teachers", name="espt_teachers")
+     * @Route("/", name="espt_index")
      * @Template("@DH_EspT/Default/teachers.html.twig")
      */
-    public function teachers(CreationSettingsRepository $creationSettingsRepository): array {
+    public function index(CreationSettingsRepository $creationSettingsRepository): array {
         $this->addBreadcrumb(_("EspT"));
 
         $settings = $creationSettingsRepository->findFirst();
+        if ($settings == null || $settings->getEnd()) {
+            return [
+                "state" => State::NONE,
+            ];
+        }
 
         return [
+            "state" => State::REGISTRATION,
             "startTime" => $settings->getStart(),
             "endTime" => $settings->getEnd(),
             "regEnd" => $settings->getRegEnd(),
-            "groups" => []
+            "groups" => [],
         ];
-    }
-
-    private function getMenu(?string $current = null): ItemInterface
-    {
-        $menu = $this->get(FactoryInterface::class)->createItem('root');
-        $menu->addChild('Erstellung', ['route' => 'espt_index']);
-        $menu->addChild('Lehrkräfte', ['route' => 'espt_teachers']);
-
-        if (null !== $current) {
-            if (null === $item = $menu->getChild($current)) {
-                throw new \LogicException(sprintf('No child "%s" found!', $current));
-            }
-
-            $item->setCurrent(true);
-        }
-
-        return $menu;
     }
 
     /**

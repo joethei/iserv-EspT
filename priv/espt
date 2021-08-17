@@ -1,4 +1,4 @@
 priv.espt_admin:
 module      EspT
 title       Elternsprechtag Verwaltung
-description Erstellen & Verwalten von Sprechterminen
+description Erstellen & Verwalten von Sprechtagsterminen

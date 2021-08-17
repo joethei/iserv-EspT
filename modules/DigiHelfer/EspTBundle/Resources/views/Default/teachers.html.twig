@@ -4,20 +4,22 @@
 
 {% block content %}
 
-    <p>Der nächste Sprechtag ist am {{ date }} von {{ startTime }} - {{ endTime }}</p>
-    <p>Hier können Sie sich bis zum {{ regEnd }}  ihren Termin reservieren</p>
+    {% if state is constant('DigiHelfer\\EspTBundle\\\Entity\\State::NONE') %}
+        <p>Kein Sprechtag geplannt</p>
+    {% elseif state is constant('DigiHelfer\\EspTBundle\\\Entity\\State::REGISTRATION') %}
 
-    {#
-    {% for group in groups %}
-        * {{ group.name }}
-    {% else %}
-        Keine Gruppen vorhanden
-    {% endfor %}
-    #}
+        <div id="espt-schedules">
 
-    <div id="espt-schedules">
+        </div>
 
-    </div>
+    {% elseif state is constant('DigiHelfer\\EspTBundle\\\Entity\\State::INVITE') %}
+
+        <p>Der nächste Sprechtag ist am {{ date }} von {{ startTime }} - {{ endTime }}</p>
+        <p>Hier können Sie sich bis zum {{ regEnd }}  ihren Termin reservieren</p>
+
+    {% elseif state is constant('DigiHelfer\\EspTBundle\\\Entity\\State::PRINT') %}
+
+    {% endif %}
 
 
 

@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace DigiHelfer\EspTBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
-use IServ\CoreBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class Timeslot
+ * Class TimeslotTemplate
  * @package DigiHelfer\EspTBundle\Entity
  * @ORM\Entity
- * @ORM\Table(name="espt_timeslot")
+ * @ORM\Table(name="espt_timeslot_template")
  * @ORM\HasLifecycleCallbacks
  */
-class Timeslot {
+class TimeslotTemplate {
 
     /**
      * @ORM\Column(type="integer")
@@ -46,19 +44,6 @@ class Timeslot {
      * @Assert\NotBlank()
      */
     private $type;
-
-    /**
-     * @ORM\OneToMany(targetEntity="TeacherGroup", mappedBy="group")
-     * @var TeacherGroup
-     */
-    private $group;
-
-    /**
-     * @var User
-     * @ORM\OneToMany(targetEntity="\IServ\CoreBundle\Entity\User", mappedBy="user")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
-     */
-    private $user;
 
     public function __toString() {
         return "";
@@ -104,37 +89,9 @@ class Timeslot {
     }
 
     /**
-     * @param EventType $type
+     * @param int $type
      */
-    public function setType(EventType $type): void {
+    public function setType(int $type): void {
         $this->type = $type;
-    }
-
-    /**
-     * @return TeacherGroup
-     */
-    public function getGroup(): TeacherGroup {
-        return $this->group;
-    }
-
-    /**
-     * @param TeacherGroup $group
-     */
-    public function setGroup(TeacherGroup $group): void {
-        $this->group = $group;
-    }
-
-    /**
-     * @return User
-     */
-    public function getUser(): User {
-        return $this->user;
-    }
-
-    /**
-     * @param User $user
-     */
-    public function setUser(User $user): void {
-        $this->user = $user;
     }
 }

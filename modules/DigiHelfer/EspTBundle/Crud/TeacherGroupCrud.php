@@ -23,19 +23,30 @@ class TeacherGroupCrud extends AdminServiceCrud {
     }
 
     protected function configureListFields(ListMapper $listMapper): void {
-        $listMapper->addIdentifier('id', null)->add('room', null, ['label' => "Raum"])->add('users', UserType::class, ['label' => "Lehrer"]);
+        $listMapper
+            ->addIdentifier('id', null)
+            ->add('room', null, ['label' => "Raum"])
+            ->add('users', UserType::class, ['label' => "Lehrkräfte"]);
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void {
-        $showMapper->add('room', null, ['label' => "Raum"])->add('users', UserType::class, ['label' => 'Lehrer']);
+        $showMapper
+            ->add('room', null, ['label' => "Raum"])
+            ->add('users', UserType::class, ['label' => 'Lehrer']);
     }
 
     protected function configureFormFields(FormMapper $formMapper): void {
-        $formMapper->add('room', null, ['label' => "Raum", 'required' => false,])->add('users', AutocompleteTagsType::class, ['label' => "Lehrer", 'autocomplete_types' => AutocompleteType::user(), 'tag_default_icon' => 'user']);
+        $formMapper
+            ->add('room', null, ['label' => "Raum", 'required' => false,])
+            ->add('users', AutocompleteTagsType::class, [
+                'label' => "Lehrer",
+                'autocomplete_types' => AutocompleteType::user(),
+                'tag_default_icon' => 'user'
+            ]);
     }
 
     public function isAuthorized(): bool {
-        return $this->isGranted('ROLE_ADMIN');
+        return $this->isGranted('ESPT_ADMIN');
     }
 
     public function prepareBreadcrumbs(): array {

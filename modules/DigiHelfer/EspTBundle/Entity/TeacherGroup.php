@@ -4,6 +4,7 @@
 namespace DigiHelfer\EspTBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use IServ\CoreBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -30,11 +31,16 @@ class TeacherGroup {
     private $room;
 
     /**
-     * @var User
      * @ORM\OneToMany(targetEntity="\IServ\CoreBundle\Entity\User", mappedBy="user")
-     * @var ArrayCollection
+     * @var Collection|User
      */
     private $users;
+
+    /**
+     * @var TimeslotTemplateCollection
+     * @ORM\ManyToOne(targetEntity="DigiHelfer\EspTBundle\Entity\TimeslotTemplateCollection")
+     */
+    private $timeslotTemplate;
 
     public function __construct() {
         $this->users = new ArrayCollection();
@@ -81,6 +87,21 @@ class TeacherGroup {
     public function setUsers(ArrayCollection $users): void {
         $this->users = $users;
     }
+
+    /**
+     * @return TimeslotTemplateCollection
+     */
+    public function getTimeslotTemplate(): TimeslotTemplateCollection {
+        return $this->timeslotTemplate;
+    }
+
+    /**
+     * @param TimeslotTemplateCollection $timeslotTemplate
+     */
+    public function setTimeslotTemplate(TimeslotTemplateCollection $timeslotTemplate): void {
+        $this->timeslotTemplate = $timeslotTemplate;
+    }
+
 
     public function __toString() : string {
         return (string)$this->getId();
