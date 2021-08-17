@@ -6,7 +6,6 @@ namespace DigiHelfer\EspTBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use IServ\CoreBundle\Entity\User;
-use IServ\CrudBundle\Entity\CrudInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -15,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\Table(name="teacher_group")
  */
-class TeacherGroup implements CrudInterface {
+class TeacherGroup {
 
     /**
      * @ORM\Column(type="integer")
@@ -26,15 +25,13 @@ class TeacherGroup implements CrudInterface {
     private $id;
 
     /**
-     * @var string
-     * @Assert\NotBlank()
+     * @var string|null
      */
     private $room;
 
     /**
-     *
      * @var User
-     * @ORM\OneToMany(targetEntity="User", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="\IServ\CoreBundle\Entity\User", mappedBy="user")
      * @var ArrayCollection
      */
     private $users;
@@ -60,7 +57,7 @@ class TeacherGroup implements CrudInterface {
     /**
      * @return string
      */
-    public function getRoom(): string {
+    public function getRoom(): ?string {
         return $this->room;
     }
 
@@ -85,7 +82,7 @@ class TeacherGroup implements CrudInterface {
         $this->users = $users;
     }
 
-    public function __toString() {
-        // TODO: Implement __toString() method.
+    public function __toString() : string {
+        return (string)$this->getId();
     }
 }

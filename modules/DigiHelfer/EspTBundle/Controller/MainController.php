@@ -6,11 +6,15 @@ namespace DigiHelfer\EspTBundle\Controller;
 
 use DigiHelfer\EspTBundle\Entity\CreationSettings;
 use DigiHelfer\EspTBundle\Entity\CreationSettingsRepository;
-use DigiHelfer\EspTBundle\Entity\CreationSettingsType;
+use DigiHelfer\EspTBundle\Entity\EventSettingsType;
+use DigiHelfer\EspTBundle\Entity\TeacherGroupRepository;
+use DigiHelfer\EspTBundle\Entity\Timeslot;
+use Doctrine\ORM\EntityManagerInterface;
 use IServ\CoreBundle\Controller\AbstractPageController;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -25,7 +29,7 @@ final class MainController extends AbstractPageController {
      * @Route("", name="espt_index")
      * @Template("@DH_EspT/Default/index.html.twig")
      */
-    public function index(): array {
+    public function index(Request $request, EntityManagerInterface $entityManager, TeacherGroupRepository $repository): array {
         $this->addBreadcrumb(_("EspT"));
 
         $settings = new CreationSettings();
@@ -36,7 +40,14 @@ final class MainController extends AbstractPageController {
         $settings->setRegStart(new \DateTime('tomorrow'));
         $settings->setRegEnd(new \DateTime('tomorrow'));
 
-        $form = $this->createForm(CreationSettingsType::class, $settings);
+        $form = $this->createForm(EventSettingsType::class, $settings);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($settings);
+            $entityManager->flush();
+        }
 
         return [
             'form' => $form->createView(),

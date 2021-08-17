@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CreationSettingsType extends AbstractType {
+class EventSettingsType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options): void {
         $builder
@@ -32,9 +32,6 @@ class CreationSettingsType extends AbstractType {
             ->add('regEnd', DateTimeType::class, [
                 'label' => _("RegEnd"),
                 'help' => "Bis wann soll die Anmeldung möglich sein?"
-            ])->add('timeslots', CollectionType::class, [
-                'entry_type' => TimeslotType::class,
-                'entry_options' => ['label' => false],
             ])
         ->add('save', SubmitType::class, [
             'label' => _("save"),

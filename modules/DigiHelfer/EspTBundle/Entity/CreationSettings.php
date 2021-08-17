@@ -3,7 +3,6 @@
 namespace DigiHelfer\EspTBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use IServ\CrudBundle\Entity\CrudInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -13,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="espt_settings")
  * @ORM\HasLifecycleCallbacks
  */
-class CreationSettings implements CrudInterface{
+class CreationSettings {
 
     /**
      * @ORM\Column(type="integer")
@@ -114,5 +113,10 @@ class CreationSettings implements CrudInterface{
     public function setRegEnd(\DateTime $regEnd): void {
         $this->regEnd = $regEnd;
     }
+
+    public function addTimeslot(Timeslot $timeslot) : void {
+
+    }
+    
 
 }

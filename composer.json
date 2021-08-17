@@ -1,5 +1,7 @@
 {
     "require": {
-        "doctrine/orm": "^2.9"
+        "doctrine/orm": "^2.9",
+        "tecnickcom/tcpdf": "6.3.*",
+      "ext-gettext": "*"
     }
 }

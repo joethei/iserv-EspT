@@ -1,6 +1,0 @@
-EsptInviteAll:
-name        Frei wählbare Einladungstermine
-description Einladungstermine sind frei wählbar
-type        bool
-group	    Modul: Elternsprechtag
-default	    true

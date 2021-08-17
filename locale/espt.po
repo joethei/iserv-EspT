@@ -1,5 +1,5 @@
 # TRANSLATION CATALOG OF DIGIHELFER-ESPT
-# Copyright (C) 2021 Johanens Theiner
+# Copyright (C) 2021 Johannes Theiner
 # This file is distributed under the same license as the digihelfer-espt package.
 msgid ""
 msgstr ""

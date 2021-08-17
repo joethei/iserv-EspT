@@ -5,7 +5,6 @@ namespace DigiHelfer\EspTBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
-use IServ\CrudBundle\Entity\CrudInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -15,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="espt_event")
  * @ORM\HasLifecycleCallbacks
  */
-class Timeslot implements CrudInterface {
+class Timeslot {
 
     /**
      * @ORM\Column(type="integer")
