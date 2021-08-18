@@ -6,7 +6,7 @@ namespace DigiHelfer\EspTBundle\Controller;
 
 use DigiHelfer\EspTBundle\Entity\CreationSettingsRepository;
 use DigiHelfer\EspTBundle\Entity\EventType;
-use DigiHelfer\EspTBundle\Entity\State;
+use DigiHelfer\EspTBundle\Entity\EventState;
 use DigiHelfer\EspTBundle\Entity\TeacherGroup;
 use DigiHelfer\EspTBundle\Entity\TeacherGroupRepository;
 use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
@@ -33,13 +33,13 @@ final class MainController extends AbstractPageController {
         $this->addBreadcrumb(_("EspT"));
 
         $settings = $creationSettingsRepository->findFirst();
-        $state = State::getState($settings);
+        $state = EventState::getState($settings);
 
-        if ($state == State::NONE) {
+        if ($state == EventState::NONE) {
             return $this->render("@DH_EspT/User/None.twig");
         }
 
-        if ($state == State::INVITE) {
+        if ($state == EventState::INVITE) {
             if($this->isGranted("ROLE_TEACHER")) {
                 return $this->render("@DH_EspT/User/TeacherInvite.twig" , [
                     "startTime" => $settings->getStart(),
@@ -60,7 +60,7 @@ final class MainController extends AbstractPageController {
             }
         }
 
-        if ($state == State::REGISTRATION) {
+        if ($state == EventState::REGISTRATION) {
             if($this->isGranted("ROLE_TEACHER")) {
                 return $this->render("@DH_EspT/User/TeacherRegister.twig", [
                     "regEnd" => $settings->getRegEnd(),
@@ -78,7 +78,7 @@ final class MainController extends AbstractPageController {
             }
         }
 
-        if($state == State::PRINT) {
+        if($state == EventState::PRINT) {
             if($this->isGranted("ROLE_TEACHER")) {
                 return $this->render("@DH_EspT/User/TeacherPrint.twig", [
                     "start" => $settings->getStart(),
@@ -108,19 +108,19 @@ final class MainController extends AbstractPageController {
      */
     public function timeslots(CreationSettingsRepository $settingsRepository, TimeslotRepository $timeslotRepository) : Response {
         $settings = $settingsRepository->findFirst();
-        $state = State::getState($settings);
+        $state = EventState::getState($settings);
 
-        if($state == State::NONE) {
+        if($state == EventState::NONE) {
             return $this->json([]);
         }
 
         if($this->isGranted("ROLE_TEACHER")) {
-            if($state == State::INVITE)
+            if($state == EventState::INVITE)
                 return $this->json($timeslotRepository->findForTeacher($this->authenticatedUser()));
         }
 
         if($this->isGranted("ROLE_STUDENT") || $this->isGranted("ROLE_PARENT")) {
-            if($state == State::REGISTRATION)
+            if($state == EventState::REGISTRATION)
                 return $this->json($timeslotRepository->findAll());
         }
 

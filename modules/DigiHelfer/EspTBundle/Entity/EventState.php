@@ -4,7 +4,7 @@ namespace DigiHelfer\EspTBundle\Entity;
 
 use DateTime;
 
-class State {
+class EventState {
     const NONE = 'none';
     const INVITE = 'invite';
     const REGISTRATION = 'registration';
@@ -14,14 +14,14 @@ class State {
         $now = new DateTime('now');
 
         if($settings == null || $settings->getEnd() > $now)
-            return State::NONE;
+            return EventState::NONE;
         if ($settings->getRegStart() > $now)
-            return State::INVITE;
+            return EventState::INVITE;
         if ($settings->getRegStart() < $now && $settings->getRegEnd() > $now)
-            return State::REGISTRATION;
+            return EventState::REGISTRATION;
         if($settings->getRegEnd() < $now)
-            return State::PRINT;
+            return EventState::PRINT;
 
-        return State::NONE;
+        return EventState::NONE;
     }
 }
