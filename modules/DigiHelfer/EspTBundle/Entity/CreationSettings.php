@@ -24,28 +24,28 @@ class CreationSettings {
 
     /**
      * @ORM\Column(name="start_date", type="datetime")
-     * @var \DateTime
+     * @var \DateTimeImmutable
      * @Assert\NotBlank()
      */
     private $start;
 
     /**
      * @ORM\Column(name="end_date", type="datetime")
-     * @var \DateTime
+     * @var \DateTimeImmutable
      * @Assert\NotBlank()
      */
     private $end;
 
     /**
      * @ORM\Column(name="registration_start", type="datetime")
-     * @var \DateTime
+     * @var \DateTimeImmutable
      * @Assert\NotBlank()
      */
     private $regStart;
 
     /**
      * @ORM\Column(name="registration_end", type="datetime")
-     * @var \DateTime
+     * @var \DateTimeImmutable
      * @Assert\NotBlank()
      */
     private $regEnd;
@@ -54,69 +54,74 @@ class CreationSettings {
         return "";
     }
 
-    public function getId() : ?int {
+    /**
+     * @return int
+     */
+    public function getId(): int {
         return $this->id;
     }
 
     /**
-     * @return \DateTime
+     * @param int $id
      */
-    public function getStart(): \DateTime {
+    public function setId(int $id): void {
+        $this->id = $id;
+    }
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getStart(): \DateTimeImmutable {
         return $this->start;
     }
 
     /**
-     * @param \DateTime $start
+     * @param \DateTimeImmutable $start
      */
-    public function setStart(\DateTime $start): void {
+    public function setStart(\DateTimeImmutable $start): void {
         $this->start = $start;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      */
-    public function getEnd(): \DateTime {
+    public function getEnd(): \DateTimeImmutable {
         return $this->end;
     }
 
     /**
-     * @param \DateTime $end
+     * @param \DateTimeImmutable $end
      */
-    public function setEnd(\DateTime $end): void {
+    public function setEnd(\DateTimeImmutable $end): void {
         $this->end = $end;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      */
-    public function getRegStart(): \DateTime {
+    public function getRegStart(): \DateTimeImmutable {
         return $this->regStart;
     }
 
     /**
-     * @param \DateTime $regStart
+     * @param \DateTimeImmutable $regStart
      */
-    public function setRegStart(\DateTime $regStart): void {
+    public function setRegStart(\DateTimeImmutable $regStart): void {
         $this->regStart = $regStart;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      */
-    public function getRegEnd(): \DateTime {
+    public function getRegEnd(): \DateTimeImmutable {
         return $this->regEnd;
     }
 
     /**
-     * @param \DateTime $regEnd
+     * @param \DateTimeImmutable $regEnd
      */
-    public function setRegEnd(\DateTime $regEnd): void {
+    public function setRegEnd(\DateTimeImmutable $regEnd): void {
         $this->regEnd = $regEnd;
     }
-
-    public function addTimeslot(Timeslot $timeslot) : void {
-
-    }
-    
 
 }

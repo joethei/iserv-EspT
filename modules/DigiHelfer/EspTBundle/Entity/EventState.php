@@ -13,11 +13,11 @@ class EventState {
     public static function getState(?CreationSettings $settings) : string {
         $now = new DateTime('now');
 
-        if($settings == null || $settings->getEnd() > $now)
+        if($settings == null || $settings->getEnd() < $now)
             return EventState::NONE;
-        if ($settings->getRegStart() > $now)
+        if ($now < $settings->getRegStart())
             return EventState::INVITE;
-        if ($settings->getRegStart() < $now && $settings->getRegEnd() > $now)
+        if ($settings->getRegStart() < $now && $now < $settings->getRegEnd())
             return EventState::REGISTRATION;
         if($settings->getRegEnd() < $now)
             return EventState::PRINT;

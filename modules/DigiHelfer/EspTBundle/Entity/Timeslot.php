@@ -28,14 +28,14 @@ class Timeslot {
 
     /**
      * @ORM\Column(type="time")
-     * @var \DateTime
+     * @var \DateTimeImmutable
      * @Assert\NotBlank()
      */
     private $start;
 
     /**
      * @ORM\Column(type="time")
-     * @var \DateTime
+     * @var \DateTimeImmutable
      * @Assert\NotBlank()
      */
     private $end;
@@ -64,35 +64,45 @@ class Timeslot {
         return "";
     }
 
+    /**
+     * @return int
+     */
     public function getId(): int {
         return $this->id;
     }
 
     /**
-     * @return \DateTime
+     * @param int $id
      */
-    public function getStart(): \DateTime {
+    public function setId(int $id): void {
+        $this->id = $id;
+    }
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getStart(): \DateTimeImmutable {
         return $this->start;
     }
 
     /**
-     * @param \DateTime $start
+     * @param \DateTimeImmutable $start
      */
-    public function setStart(\DateTime $start): void {
+    public function setStart(\DateTimeImmutable $start): void {
         $this->start = $start;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      */
-    public function getEnd(): \DateTime {
+    public function getEnd(): \DateTimeImmutable {
         return $this->end;
     }
 
     /**
-     * @param \DateTime $end
+     * @param \DateTimeImmutable $end
      */
-    public function setEnd(\DateTime $end): void {
+    public function setEnd(\DateTimeImmutable $end): void {
         $this->end = $end;
     }
 
