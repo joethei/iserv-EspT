@@ -48,14 +48,14 @@ class Timeslot {
     private $type;
 
     /**
-     * @ORM\OneToMany(targetEntity="TeacherGroup", mappedBy="group")
+     * @ORM\OneToMany(targetEntity="TeacherGroup", mappedBy="group", fetch="EAGER")
      * @var TeacherGroup
      */
     private $group;
 
     /**
      * @var User
-     * @ORM\OneToMany(targetEntity="\IServ\CoreBundle\Entity\User", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="\IServ\CoreBundle\Entity\User", mappedBy="user", fetch="EAGER")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      */
     private $user;
@@ -64,7 +64,7 @@ class Timeslot {
         return "";
     }
 
-    public function getId() {
+    public function getId(): int {
         return $this->id;
     }
 

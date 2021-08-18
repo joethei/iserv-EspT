@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class TeacherGroup
  * @package DigiHelfer\EspTBundle\Entity
  * @ORM\Entity
- * @ORM\Table(name="teacher_group")
+ * @ORM\Table(name="espt_teacher_group")
  */
 class TeacherGroup {
 
@@ -31,7 +31,7 @@ class TeacherGroup {
     private $room;
 
     /**
-     * @ORM\OneToMany(targetEntity="\IServ\CoreBundle\Entity\User", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="\IServ\CoreBundle\Entity\User", mappedBy="user", fetch="EAGER")
      * @var Collection|User
      */
     private $users;

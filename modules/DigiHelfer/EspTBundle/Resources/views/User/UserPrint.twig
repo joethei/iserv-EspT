@@ -1,0 +1,25 @@
+{% extends "@DH_EspT/Default/base.html.twig" %}
+{# @var timeslot \DigiHelfer\EspTBundle\Entity\Timeslot #}
+{# @var group \DigiHelfer\EspTBundle\Entity\TeacherGroup #}
+{# @var user \IServ\CoreBundle\Entity\User #}
+
+{% block page_title 'Elternsprechtag' %}
+
+{% block content %}
+
+    {{ start }} - {{ end }}
+
+    <p>Zeitfenster</p>
+
+    {% for timeslot in timeslots %}
+        {{ timeslot.user.nameByFirstname }}
+        {{ timeslot.start }}
+        {{ timeslot.end }}
+        {{ timeslot.group.room }}
+        <p>----</p>
+        {% for user in timeslot.group.users %}
+            {{ user.nameByFirstname }}
+        {% endfor %}
+    {% endfor %}
+
+{% endblock %}

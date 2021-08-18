@@ -4,23 +4,6 @@
 
 {% block content %}
 
-    {% if state is constant('DigiHelfer\\EspTBundle\\\Entity\\State::NONE') %}
-        <p>Kein Sprechtag geplannt</p>
-    {% elseif state is constant('DigiHelfer\\EspTBundle\\\Entity\\State::REGISTRATION') %}
-
-        <div id="espt-schedules">
-
-        </div>
-
-    {% elseif state is constant('DigiHelfer\\EspTBundle\\\Entity\\State::INVITE') %}
-
-        <p>Der nächste Sprechtag ist am {{ date }} von {{ startTime }} - {{ endTime }}</p>
-        <p>Hier können Sie sich bis zum {{ regEnd }}  ihren Termin reservieren</p>
-
-    {% elseif state is constant('DigiHelfer\\EspTBundle\\\Entity\\State::PRINT') %}
-
-    {% endif %}
-
 
 
 {% endblock %}

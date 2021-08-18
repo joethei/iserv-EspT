@@ -4,17 +4,18 @@ namespace DigiHelfer\EspTBundle\Entity;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use IServ\CoreBundle\Entity\User;
 
 class TimeslotRepository extends ServiceEntityRepository {
 
-    public function __construct(ManagerRegistry $registry, $entityClass) {
-        parent::__construct($registry, $entityClass);
+    public function __construct(ManagerRegistry $registry) {
+        parent::__construct($registry, Timeslot::class);
     }
 
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function find($id, $lockMode = null, $lockVersion = null) {
+    public function find($id, $lockMode = null, $lockVersion = null) : Timeslot {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s WHERE id=$id");
 
@@ -24,6 +25,38 @@ class TimeslotRepository extends ServiceEntityRepository {
     public function findAll() {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s");
+
+        return $query->getArrayResult();
+    }
+
+    /**
+     * @param User $user
+     * @return Timeslot[]
+     */
+    public function findForTeacher(User $user) : array {
+        $entityManager = $this->getEntityManager();
+        //todo: actual query
+        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s");
+
+        return $query->getArrayResult();
+    }
+
+    /**
+     * @param User $user
+     * @return Timeslot[]
+     */
+    public function findForUser(User $user) : array {
+        $entityManager = $this->getEntityManager();
+        //todo: actual query
+        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s");
+
+        return $query->getArrayResult();
+    }
+
+    public function findForGroup(TeacherGroup $group) {
+        $entityManager = $this->getEntityManager();
+        //todo: actual query
+        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s WHERE group=$group");
 
         return $query->getArrayResult();
     }

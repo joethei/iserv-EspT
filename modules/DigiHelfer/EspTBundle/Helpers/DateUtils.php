@@ -15,7 +15,7 @@ class DateUtils {
      * @param $end_two
      * @return int overlap in minutes
      */
-    public function datesOverlap(DateTime $start_one, DateTime $end_one, DateTime $start_two, DateTime $end_two): int {
+    public static function datesOverlap(DateTime $start_one, DateTime $end_one, DateTime $start_two, DateTime $end_two): int {
         if ($start_one <= $end_two && $end_one >= $start_two) { //If the dates overlap
             return min($end_one, $end_two)->diff(max($start_two, $start_one))->minutes + 1; //return how many days overlap
         }
