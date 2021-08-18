@@ -16,7 +16,7 @@ class EventStateTest extends TestCase {
         $this->assertEquals(EventState::NONE, $state);
 
         $settings = new CreationSettings();
-        $settings->setEnd($now->sub(new \DateInterval('1D')));
+        $settings->setEnd($now->sub(new \DateInterval('P1D')));
 
         $state = EventState::getState($settings);
         $this->assertEquals(EventState::NONE, $state);
@@ -26,10 +26,10 @@ class EventStateTest extends TestCase {
         $now = new \DateTime('now');
         $settings = new CreationSettings();
 
-        $settings->setStart($now->add(new \DateInterval('5D')));
-        $settings->setEnd($now->add(new \DateInterval('6D')));
-        $settings->setRegStart($now->add(new \DateInterval('1D')));
-        $settings->setRegEnd($now->add(new \DateInterval('2D')));
+        $settings->setStart($now->add(new \DateInterval('P5D')));
+        $settings->setEnd($now->add(new \DateInterval('P6D')));
+        $settings->setRegStart($now->add(new \DateInterval('P1D')));
+        $settings->setRegEnd($now->add(new \DateInterval('P2D')));
 
         $state = EventState::getState($settings);
         $this->assertEquals(EventState::INVITE, $state);
@@ -39,10 +39,10 @@ class EventStateTest extends TestCase {
         $now = new \DateTime('now');
         $settings = new CreationSettings();
 
-        $settings->setStart($now->add(new \DateInterval('4D')));
-        $settings->setEnd($now->add(new \DateInterval('6D')));
-        $settings->setRegStart($now->sub(new \DateInterval('1D')));
-        $settings->setRegEnd($now->add(new \DateInterval('1D')));
+        $settings->setStart($now->add(new \DateInterval('P4D')));
+        $settings->setEnd($now->add(new \DateInterval('P6D')));
+        $settings->setRegStart($now->sub(new \DateInterval('P1D')));
+        $settings->setRegEnd($now->add(new \DateInterval('P1D')));
 
         $state = EventState::getState($settings);
         $this->assertEquals(EventState::REGISTRATION, $state);
@@ -52,10 +52,10 @@ class EventStateTest extends TestCase {
         $now = new \DateTime('now');
 
         $settings = new CreationSettings();
-        $settings->setStart($now->sub(new \DateInterval('1H')));
-        $settings->setEnd($now->add(new \DateInterval('3H')));
-        $settings->setRegStart($now->sub(new \DateInterval('2D')));
-        $settings->setRegEnd($now->sub(new \DateInterval('1D')));
+        $settings->setStart($now->sub(new \DateInterval('P1H')));
+        $settings->setEnd($now->add(new \DateInterval('P3H')));
+        $settings->setRegStart($now->sub(new \DateInterval('P2D')));
+        $settings->setRegEnd($now->sub(new \DateInterval('P1D')));
 
         $state = EventState::getState($settings);
         $this->assertEquals(EventState::PRINT, $state);
