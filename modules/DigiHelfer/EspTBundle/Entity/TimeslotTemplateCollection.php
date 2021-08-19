@@ -32,7 +32,7 @@ class TimeslotTemplateCollection {
     /**
      *
      * @var Collection|TimeslotTemplate[]
-     * @ORM\OneToMany(targetEntity="\IServ\CoreBundle\Entity\TimeslotTemplate", mappedBy="timeslots")
+     * @ORM\OneToMany(targetEntity="DigiHelfer\EspTBundle\Entity\TimeslotTemplate", mappedBy="collection")
      */
     private $timeslots;
 

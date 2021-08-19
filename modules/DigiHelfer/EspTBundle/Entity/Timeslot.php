@@ -27,21 +27,21 @@ class Timeslot {
     private $id;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="time_immutable", name="start_time")
      * @var \DateTimeImmutable
      * @Assert\NotBlank()
      */
     private $start;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="time_immutable", name="end_time")
      * @var \DateTimeImmutable
      * @Assert\NotBlank()
      */
     private $end;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="espt_eventType")
      * @var EventType
      * @Assert\NotBlank()
      */
@@ -55,7 +55,7 @@ class Timeslot {
 
     /**
      * @var User
-     * @ORM\OneToMany(targetEntity="\IServ\CoreBundle\Entity\User", mappedBy="user", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="\IServ\CoreBundle\Entity\User", fetch="EAGER")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      */
     private $user;

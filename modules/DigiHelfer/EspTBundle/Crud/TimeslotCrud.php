@@ -2,47 +2,42 @@
 
 namespace DigiHelfer\EspTBundle\Crud;
 
-use DigiHelfer\EspTBundle\Entity\TeacherGroup;
 use IServ\AdminBundle\Admin\AdminServiceCrud;
-use IServ\CoreBundle\Autocomplete\AutocompleteType;
-use IServ\CoreBundle\Autocomplete\Form\Type\AutocompleteTagsType;
-use IServ\CrudBundle\Model\Breadcrumb;
 use IServ\CoreBundle\Form\Type\UserType;
 use IServ\CrudBundle\Mapper\FormMapper;
 use IServ\CrudBundle\Mapper\ListMapper;
 use IServ\CrudBundle\Mapper\ShowMapper;
+use IServ\CrudBundle\Model\Breadcrumb;
 use IServ\CrudBundle\Routing\RoutingDefinition;
 
-class TeacherGroupCrud extends AdminServiceCrud {
-
-    protected static $entityClass = TeacherGroup::class;
+class TimeslotCrud extends AdminServiceCrud {
 
     protected function configure(): void {
-        $this->title = "Lehrer Gruppen";
-        $this->itemTitle = "Lehrer Gruppe";
+        $this->title = "Zeitfenster";
+        $this->itemTitle = "Zeitfenster";
     }
 
     protected function configureListFields(ListMapper $listMapper): void {
         $listMapper
             ->addIdentifier('id')
-            ->add('room', null, ['label' => "Raum"])
-            ->add('users', UserType::class, ['label' => "Lehrkräfte"]);
+            ->add('group', null, ['label' => 'Lehrkräfte'])
+            ->add('user', null, ['label' => 'Schüler'])
+            ->add('start', null, ['label' => 'Beginn'])
+            ->add('end', null, ['label' => 'Ende']);
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void {
         $showMapper
-            ->add('room', null, ['label' => "Raum"])
-            ->add('users', UserType::class, ['label' => 'Lehrkräfte']);
+            ->add('group', null, ['label' => 'Lehrkräfte'])
+            ->add('user', null, ['label' => 'Schüler'])
+            ->add('start', null, ['label' => 'Beginn'])
+            ->add('end', null, ['label' => 'Ende']);
+
     }
 
     protected function configureFormFields(FormMapper $formMapper): void {
         $formMapper
-            ->add('room', null, ['label' => "Raum", 'required' => false,])
-            ->add('users', AutocompleteTagsType::class, [
-                'label' => "Lehrer",
-                'autocomplete_types' => AutocompleteType::user(),
-                'tag_default_icon' => 'user'
-            ]);
+            ->add('user', UserType::class, ['label' => 'Schüler']);
     }
 
     public function isAuthorized(): bool {

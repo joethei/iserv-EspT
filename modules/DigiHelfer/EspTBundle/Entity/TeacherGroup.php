@@ -6,8 +6,8 @@ namespace DigiHelfer\EspTBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
 use IServ\CoreBundle\Entity\User;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class TeacherGroup
@@ -31,8 +31,12 @@ class TeacherGroup {
     private $room;
 
     /**
-     * @ORM\OneToMany(targetEntity="\IServ\CoreBundle\Entity\User", mappedBy="user", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="\IServ\CoreBundle\Entity\User", fetch="EAGER")
      * @var Collection|User
+     * @JoinTable(name="espt_teacher_groups",
+     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="group_id", referencedColumnName="id")}
+     *      )
      */
     private $users;
 

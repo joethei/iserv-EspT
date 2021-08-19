@@ -50,7 +50,7 @@ class TimeslotTemplatesCrud extends AdminServiceCrud {
     }
 
     public function isAuthorized(): bool {
-        return $this->isGranted('ESPT_ADMIN');
+        return $this->isGranted('PRIV_ESPT_ADMIN');
     }
 
     public function prepareBreadcrumbs(): array {

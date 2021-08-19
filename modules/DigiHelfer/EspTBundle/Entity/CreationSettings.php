@@ -23,28 +23,28 @@ class CreationSettings {
     private $id;
 
     /**
-     * @ORM\Column(name="start_date", type="datetime")
+     * @ORM\Column(name="start_date", type="datetime_immutable")
      * @var \DateTimeImmutable
      * @Assert\NotBlank()
      */
     private $start;
 
     /**
-     * @ORM\Column(name="end_date", type="datetime")
+     * @ORM\Column(name="end_date", type="datetime_immutable")
      * @var \DateTimeImmutable
      * @Assert\NotBlank()
      */
     private $end;
 
     /**
-     * @ORM\Column(name="registration_start", type="datetime")
+     * @ORM\Column(name="registration_start", type="datetime_immutable")
      * @var \DateTimeImmutable
      * @Assert\NotBlank()
      */
     private $regStart;
 
     /**
-     * @ORM\Column(name="registration_end", type="datetime")
+     * @ORM\Column(name="registration_end", type="datetime_immutable")
      * @var \DateTimeImmutable
      * @Assert\NotBlank()
      */

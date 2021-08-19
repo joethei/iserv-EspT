@@ -25,14 +25,14 @@ class TimeslotTemplate {
     private $id;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="time_immutable", name="start_time")
      * @var \DateTimeImmutable
      * @Assert\NotBlank()
      */
     private $start;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="time_immutable", name="end_time")
      * @var \DateTimeImmutable
      * @Assert\NotBlank()
      */
@@ -44,6 +44,12 @@ class TimeslotTemplate {
      * @Assert\NotBlank()
      */
     private $type;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="DigiHelfer\EspTBundle\Entity\TimeslotTemplateCollection", inversedBy="timeslots")
+     * @var TimeslotTemplateCollection
+     */
+    private $collection;
 
     public function __toString() {
         return "";
@@ -103,6 +109,20 @@ class TimeslotTemplate {
      */
     public function setType(EventType $type): void {
         $this->type = $type;
+    }
+
+    /**
+     * @return TimeslotTemplateCollection
+     */
+    public function getCollection(): TimeslotTemplateCollection {
+        return $this->collection;
+    }
+
+    /**
+     * @param TimeslotTemplateCollection $collection
+     */
+    public function setCollection(TimeslotTemplateCollection $collection): void {
+        $this->collection = $collection;
     }
 
 }

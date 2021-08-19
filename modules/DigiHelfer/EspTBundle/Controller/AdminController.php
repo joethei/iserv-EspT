@@ -41,10 +41,10 @@ class AdminController extends AbstractPageController {
         $settings = new CreationSettings();
 
         //set default form values
-        $settings->setStart(new \DateTime('tomorrow'));
-        $settings->setEnd(new \DateTime('tomorrow'));
-        $settings->setRegStart(new \DateTime('tomorrow'));
-        $settings->setRegEnd(new \DateTime('tomorrow'));
+        $settings->setStart(new \DateTimeImmutable('tomorrow'));
+        $settings->setEnd(new \DateTimeImmutable('tomorrow'));
+        $settings->setRegStart(new \DateTimeImmutable('tomorrow'));
+        $settings->setRegEnd(new \DateTimeImmutable('tomorrow'));
 
         $form = $this->createForm(EventSettingsType::class, $settings);
 
@@ -83,7 +83,8 @@ class AdminController extends AbstractPageController {
     private function getMenu(?string $current = null): ItemInterface {
         $menu = $this->get(FactoryInterface::class)->createItem('root');
         $menu->addChild('Gruppen', ['route' => 'espt_admin_teachergroup_index']);
-        $menu->addChild('Zeitfenster', ['route' => 'espt_admin_timeslots_index']);
+        $menu->addChild('Zeitfenster', ['route' => 'espt_admin_timeslot_index']);
+        $menu->addChild('Zeitfenster Templates', ['route' => 'espt_admin_timeslottemplates_index']);
         $menu->addChild('Einstellungen', ['route' => 'espt_admin_settings']);
 
         if (null !== $current) {
