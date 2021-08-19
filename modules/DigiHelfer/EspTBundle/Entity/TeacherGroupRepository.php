@@ -21,20 +21,22 @@ class TeacherGroupRepository extends ServiceEntityRepository {
      */
     public function find($id, $lockMode = null, $lockVersion = null) {
         $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\TeacherGroup s WHERE id=$id");
+        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\TeacherGroup s WHERE s.id = :id");
+        $query->setParameter('id', $id);
 
         return $query->getOneOrNullResult();
     }
 
     /**
-     * @return TeacherGroup
+     * @return TeacherGroup[]
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function findFor(User $user): TeacherGroup {
+    public function findFor(User $user): array {
         $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\TeacherGroup s");
+        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\TeacherGroup s WHERE :user MEMBER OF s.users");
+        $query->setParameter('user', $user);
 
-        return $query->getOneOrNullResult();
+        return $query->getArrayResult();
     }
 
     /**

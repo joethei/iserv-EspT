@@ -2,6 +2,7 @@
 
 namespace DigiHelfer\EspTBundle\Crud;
 
+use DigiHelfer\EspTBundle\Entity\Timeslot;
 use IServ\AdminBundle\Admin\AdminServiceCrud;
 use IServ\CoreBundle\Form\Type\UserType;
 use IServ\CrudBundle\Mapper\FormMapper;
@@ -11,6 +12,8 @@ use IServ\CrudBundle\Model\Breadcrumb;
 use IServ\CrudBundle\Routing\RoutingDefinition;
 
 class TimeslotCrud extends AdminServiceCrud {
+
+    protected static $entityClass = Timeslot::class;
 
     protected function configure(): void {
         $this->title = "Zeitfenster";

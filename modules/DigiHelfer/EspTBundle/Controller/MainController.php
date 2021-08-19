@@ -28,6 +28,7 @@ final class MainController extends AbstractPageController {
      * @param TimeslotRepository $timeslotRepository
      * @return Response
      * @Route("/", name="espt_index")
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function index(CreationSettingsRepository $creationSettingsRepository, TeacherGroupRepository $groupRepository, TimeslotRepository $timeslotRepository): Response {
         $this->addBreadcrumb(_("EspT"));
@@ -45,7 +46,6 @@ final class MainController extends AbstractPageController {
                     "startTime" => $settings->getStart(),
                     "endTime" => $settings->getEnd(),
                     "regStart" => $settings->getRegStart(),
-                    "regEnd" => $settings->getRegEnd(),
                     "timeslots" => $timeslotRepository->findForTeacher($this->authenticatedUser()),
                 ]);
             }
@@ -64,8 +64,8 @@ final class MainController extends AbstractPageController {
             if($this->isGranted("ROLE_TEACHER")) {
                 return $this->render("@DH_EspT/User/TeacherRegister.twig", [
                     "regEnd" => $settings->getRegEnd(),
-                    "start" => $settings->getStart(),
-                    "end" => $settings->getEnd(),
+                    "startTime" => $settings->getStart(),
+                    "endTime" => $settings->getEnd(),
                 ]);
             }
 
@@ -73,7 +73,8 @@ final class MainController extends AbstractPageController {
                 return $this->render("@DH_EspT/User/UserRegister.twig" ,[
                     "timeslots" => $timeslotRepository->findAll(),
                     "regEnd" => $settings->getRegEnd(),
-                    "start" => $settings->getStart(),
+                    "startTime" => $settings->getStart(),
+                    "endTime" => $settings->getEnd(),
                 ]);
             }
         }
@@ -81,8 +82,8 @@ final class MainController extends AbstractPageController {
         if($state == EventState::PRINT) {
             if($this->isGranted("ROLE_TEACHER")) {
                 return $this->render("@DH_EspT/User/TeacherPrint.twig", [
-                    "start" => $settings->getStart(),
-                    "end" => $settings->getEnd(),
+                    "startTime" => $settings->getStart(),
+                    "endTime" => $settings->getEnd(),
                     "group" => $groupRepository->findFor($this->authenticatedUser()),
                     "timeslots" => $timeslotRepository->findForTeacher($this->authenticatedUser()),
                 ]);
@@ -90,8 +91,8 @@ final class MainController extends AbstractPageController {
 
             if($this->isGranted("ROLE_STUDENT") || $this->isGranted("ROLE_PARENT")) {
                 return $this->render("@DH_EspT/User/UserPrint.twig" ,[
-                    "start" => $settings->getStart(),
-                    "end" => $settings->getEnd(),
+                    "startTime" => $settings->getStart(),
+                    "endTime" => $settings->getEnd(),
                     "timeslots" => $timeslotRepository->findForUser($this->authenticatedUser()),
                 ]);
             }
@@ -105,6 +106,7 @@ final class MainController extends AbstractPageController {
      * @param TimeslotRepository $timeslotRepository
      * @return Response
      * @Route("/timeslots", name="espt_timeslots")
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function timeslots(CreationSettingsRepository $settingsRepository, TimeslotRepository $timeslotRepository) : Response {
         $settings = $settingsRepository->findFirst();
@@ -135,7 +137,7 @@ final class MainController extends AbstractPageController {
      * @throws \Doctrine\ORM\NonUniqueResultException
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
-     * @Route("/timeslots/reserve/{id}", name="espt_timeslots/reserve")
+     * @Route("/timeslots/reserve/{id}", name="espt_timeslots_reserve")
      */
     public function reserveTimeslot(int $id, TimeslotRepository $timeslotRepository, EntityManager $entityManager) : Response {
 

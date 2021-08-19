@@ -17,7 +17,8 @@ class TimeslotRepository extends ServiceEntityRepository {
      */
     public function find($id, $lockMode = null, $lockVersion = null) : Timeslot {
         $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s WHERE id=$id");
+        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s WHERE s.id = :id");
+        $query->setParameter('id', $id);
 
         return $query->getOneOrNullResult();
     }
@@ -35,8 +36,8 @@ class TimeslotRepository extends ServiceEntityRepository {
      */
     public function findForTeacher(User $user) : array {
         $entityManager = $this->getEntityManager();
-        //todo: actual query
-        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s");
+        $query = $entityManager->createQuery("SELECT t FROM DigiHelfer\EspTBundle\Entity\Timeslot s JOIN s.group g WHERE :user MEMBER OF g.users");
+        $query->setParameter('user', $user);
 
         return $query->getArrayResult();
     }
@@ -47,16 +48,16 @@ class TimeslotRepository extends ServiceEntityRepository {
      */
     public function findForUser(User $user) : array {
         $entityManager = $this->getEntityManager();
-        //todo: actual query
-        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s");
+        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s WHERE s.user = :user");
+        $query->setParameter('user', $user);
 
         return $query->getArrayResult();
     }
 
     public function findForGroup(TeacherGroup $group) {
         $entityManager = $this->getEntityManager();
-        //todo: actual query
-        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s WHERE group=$group");
+        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s WHERE group = :teacherGroup");
+        $query->setParameter('teacherGroup', $group);
 
         return $query->getArrayResult();
     }

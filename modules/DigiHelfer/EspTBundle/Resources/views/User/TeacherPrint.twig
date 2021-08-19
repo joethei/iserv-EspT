@@ -1,8 +1,21 @@
 {% extends "@DH_EspT/Default/base.html.twig" %}
+{# @var timeslot \DigiHelfer\EspTBundle\Entity\Timeslot #}
+{# @var group \IServ\CoreBundle\Entity\Group #}
 
 {% block page_title 'Elternsprechtag' %}
 
 {% block content %}
 
+    <p>{{ startTime }}</p>
+    <p>{{ endTime }}</p>
+
+    {% for timeslot in timeslots %}
+        {{ timeslot.start }}
+        {{ timeslot.end }}
+        {{ timeslot.user.nameByFirstname }}
+        {% for group in timeslot.user.groups %}
+            {{ group.name }}
+        {% endfor %}
+    {% endfor %}
 
 {% endblock %}
