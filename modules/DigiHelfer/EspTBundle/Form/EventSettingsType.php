@@ -14,20 +14,20 @@ class EventSettingsType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options): void {
         $builder
             ->add('start', DateTimeType::class, [
-                'label' => _('StartTime'),
-                'help' => "Um welche Uhrzeit soll der Sprechtag starten?"
+                'label' => _('espt_starttime'),
+                'help' => _('epst_starttime_help')
             ])
             ->add('end', DateTimeType::class, [
-                'label' => _("EndTime"),
-                'help' => "Um welche Uhrzeit soll der Sprechtag enden?"
+                'label' => _("espt_endtime"),
+                'help' => _('espt_endtime_help')
             ])
             ->add('regStart', DateTimeType::class, [
-                'label' => _("RegStart"),
-                'help' => "Ab wann soll die Anmeldung möglich sein?"
+                'label' => _("espt_registration_start"),
+                'help' => _('espt_registration_start_help')
             ])
             ->add('regEnd', DateTimeType::class, [
-                'label' => _("RegEnd"),
-                'help' => "Bis wann soll die Anmeldung möglich sein?"
+                'label' => _("espt_registration_end"),
+                'help' => _('espt_registration_end_help')
             ])
         ->add('save', SubmitType::class, [
             'label' => _("save"),

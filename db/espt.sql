@@ -1,13 +1,3 @@
-/*
- * todo: remove after testing
- */
-DROP TABLE espt_settings;
-DROP TABLE espt_timeslot;
-DROP TABLE espt_teacher_groups;
-DROP TABLE espt_teacher_group;
-DROP TABLE espt_timeslot_template_collection;
-DROP TABLE espt_timeslot_template;
-
 CREATE TABLE espt_settings
 (
     id                 BIGSERIAL PRIMARY KEYNOT NULL,

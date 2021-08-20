@@ -17,33 +17,33 @@ class TimeslotTemplatesCrud extends AdminServiceCrud {
     protected static $entityClass = TimeslotTemplateCollection::class;
 
     protected function configure(): void {
-        $this->title = "Zeitfenster Templates";
-        $this->itemTitle = "Zeitfenster Template";
+        $this->title = _('espt_timeslot_templates');
+        $this->itemTitle = _('espt_timeslot_template');
     }
 
     protected function configureListFields(ListMapper $listMapper): void {
         $listMapper
             ->addIdentifier('name', null)
-            ->add('timeslots', null, ['label' => 'Zeitfenster']);
+            ->add('timeslots', null, ['label' => _('espt_timeslot')]);
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void {
         $showMapper
-            ->add('name', null, ['label' => 'Name'])
-            ->add('timeslots', null, ['label' => 'Zeitfenster']);
+            ->add('name', null, ['label' => _('espt_name')])
+            ->add('timeslots', null, ['label' => _('espt_timeslots')]);
     }
 
     protected function configureFormFields(FormMapper $formMapper): void {
         $formMapper
             ->add('name', TextType::class, [
-                'label' => 'Name'
+                'label' => _('espt_name')
             ])
             ->add('timeslots', BootstrapCollectionType::class, [
-                'label' => "Zeitfenster",
+                'label' => _('espt_timeslot'),
                 'allow_add'          => true,
                 'allow_delete'       => true,
-                'add_button_text'    => 'Zeitfenster hinzufügen',
-                'delete_button_text' => 'Zeitfenster entfernen',
+                'add_button_text'    => _('espt_timeslot_add'),
+                'delete_button_text' => _('ept_timeslot_remove'),
                 'sub_widget_col'     => 9,
                 'button_col'         => 3
             ]);

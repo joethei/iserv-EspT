@@ -76,16 +76,16 @@ class AdminController extends AbstractPageController {
 
         return [
             'form' => $form->createView(),
-            'menu' => $this->getMenu('Einstellungen')
+            'menu' => $this->getMenu(_('espt_settings'))
         ];
     }
 
     private function getMenu(?string $current = null): ItemInterface {
         $menu = $this->get(FactoryInterface::class)->createItem('root');
-        $menu->addChild('Gruppen', ['route' => 'espt_admin_teachergroup_index']);
-        $menu->addChild('Zeitfenster', ['route' => 'espt_admin_timeslot_index']);
-        $menu->addChild('Zeitfenster Templates', ['route' => 'espt_admin_timeslottemplates_index']);
-        $menu->addChild('Einstellungen', ['route' => 'espt_admin_settings']);
+        $menu->addChild(_('espt_groups'), ['route' => 'espt_admin_teachergroup_index']);
+        $menu->addChild(_('espt_timeslots'), ['route' => 'espt_admin_timeslot_index']);
+        $menu->addChild(_('espt_timeslot_templates'), ['route' => 'espt_admin_timeslottemplates_index']);
+        $menu->addChild(_('espt_settings'), ['route' => 'espt_admin_settings']);
 
         if (null !== $current) {
             if (null === $item = $menu->getChild($current)) {
