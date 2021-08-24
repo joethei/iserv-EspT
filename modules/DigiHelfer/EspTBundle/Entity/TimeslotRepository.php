@@ -54,7 +54,11 @@ class TimeslotRepository extends ServiceEntityRepository {
         return $query->getArrayResult();
     }
 
-    public function findForGroup(TeacherGroup $group) {
+    /**
+     * @param TeacherGroup $group
+     * @return Timeslot[]
+     */
+    public function findForGroup(TeacherGroup $group) : array {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s WHERE group = :teacherGroup");
         $query->setParameter('teacherGroup', $group);
@@ -63,9 +67,10 @@ class TimeslotRepository extends ServiceEntityRepository {
     }
 
     /**
+     * remove all entries in table and reset id generation
      * @throws \Doctrine\DBAL\Exception
      */
-    public function clear() {
+    public function truncate() {
         //based on https://blog.nevercodealone.de/symfony-doctrine-truncate-table/
         $connection = parent::getEntityManager()->getConnection();
         $platform   = $connection->getDatabasePlatform();

@@ -7,7 +7,7 @@ CREATE TABLE espt_settings
     registration_end   TIMESTAMP NOT NULL
 );
 
-GRANT USAGE, SELECT ON "espt_settings_seq" to "symfony";
+GRANT USAGE, SELECT ON "espt_settings_id_seq" to "symfony";
 GRANT SELECT, INSERT, UPDATE, DELETE ON "espt_settings" TO "symfony";
 
 CREATE TYPE espt_eventType AS ENUM (
@@ -23,7 +23,7 @@ CREATE TABLE espt_timeslot_template_collection
     name text                  NOT NULL
 );
 
-GRANT USAGE, SELECT ON "espt_timeslot_template_collection_seq" to "symfony";
+GRANT USAGE, SELECT ON "espt_timeslot_template_collection_id_seq" to "symfony";
 GRANT SELECT, INSERT, UPDATE, DELETE ON "espt_timeslot_template_collection" TO "symfony";
 
 CREATE TABLE espt_timeslot_template
@@ -35,7 +35,7 @@ CREATE TABLE espt_timeslot_template
     collection BIGINT REFERENCES espt_timeslot_template_collection (id)
 );
 
-GRANT USAGE, SELECT ON "espt_timeslot_template_seq" to "symfony";
+GRANT USAGE, SELECT ON "espt_timeslot_template_id_seq" to "symfony";
 GRANT SELECT, INSERT, UPDATE, DELETE ON "espt_timeslot_template" TO "symfony";
 
 CREATE TABLE espt_teacher_group
@@ -44,7 +44,7 @@ CREATE TABLE espt_teacher_group
     room TEXT
 );
 
-GRANT USAGE, SELECT ON "espt_teacher_group_seq" to "symfony";
+GRANT USAGE, SELECT ON "espt_teacher_group_id_seq" to "symfony";
 GRANT SELECT, INSERT, UPDATE, DELETE ON "espt_teacher_group" TO "symfony";
 
 CREATE TABLE espt_teacher_groups
@@ -54,7 +54,7 @@ CREATE TABLE espt_teacher_groups
     PRIMARY KEY (user_id, group_id)
 );
 
-GRANT USAGE, SELECT ON "espt_teacher_groups_seq" to "symfony";
+GRANT USAGE, SELECT ON "espt_teacher_groups_id_seq" to "symfony";
 GRANT SELECT, INSERT, UPDATE, DELETE ON "espt_teacher_groups" TO "symfony";
 
 CREATE TABLE espt_timeslot
@@ -67,5 +67,5 @@ CREATE TABLE espt_timeslot
     user_id    BIGINT REFERENCES users (id)
 );
 
-GRANT USAGE, SELECT ON "espt_timeslot_seq" to "symfony";
+GRANT USAGE, SELECT ON "espt_timeslot_id_seq" to "symfony";
 GRANT SELECT, INSERT, UPDATE, DELETE ON "espt_timeslot" TO "symfony";

@@ -1,7 +1,7 @@
 {%  extends "@IServCore/page.html.twig" %}
 
 {% block stylesheets %}
-
+    {{ parent() }}
     {% if app.environment != 'prod' %}
         <!-- {{ _self }} => espt.css -->
     {% endif %}

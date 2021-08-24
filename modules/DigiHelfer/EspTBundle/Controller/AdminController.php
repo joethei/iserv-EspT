@@ -53,7 +53,7 @@ class AdminController extends AbstractPageController {
         if ($form->isSubmitted() && $form->isValid()) {
 
             //reset timeslots from last time
-            $timeslotRepository->clear();
+            $timeslotRepository->truncate();
 
             //create timeslots for all groups according to template
             $groups = $groupRepository->findAll();
