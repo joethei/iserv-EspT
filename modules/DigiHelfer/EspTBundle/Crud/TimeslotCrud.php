@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DigiHelfer\EspTBundle\Crud;
 
 use DigiHelfer\EspTBundle\Entity\Timeslot;

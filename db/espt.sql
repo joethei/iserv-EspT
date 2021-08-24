@@ -1,6 +1,6 @@
 CREATE TABLE espt_settings
 (
-    id                 BIGSERIAL PRIMARY KEYNOT NULL,
+    id                 BIGSERIAL PRIMARY KEY NOT NULL,
     start_date         TIMESTAMP NOT NULL,
     end_date           TIMESTAMP NOT NULL,
     registration_start TIMESTAMP NOT NULL,

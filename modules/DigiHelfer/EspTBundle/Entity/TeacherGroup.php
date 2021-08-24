@@ -32,7 +32,7 @@ class TeacherGroup {
     private $room;
 
     /**
-     * @ORM\OneToMany(targetEntity="\IServ\CoreBundle\Entity\User", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="\IServ\CoreBundle\Entity\User", fetch="EAGER", mappedBy="id")
      * @var Collection|User
      * @JoinTable(name="espt_teacher_groups",
      *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
