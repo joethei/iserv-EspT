@@ -9,7 +9,7 @@ use DigiHelfer\EspTBundle\Entity\TeacherGroupRepository;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
 use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
 use DigiHelfer\EspTBundle\Entity\TimeslotTemplate;
-use DigiHelfer\EspTBundle\Form\EventSettingsType;
+use DigiHelfer\EspTBundle\Form\CreationSettingsType;
 use Doctrine\ORM\EntityManagerInterface;
 use IServ\CoreBundle\Controller\AbstractPageController;
 use Knp\Menu\FactoryInterface;
@@ -32,7 +32,7 @@ class AdminController extends AbstractPageController {
      * @param TimeslotRepository $timeslotRepository
      * @return array
      * @throws \Doctrine\DBAL\Exception
-     * @Route("/settings", name="espt_admin_settings")
+     * @Route("/settings", name="_settings")
      * @Template("@DH_EspT/Default/index.html.twig")
      */
     public function index(Request $request, EntityManagerInterface $entityManager, TeacherGroupRepository $groupRepository, TimeslotRepository $timeslotRepository): array {
@@ -46,7 +46,7 @@ class AdminController extends AbstractPageController {
         $settings->setRegStart(new \DateTimeImmutable('tomorrow'));
         $settings->setRegEnd(new \DateTimeImmutable('tomorrow'));
 
-        $form = $this->createForm(EventSettingsType::class, $settings);
+        $form = $this->createForm(CreationSettingsType::class, $settings);
 
         $form->handleRequest($request);
 

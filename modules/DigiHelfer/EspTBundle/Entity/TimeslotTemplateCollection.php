@@ -5,6 +5,7 @@ namespace DigiHelfer\EspTBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use IServ\CrudBundle\Entity\CrudInterface;
 
 /**
  * Class TimeslotTemplateCollection
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="espt_timeslot_template_collection")
  * @ORM\HasLifecycleCallbacks
  */
-class TimeslotTemplateCollection {
+class TimeslotTemplateCollection implements CrudInterface {
 
     /**
      * @ORM\Column(type="integer")
@@ -80,5 +81,9 @@ class TimeslotTemplateCollection {
      */
     public function setTimeslots(ArrayCollection $timeslots): void {
         $this->timeslots = $timeslots;
+    }
+
+    public function __toString() : string {
+        return $this->name;
     }
 }

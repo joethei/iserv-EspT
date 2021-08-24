@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DigiHelfer\EspTBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use IServ\CrudBundle\Entity\CrudInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="espt_timeslot_template")
  * @ORM\HasLifecycleCallbacks
  */
-class TimeslotTemplate {
+class TimeslotTemplate implements CrudInterface {
 
     /**
      * @ORM\Column(type="integer")
@@ -52,7 +53,7 @@ class TimeslotTemplate {
     private $collection;
 
     public function __toString() {
-        return "";
+        return $this->id;
     }
 
     /**

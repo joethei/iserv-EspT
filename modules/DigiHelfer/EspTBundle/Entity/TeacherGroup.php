@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\JoinColumn;
 use IServ\CoreBundle\Entity\User;
+use IServ\CrudBundle\Entity\CrudInterface;
 
 /**
  * Class TeacherGroup
@@ -16,7 +17,7 @@ use IServ\CoreBundle\Entity\User;
  * @ORM\Entity
  * @ORM\Table(name="espt_teacher_group")
  */
-class TeacherGroup {
+class TeacherGroup implements CrudInterface {
 
     /**
      * @ORM\Column(type="integer")
@@ -32,10 +33,10 @@ class TeacherGroup {
     private $room;
 
     /**
-     * @ORM\OneToMany(targetEntity="\IServ\CoreBundle\Entity\User", fetch="EAGER", mappedBy="id")
+     * @ORM\OneToMany(targetEntity="\IServ\CoreBundle\Entity\User", fetch="EAGER", mappedBy="uuid")
      * @var Collection|User
      * @JoinTable(name="espt_teacher_groups",
-     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="uuid")},
      *      inverseJoinColumns={@JoinColumn(name="group_id", referencedColumnName="id")}
      *      )
      */

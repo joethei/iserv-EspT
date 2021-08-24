@@ -61,7 +61,7 @@ class TimeslotTemplatesCrud extends AdminServiceCrud {
 
     public static function defineRoutes(): RoutingDefinition {
         return parent::defineRoutes()
-            ->setNamePrefix('espt_admin')
+            ->setNamePrefix('espt_admin_')
             ->prependPathPrefix('espt/');
     }
 }

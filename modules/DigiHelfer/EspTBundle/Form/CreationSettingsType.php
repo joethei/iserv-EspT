@@ -9,28 +9,32 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EventSettingsType extends AbstractType {
+class CreationSettingsType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options): void {
         $builder
             ->add('start', DateTimeType::class, [
                 'label' => _('espt_starttime'),
-                'help' => _('epst_starttime_help')
+                'help' => _('espt_starttime_help'),
+                'input' => 'datetime_immutable',
             ])
             ->add('end', DateTimeType::class, [
                 'label' => _("espt_endtime"),
-                'help' => _('espt_endtime_help')
+                'help' => _('espt_endtime_help'),
+                'input' => 'datetime_immutable',
             ])
             ->add('regStart', DateTimeType::class, [
                 'label' => _("espt_registration_start"),
-                'help' => _('espt_registration_start_help')
+                'help' => _('espt_registration_start_help'),
+                'input' => 'datetime_immutable',
             ])
             ->add('regEnd', DateTimeType::class, [
                 'label' => _("espt_registration_end"),
-                'help' => _('espt_registration_end_help')
+                'help' => _('espt_registration_end_help'),
+                'input' => 'datetime_immutable',
             ])
         ->add('save', SubmitType::class, [
-            'label' => _("save"),
+            'label' => _("espt_save"),
             'icon' => 'ok',
             'buttonClass' => 'btn-success',
         ]);

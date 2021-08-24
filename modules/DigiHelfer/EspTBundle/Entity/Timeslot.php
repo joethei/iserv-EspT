@@ -7,6 +7,7 @@ namespace DigiHelfer\EspTBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use IServ\CoreBundle\Entity\User;
+use IServ\CrudBundle\Entity\CrudInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -16,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="espt_timeslot")
  * @ORM\HasLifecycleCallbacks
  */
-class Timeslot {
+class Timeslot implements CrudInterface {
 
     /**
      * @ORM\Column(type="integer")
@@ -48,7 +49,7 @@ class Timeslot {
     private $type;
 
     /**
-     * @ORM\OneToMany(targetEntity="TeacherGroup", mappedBy="group", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="DigiHelfer\EspTBundle\Entity\TeacherGroup", mappedBy="group", fetch="EAGER")
      * @var TeacherGroup
      */
     private $group;
