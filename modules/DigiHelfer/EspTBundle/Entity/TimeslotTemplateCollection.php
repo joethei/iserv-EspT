@@ -26,7 +26,7 @@ class TimeslotTemplateCollection implements CrudInterface {
 
     /**
      * @ORM\Column(type="string")
-     * @var string
+     * @var string|null
      */
     private $name;
 
@@ -58,7 +58,7 @@ class TimeslotTemplateCollection implements CrudInterface {
     /**
      * @return string
      */
-    public function getName(): string {
+    public function getName(): ?string {
         return $this->name;
     }
 

@@ -37,7 +37,7 @@ class TimeslotTemplatesCrud extends AdminServiceCrud {
 
     protected function configureFormFields(FormMapper $formMapper): void {
         $formMapper
-            ->add('name', TextType::class, [
+            ->add('name', null, [
                 'label' => _('espt_name')
             ])
             ->add('timeslots', BootstrapCollectionType::class, [

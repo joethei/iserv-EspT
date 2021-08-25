@@ -49,7 +49,7 @@ class Timeslot implements CrudInterface {
     private $type;
 
     /**
-     * @ORM\OneToMany(targetEntity="DigiHelfer\EspTBundle\Entity\TeacherGroup", mappedBy="group", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="DigiHelfer\EspTBundle\Entity\TeacherGroup", mappedBy="id", fetch="EAGER")
      * @var TeacherGroup
      */
     private $group;

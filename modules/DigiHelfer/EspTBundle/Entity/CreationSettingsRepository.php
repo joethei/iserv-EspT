@@ -15,7 +15,7 @@ final class CreationSettingsRepository extends ServiceEntityRepository {
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function findFirst(): CreationSettings {
+    public function findFirst(): ?CreationSettings {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\CreationSettings s");
 

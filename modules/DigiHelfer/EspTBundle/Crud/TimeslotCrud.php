@@ -42,7 +42,7 @@ class TimeslotCrud extends AdminServiceCrud {
 
     protected function configureFormFields(FormMapper $formMapper): void {
         $formMapper
-            ->add('user', UserType::class, ['label' => _('espt_student')]);
+            ->add('user', null, ['label' => _('espt_student')]);
     }
 
     public function isAuthorized(): bool {

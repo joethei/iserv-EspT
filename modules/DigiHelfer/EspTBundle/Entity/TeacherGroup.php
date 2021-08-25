@@ -6,8 +6,6 @@ namespace DigiHelfer\EspTBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinTable;
-use Doctrine\ORM\Mapping\JoinColumn;
 use IServ\CoreBundle\Entity\User;
 use IServ\CrudBundle\Entity\CrudInterface;
 
@@ -33,12 +31,8 @@ class TeacherGroup implements CrudInterface {
     private $room;
 
     /**
-     * @ORM\OneToMany(targetEntity="\IServ\CoreBundle\Entity\User", fetch="EAGER", mappedBy="uuid")
+     * @ORM\ManyToOne(targetEntity="\IServ\CoreBundle\Entity\User", fetch="EAGER", inversedBy="uuid")
      * @var Collection|User
-     * @JoinTable(name="espt_teacher_groups",
-     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="uuid")},
-     *      inverseJoinColumns={@JoinColumn(name="group_id", referencedColumnName="id")}
-     *      )
      */
     private $users;
 

@@ -83,8 +83,8 @@ class AdminController extends AbstractPageController {
     private function getMenu(?string $current = null): ItemInterface {
         $menu = $this->get(FactoryInterface::class)->createItem('root');
         $menu->addChild(_('espt_groups'), ['route' => 'espt_admin_teachergroup_index']);
-        $menu->addChild(_('espt_timeslots'), ['route' => 'espt_admin_timeslot_index']);
-        $menu->addChild(_('espt_timeslot_templates'), ['route' => 'espt_admin_timeslottemplates_index']);
+        $menu->addChild(_('espt_timeslot'), ['route' => 'espt_admin_timeslot_index']);
+        $menu->addChild(_('espt_timeslot_templates'), ['route' => 'espt_admin_timeslottemplatecollection_index']);
         $menu->addChild(_('espt_settings'), ['route' => 'espt_admin_settings']);
 
         if (null !== $current) {
