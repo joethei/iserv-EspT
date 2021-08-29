@@ -6,6 +6,7 @@ namespace DigiHelfer\EspTBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use IServ\CoreBundle\Entity\User;
 use IServ\CrudBundle\Entity\CrudInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -49,7 +50,8 @@ class Timeslot implements CrudInterface {
     private $type;
 
     /**
-     * @ORM\OneToMany(targetEntity="DigiHelfer\EspTBundle\Entity\TeacherGroup", mappedBy="id", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="DigiHelfer\EspTBundle\Entity\TeacherGroup", inversedBy="timeslots")
+     * @JoinColumn(name="group_id" referencedColumnName="id")
      * @var TeacherGroup
      */
     private $group;

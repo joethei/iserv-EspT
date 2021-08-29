@@ -4,7 +4,10 @@
 
 {% block content %}
 
-    <p>Der nächste Elternsprechtag findet statt von {{ startTime }} - {{ endTime }}</p>
-    <p>Registrierung ist möglich von {{ regStart }} - {{ regEnd }}</p>
+    <div class="jumbotron">
+        <p>Der nächste Elternsprechtag findet statt am {{ startTime|ldate }} von {{ startTime|ltime }} - {{ endTime|ltime }}</p>
+        <p>Registrierung ist möglich von {{ regStart|ldatetime }} - {{ regEnd|ldatetime }}</p>
+    </div>
+
 
 {% endblock %}

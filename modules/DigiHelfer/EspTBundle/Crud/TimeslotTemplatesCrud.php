@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DigiHelfer\EspTBundle\Crud;
 
+use DigiHelfer\EspTBundle\Entity\TimeslotTemplate;
 use DigiHelfer\EspTBundle\Entity\TimeslotTemplateCollection;
 use IServ\AdminBundle\Admin\AdminServiceCrud;
 use IServ\BootstrapBundle\Form\Type\BootstrapCollectionType;
@@ -12,7 +13,6 @@ use IServ\CrudBundle\Mapper\ListMapper;
 use IServ\CrudBundle\Mapper\ShowMapper;
 use IServ\CrudBundle\Model\Breadcrumb;
 use IServ\CrudBundle\Routing\RoutingDefinition;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class TimeslotTemplatesCrud extends AdminServiceCrud {
 
@@ -41,11 +41,12 @@ class TimeslotTemplatesCrud extends AdminServiceCrud {
                 'label' => _('espt_name')
             ])
             ->add('timeslots', BootstrapCollectionType::class, [
+                'entry_type' => TimeslotTemplate::class,
                 'label' => _('espt_timeslot'),
                 'allow_add'          => true,
                 'allow_delete'       => true,
                 'add_button_text'    => _('espt_timeslot_add'),
-                'delete_button_text' => _('ept_timeslot_remove'),
+                'delete_button_text' => _('espt_timeslot_remove'),
                 'sub_widget_col'     => 9,
                 'button_col'         => 3
             ]);

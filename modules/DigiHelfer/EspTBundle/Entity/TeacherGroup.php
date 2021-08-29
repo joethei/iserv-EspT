@@ -6,6 +6,7 @@ namespace DigiHelfer\EspTBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
 use IServ\CoreBundle\Entity\User;
 use IServ\CrudBundle\Entity\CrudInterface;
 
@@ -31,7 +32,11 @@ class TeacherGroup implements CrudInterface {
     private $room;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\IServ\CoreBundle\Entity\User", fetch="EAGER", inversedBy="uuid")
+     * @ORM\ManyToMany(targetEntity="\IServ\CoreBundle\Entity\User")
+     *  @JoinTable(name="espt_teacher_groups",
+     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="group_id", referencedColumnName="id")}
+     *      )
      * @var Collection|User
      */
     private $users;
@@ -42,7 +47,14 @@ class TeacherGroup implements CrudInterface {
      */
     private $timeslotTemplate;
 
+    /**
+     * @var Timeslot[]
+     * @ORM\OneToMany(targetEntity="DigiHelfer\EspTBundle\Entity\Timeslot" mappedBy="timeslot")
+     */
+    private $timeslots;
+
     public function __construct() {
+        $this->timeslots = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
 
@@ -100,6 +112,20 @@ class TeacherGroup implements CrudInterface {
      */
     public function setTimeslotTemplate(TimeslotTemplateCollection $timeslotTemplate): void {
         $this->timeslotTemplate = $timeslotTemplate;
+    }
+
+    /**
+     * @return Timeslot[]
+     */
+    public function getTimeslots() {
+        return $this->timeslots;
+    }
+
+    /**
+     * @param Timeslot[] $timeslots
+     */
+    public function setTimeslots(array $timeslots): void {
+        $this->timeslots = $timeslots;
     }
 
 

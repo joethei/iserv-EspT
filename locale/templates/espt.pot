@@ -97,3 +97,6 @@ msgstr ""
 
 msgid "espt_timeslot_remove"
 msgstr ""
+
+msgid "espt_no_planned_event"
+msgstr ""

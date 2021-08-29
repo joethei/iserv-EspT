@@ -6,8 +6,7 @@
 
 {% block content %}
 
-    <p>{{ startTime }}</p>
-    <p>{{ endTime }}</p>
+    <p>{{ startTime|ldatetime }} - {{ endTime|ltime }}</p>
 
     {% for timeslot in timeslots %}
         {{ timeslot.start }}

@@ -4,8 +4,10 @@
 
 {% block content %}
 
-    <p>Registrierung ist offen bis {{ regEnd }}</p>
-    <p>Sprechtag ist von {{ regStart }} - {{ regEnd }}</p>
+    <div class="jumbotron">
+        <p>Registrierung ist offen bis {{ regEnd|ldatetime }}</p>
+        <p>Sprechtag ist von {{ regStart|ldatetime }} - {{ regEnd|ltime }}</p>
+    </div>
 
     <div id="espt-schedule"></div>
 

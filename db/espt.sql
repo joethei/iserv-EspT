@@ -8,7 +8,7 @@ CREATE TABLE espt_settings
 );
 
 GRANT USAGE, SELECT ON "espt_settings_id_seq" to "symfony";
-GRANT SELECT, INSERT, UPDATE, DELETE ON "espt_settings" TO "symfony";
+GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON "espt_settings" TO "symfony";
 
 CREATE TYPE espt_eventType AS ENUM (
     'invite',
