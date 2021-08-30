@@ -59,12 +59,12 @@ class Timeslot implements CrudInterface {
     /**
      * @var User
      * @ORM\ManyToOne(targetEntity="\IServ\CoreBundle\Entity\User", fetch="EAGER")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="uuid", nullable=true)
      */
     private $user;
 
-    public function __toString() {
-        return "";
+    public function __toString() : string {
+        return (string)$this->id;
     }
 
     /**

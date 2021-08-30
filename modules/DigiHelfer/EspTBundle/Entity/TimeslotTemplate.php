@@ -52,8 +52,8 @@ class TimeslotTemplate implements CrudInterface {
      */
     private $collection;
 
-    public function __toString() {
-        return $this->id;
+    public function __toString() : string {
+        return (string)$this->id;
     }
 
     /**

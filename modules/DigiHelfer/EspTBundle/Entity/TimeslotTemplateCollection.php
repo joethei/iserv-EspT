@@ -37,8 +37,18 @@ class TimeslotTemplateCollection implements CrudInterface {
      */
     private $timeslots;
 
+    /**
+     * @var TeacherGroup[]
+     * @ORM\OneToMany(targetEntity="DigiHelfer\EspTBundle\Entity\TeacherGroup", mappedBy="timeslotTemplate")
+     */
+    private $groups;
+
     public function __construct() {
         $this->timeslots = new ArrayCollection();
+    }
+
+    public function __toString() : string {
+        return $this->name;
     }
 
     /**
@@ -83,7 +93,17 @@ class TimeslotTemplateCollection implements CrudInterface {
         $this->timeslots = $timeslots;
     }
 
-    public function __toString() : string {
-        return $this->name;
+    /**
+     * @return TeacherGroup[]
+     */
+    public function getGroups(): array {
+        return $this->groups;
+    }
+
+    /**
+     * @param TeacherGroup[] $groups
+     */
+    public function setGroups(array $groups): void {
+        $this->groups = $groups;
     }
 }

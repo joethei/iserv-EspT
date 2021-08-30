@@ -49,7 +49,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON "espt_teacher_group" TO "symfony";
 
 CREATE TABLE espt_teacher_groups
 (
-    user_id  BIGINT REFERENCES users (uuid),
+    user_id  UUID REFERENCES users (uuid),
     group_id BIGINT REFERENCES espt_teacher_group (id),
     PRIMARY KEY (user_id, group_id)
 );
@@ -64,7 +64,7 @@ CREATE TABLE espt_timeslot
     end_time   TIMESTAMPTZ             NOT NULL,
     type       espt_eventType        NOT NULL,
     group_id   BIGINT REFERENCES espt_teacher_group (id),
-    user_id    BIGINT REFERENCES users (uuid)
+    user_id    UUID REFERENCES users (uuid)
 );
 
 GRANT USAGE, SELECT ON "espt_timeslot_id_seq" to "symfony";
