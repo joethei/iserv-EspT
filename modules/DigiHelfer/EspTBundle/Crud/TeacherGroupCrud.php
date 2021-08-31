@@ -8,6 +8,8 @@ use DigiHelfer\EspTBundle\Entity\TeacherGroup;
 use IServ\AdminBundle\Admin\AdminServiceCrud;
 use IServ\CoreBundle\Autocomplete\AutocompleteType;
 use IServ\CoreBundle\Autocomplete\Form\Type\AutocompleteTagsType;
+use IServ\CoreBundle\NameSort\NamesSortingDirectorInterface;
+use IServ\CoreBundle\Twig\EntityFormatter;
 use IServ\CrudBundle\Model\Breadcrumb;
 use IServ\CoreBundle\Form\Type\UserType;
 use IServ\CrudBundle\Mapper\FormMapper;
@@ -34,16 +36,18 @@ class TeacherGroupCrud extends AdminServiceCrud {
     protected function configureShowFields(ShowMapper $showMapper): void {
         $showMapper
             ->add('room', null, ['label' => _('espt_room')])
-            ->add('users', UserType::class, ['label' => _('espt_teachers')]);
+            ->add('users', UserType::class, [
+                'label' => _('espt_teachers'),
+                'order_by' => $this->locator->get(NamesSortingDirectorInterface::class)->shouldSortByFirstname() ? 'nameByFirstname' : 'nameByLastname',
+                'entity_format' => EntityFormatter::FORMAT_USER,]);
     }
 
     protected function configureFormFields(FormMapper $formMapper): void {
         $formMapper
             ->add('room', null, ['label' => _('espt_room'), 'required' => false,])
-            ->add('users', AutocompleteTagsType::class, [
+            ->add('users', UserType::class, [
                 'label' => _('espt_teachers'),
-                'autocomplete_types' => AutocompleteType::user(),
-                'tag_default_icon' => 'user'
+                'by_reference' => false
             ]);
     }
 

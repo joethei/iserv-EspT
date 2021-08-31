@@ -6,6 +6,7 @@ namespace DigiHelfer\EspTBundle\Crud;
 
 use DigiHelfer\EspTBundle\Entity\TimeslotTemplate;
 use DigiHelfer\EspTBundle\Entity\TimeslotTemplateCollection;
+use DigiHelfer\EspTBundle\Form\TimeslotTemplateType;
 use IServ\AdminBundle\Admin\AdminServiceCrud;
 use IServ\BootstrapBundle\Form\Type\BootstrapCollectionType;
 use IServ\CrudBundle\Mapper\FormMapper;
@@ -41,7 +42,7 @@ class TimeslotTemplatesCrud extends AdminServiceCrud {
                 'label' => _('espt_name')
             ])
             ->add('timeslots', BootstrapCollectionType::class, [
-                'entry_type' => TimeslotTemplate::class,
+                'entry_type' => TimeslotTemplateType::class,
                 'label' => _('espt_timeslot'),
                 'allow_add'          => true,
                 'allow_delete'       => true,

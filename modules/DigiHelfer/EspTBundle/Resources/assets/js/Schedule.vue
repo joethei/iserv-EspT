@@ -5,12 +5,27 @@
 <script>
 
 import ScheduleTimelineView from 'vue-schedule-timeline-view';
+import Confirm from 'IServ.Confirm';
+import Locale from 'IServ.Locale';
 
 export default {
   components: {ScheduleTimelineView},
   methods: {
     onClickEvent: function(id) {
       console.log("clicked event #" + id);
+      Confirm.confirm('', {
+        title: _('espt_confirm'),
+        content: _('espt_confirm_text'),
+        buttons: {
+          confirmButton: {
+            text: _('OK'),
+            action: function () {}
+          },
+          cancelButton: {
+            text: _('Cancel'),
+            action: function () {}
+          }
+        });
     }
   },
   data: function () {

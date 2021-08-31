@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DigiHelfer\EspTBundle\Entity;
 
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use IServ\CoreBundle\Entity\User;
@@ -30,14 +31,14 @@ class Timeslot implements CrudInterface {
 
     /**
      * @ORM\Column(type="time_immutable", name="start_time")
-     * @var \DateTimeImmutable
+     * @var DateTimeImmutable
      * @Assert\NotBlank()
      */
     private $start;
 
     /**
      * @ORM\Column(type="time_immutable", name="end_time")
-     * @var \DateTimeImmutable
+     * @var DateTimeImmutable
      * @Assert\NotBlank()
      */
     private $end;
@@ -51,15 +52,15 @@ class Timeslot implements CrudInterface {
 
     /**
      * @ORM\ManyToOne(targetEntity="DigiHelfer\EspTBundle\Entity\TeacherGroup", inversedBy="timeslots")
-     * @JoinColumn(name="group_id" referencedColumnName="id")
+     * @JoinColumn(name="group_id")
      * @var TeacherGroup
      */
     private $group;
 
     /**
-     * @var User
+     * @var User|null
      * @ORM\ManyToOne(targetEntity="\IServ\CoreBundle\Entity\User", fetch="EAGER")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="uuid", nullable=true)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="act", nullable=true)
      */
     private $user;
 
@@ -82,30 +83,30 @@ class Timeslot implements CrudInterface {
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return DateTimeImmutable
      */
-    public function getStart(): \DateTimeImmutable {
+    public function getStart(): DateTimeImmutable {
         return $this->start;
     }
 
     /**
-     * @param \DateTimeImmutable $start
+     * @param DateTimeImmutable $start
      */
-    public function setStart(\DateTimeImmutable $start): void {
+    public function setStart(DateTimeImmutable $start): void {
         $this->start = $start;
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return DateTimeImmutable
      */
-    public function getEnd(): \DateTimeImmutable {
+    public function getEnd(): DateTimeImmutable {
         return $this->end;
     }
 
     /**
-     * @param \DateTimeImmutable $end
+     * @param DateTimeImmutable $end
      */
-    public function setEnd(\DateTimeImmutable $end): void {
+    public function setEnd(DateTimeImmutable $end): void {
         $this->end = $end;
     }
 

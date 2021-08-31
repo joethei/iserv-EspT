@@ -11,7 +11,7 @@ use Doctrine\DBAL\Types\Type;
  * @package DigiHelfer\EspTBundle\Entity
  */
 abstract class EventType extends Type {
-    const EVENTTYPE = 'eventtype';
+    const EVENTTYPE = 'espt_eventtype';
     const BOOK = 'book';
     const INVITE = 'invite';
     const BLOCKED = 'blocked';

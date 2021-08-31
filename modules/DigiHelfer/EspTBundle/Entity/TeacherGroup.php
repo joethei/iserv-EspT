@@ -19,6 +19,7 @@ use IServ\CrudBundle\Entity\CrudInterface;
  */
 class TeacherGroup implements CrudInterface {
 
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -35,16 +36,17 @@ class TeacherGroup implements CrudInterface {
     /**
      * @ORM\ManyToMany(targetEntity="\IServ\CoreBundle\Entity\User")
      *  @JoinTable(name="espt_teacher_groups",
-     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="uuid")},
-     *      inverseJoinColumns={@JoinColumn(name="group_id", referencedColumnName="id")}
+     *      joinColumns={@JoinColumn(name="group_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="user", referencedColumnName="act")}
      *      )
-     * @var Collection|User
+     * @var User[]
      */
     private $users;
 
     /**
-     * @var TimeslotTemplateCollection
+     * @var TimeslotTemplateCollection|null
      * @ORM\ManyToOne(targetEntity="DigiHelfer\EspTBundle\Entity\TimeslotTemplateCollection", inversedBy="groups")
+     * @ORM\JoinColumn(name="timeslot_template", referencedColumnName="id", nullable=true)
      */
     private $timeslotTemplate;
 

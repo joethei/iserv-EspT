@@ -31,7 +31,7 @@ CREATE TABLE espt_timeslot_template
     id         BIGSERIAL PRIMARY KEY NOT NULL,
     start_time TIMESTAMPTZ             NOT NULL,
     end_time   TIMESTAMPTZ             NOT NULL,
-    type       espt_eventType        NOT NULL,
+    type       espt_eventtype        NOT NULL,
     collection BIGINT REFERENCES espt_timeslot_template_collection (id)
 );
 
@@ -41,7 +41,8 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON "espt_timeslot_template" TO "symfony";
 CREATE TABLE espt_teacher_group
 (
     id   BIGSERIAL PRIMARY KEY NOT NULL,
-    room TEXT
+    room TEXT,
+    timeslot_template BIGINT
 );
 
 GRANT USAGE, SELECT ON "espt_teacher_group_id_seq" to "symfony";
@@ -49,7 +50,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON "espt_teacher_group" TO "symfony";
 
 CREATE TABLE espt_teacher_groups
 (
-    user_id  UUID REFERENCES users (uuid),
+    user_id  TEXT REFERENCES users (username),
     group_id BIGINT REFERENCES espt_teacher_group (id),
     PRIMARY KEY (user_id, group_id)
 );
@@ -64,7 +65,7 @@ CREATE TABLE espt_timeslot
     end_time   TIMESTAMPTZ             NOT NULL,
     type       espt_eventType        NOT NULL,
     group_id   BIGINT REFERENCES espt_teacher_group (id),
-    user_id    UUID REFERENCES users (uuid)
+    user_id    TEXT REFERENCES users (username)
 );
 
 GRANT USAGE, SELECT ON "espt_timeslot_id_seq" to "symfony";
