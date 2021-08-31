@@ -19,13 +19,16 @@ export default {
         buttons: {
           confirmButton: {
             text: _('OK'),
-            action: function () {}
+            action: function () {
+            }
           },
           cancelButton: {
             text: _('Cancel'),
-            action: function () {}
+            action: function () {
+            }
           }
-        });
+        }
+      })
     }
   },
   data: function () {
