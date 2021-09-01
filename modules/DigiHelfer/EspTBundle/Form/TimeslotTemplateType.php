@@ -16,15 +16,15 @@ class TimeslotTemplateType extends AbstractType {
         $builder
             ->add('start', TimeType::class, [
                 'label' => _('espt_starttime'),
-                'help' => _('espt_template_start_help')
+                'help' => _('espt_timeslot_start_help')
                 ])
             ->add('end', TimeType::class, [
                 'label' => _('espt_endtime'),
-                'help' => _('espt_template_end_help')
+                'help' => _('espt_timeslot_end_help')
                 ])
             ->add('type', ChoiceType::class, [
-                'label' => _('espt_template_type'),
-                'help' => _('espt_template_type_help'),
+                'label' => _('espt_timeslot_type'),
+                'help' => _('espt_timeslot_type_help'),
                 'choices' => [
                     _('espt_timeslot_type_blocked') => EventType::BLOCKED,
                     _('espt_timeslot_type_break') => EventType::BREAK,

@@ -44,7 +44,7 @@ class Timeslot implements CrudInterface {
     private $end;
 
     /**
-     * @ORM\Column(type="espt_eventType")
+     * @ORM\Column(type="espt_eventtype")
      * @var EventType
      * @Assert\NotBlank()
      */

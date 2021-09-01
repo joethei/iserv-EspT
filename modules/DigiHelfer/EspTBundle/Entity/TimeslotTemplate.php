@@ -28,28 +28,28 @@ class TimeslotTemplate implements CrudInterface {
 
     /**
      * @ORM\Column(type="time_immutable", name="start_time")
-     * @var DateTimeImmutable
+     * @var DateTimeImmutable|null
      * @Assert\NotBlank()
      */
     private $start;
 
     /**
      * @ORM\Column(type="time_immutable", name="end_time")
-     * @var DateTimeImmutable
+     * @var DateTimeImmutable|null
      * @Assert\NotBlank()
      */
     private $end;
 
     /**
      * @ORM\Column(type="integer")
-     * @var EventType
+     * @var EventType|null
      * @Assert\NotBlank()
      */
     private $type;
 
     /**
      * @ORM\ManyToOne(targetEntity="DigiHelfer\EspTBundle\Entity\TimeslotTemplateCollection", inversedBy="timeslots")
-     * @var TimeslotTemplateCollection
+     * @var TimeslotTemplateCollection|null
      */
     private $collection;
 
@@ -72,58 +72,58 @@ class TimeslotTemplate implements CrudInterface {
     }
 
     /**
-     * @return DateTimeImmutable
+     * @return DateTimeImmutable|null
      */
-    public function getStart(): DateTimeImmutable {
+    public function getStart(): ?DateTimeImmutable {
         return $this->start;
     }
 
     /**
-     * @param DateTimeImmutable $start
+     * @param DateTimeImmutable|null $start
      */
-    public function setStart(DateTimeImmutable $start): void {
+    public function setStart(?DateTimeImmutable $start): void {
         $this->start = $start;
     }
 
     /**
-     * @return DateTimeImmutable
+     * @return DateTimeImmutable|null
      */
-    public function getEnd(): DateTimeImmutable {
+    public function getEnd(): ?DateTimeImmutable {
         return $this->end;
     }
 
     /**
-     * @param DateTimeImmutable $end
+     * @param DateTimeImmutable|null $end
      */
-    public function setEnd(DateTimeImmutable $end): void {
+    public function setEnd(?DateTimeImmutable $end): void {
         $this->end = $end;
     }
 
     /**
-     * @return EventType
+     * @return EventType|null
      */
-    public function getType(): EventType {
+    public function getType(): ?EventType {
         return $this->type;
     }
 
     /**
-     * @param EventType $type
+     * @param EventType|null $type
      */
-    public function setType(EventType $type): void {
+    public function setType(?EventType $type): void {
         $this->type = $type;
     }
 
     /**
-     * @return TimeslotTemplateCollection
+     * @return TimeslotTemplateCollection|null
      */
-    public function getCollection(): TimeslotTemplateCollection {
+    public function getCollection(): ?TimeslotTemplateCollection {
         return $this->collection;
     }
 
     /**
-     * @param TimeslotTemplateCollection $collection
+     * @param TimeslotTemplateCollection|null $collection
      */
-    public function setCollection(TimeslotTemplateCollection $collection): void {
+    public function setCollection(?TimeslotTemplateCollection $collection): void {
         $this->collection = $collection;
     }
 

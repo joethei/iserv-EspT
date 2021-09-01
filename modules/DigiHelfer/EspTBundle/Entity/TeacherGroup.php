@@ -37,7 +37,7 @@ class TeacherGroup implements CrudInterface {
      * @ORM\ManyToMany(targetEntity="\IServ\CoreBundle\Entity\User")
      *  @JoinTable(name="espt_teacher_groups",
      *      joinColumns={@JoinColumn(name="group_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="user", referencedColumnName="act")}
+     *      inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="act")}
      *      )
      * @var User[]
      */
@@ -96,7 +96,7 @@ class TeacherGroup implements CrudInterface {
     /**
      * @return ArrayCollection
      */
-    public function getUsers(): ArrayCollection {
+    public function getUsers(): Collection {
         return $this->users;
     }
 

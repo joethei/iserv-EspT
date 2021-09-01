@@ -130,3 +130,6 @@ msgstr ""
 
 msgid "espt_confirm_text"
 msgstr ""
+
+msgid "espt_timeslot_template_help"
+msgstr ""

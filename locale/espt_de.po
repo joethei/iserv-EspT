@@ -75,6 +75,9 @@ msgstr "Zeitfenster Vorlagen"
 msgid "espt_timeslot_template"
 msgstr "Zeitfenster Vorlage"
 
+msgid "espt_timeslot_template_help"
+msgstr "Welche Vorlage soll verwendet werden?"
+
 msgid "espt_teacher"
 msgstr "Lehrkraft"
 

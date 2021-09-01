@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace DigiHelfer\EspTBundle\Crud;
 
 use DigiHelfer\EspTBundle\Entity\TeacherGroup;
+use DigiHelfer\EspTBundle\Entity\TimeslotTemplateCollection;
 use IServ\AdminBundle\Admin\AdminServiceCrud;
-use IServ\CoreBundle\Autocomplete\AutocompleteType;
-use IServ\CoreBundle\Autocomplete\Form\Type\AutocompleteTagsType;
 use IServ\CoreBundle\NameSort\NamesSortingDirectorInterface;
 use IServ\CoreBundle\Twig\EntityFormatter;
 use IServ\CrudBundle\Model\Breadcrumb;
@@ -16,6 +15,7 @@ use IServ\CrudBundle\Mapper\FormMapper;
 use IServ\CrudBundle\Mapper\ListMapper;
 use IServ\CrudBundle\Mapper\ShowMapper;
 use IServ\CrudBundle\Routing\RoutingDefinition;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class TeacherGroupCrud extends AdminServiceCrud {
 
@@ -30,7 +30,8 @@ class TeacherGroupCrud extends AdminServiceCrud {
         $listMapper
             ->addIdentifier('id')
             ->add('room', null, ['label' => _('espt_room')])
-            ->add('users', UserType::class, ['label' => _('espt_teachers')]);
+            ->add('users', null, ['label' => _('espt_teachers')])
+            ->add('timeslotTemplate', null, ['label' => _('espt_timeslot_template')]);
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void {
@@ -38,8 +39,9 @@ class TeacherGroupCrud extends AdminServiceCrud {
             ->add('room', null, ['label' => _('espt_room')])
             ->add('users', UserType::class, [
                 'label' => _('espt_teachers'),
-                'order_by' => $this->locator->get(NamesSortingDirectorInterface::class)->shouldSortByFirstname() ? 'nameByFirstname' : 'nameByLastname',
-                'entity_format' => EntityFormatter::FORMAT_USER,]);
+                'order_by' => $this->locator->get(NamesSortingDirectorInterface::class)->getSortBy(),
+                'entity_format' => EntityFormatter::FORMAT_USER,])
+            ->add('timeslotTemplate', null, ['label' => _('espt_timeslot_template')]);
     }
 
     protected function configureFormFields(FormMapper $formMapper): void {
@@ -48,7 +50,14 @@ class TeacherGroupCrud extends AdminServiceCrud {
             ->add('users', UserType::class, [
                 'label' => _('espt_teachers'),
                 'by_reference' => false
+            ])
+            ->add('timeslotTemplate', EntityType::class, [
+                'label' => _('espt_timeslot_template'),
+                'help' => _('espt_timeslot_template_help'),
+                'class' => TimeslotTemplateCollection::class,
+                'choice_label' => 'name'
             ]);
+
     }
 
     public function isAuthorized(): bool {
@@ -63,6 +72,17 @@ class TeacherGroupCrud extends AdminServiceCrud {
         return parent::defineRoutes()
             ->setNamePrefix('espt_admin_')
             ->prependPathPrefix('espt/');
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public static function getSubscribedServices(): array {
+        // Take all subscribed services from the parent classes.
+        $services = parent::getSubscribedServices();
+        // Add services we commonly use and don't want to inject in each controller or action.
+        $services[] = NamesSortingDirectorInterface::class;
+        return $services;
     }
 
 }
