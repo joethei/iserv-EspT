@@ -1,0 +1,4 @@
+doctrine:
+  dbal:
+    types:
+      espt_eventtype: DigiHelfer\EspTBundle\Entity\EventType

@@ -108,16 +108,16 @@ class TeacherGroup implements CrudInterface {
     }
 
     /**
-     * @return TimeslotTemplateCollection
+     * @return TimeslotTemplateCollection|null
      */
-    public function getTimeslotTemplate(): TimeslotTemplateCollection {
+    public function getTimeslotTemplate(): ?TimeslotTemplateCollection {
         return $this->timeslotTemplate;
     }
 
     /**
-     * @param TimeslotTemplateCollection $timeslotTemplate
+     * @param TimeslotTemplateCollection|null $timeslotTemplate
      */
-    public function setTimeslotTemplate(TimeslotTemplateCollection $timeslotTemplate): void {
+    public function setTimeslotTemplate(?TimeslotTemplateCollection $timeslotTemplate): void {
         $this->timeslotTemplate = $timeslotTemplate;
     }
 

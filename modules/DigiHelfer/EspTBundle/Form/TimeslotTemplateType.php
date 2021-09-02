@@ -16,11 +16,13 @@ class TimeslotTemplateType extends AbstractType {
         $builder
             ->add('start', TimeType::class, [
                 'label' => _('espt_starttime'),
-                'help' => _('espt_timeslot_start_help')
+                'help' => _('espt_timeslot_start_help'),
+                'input' => 'datetime_immutable',
                 ])
             ->add('end', TimeType::class, [
                 'label' => _('espt_endtime'),
-                'help' => _('espt_timeslot_end_help')
+                'help' => _('espt_timeslot_end_help'),
+                'input' => 'datetime_immutable',
                 ])
             ->add('type', ChoiceType::class, [
                 'label' => _('espt_timeslot_type'),

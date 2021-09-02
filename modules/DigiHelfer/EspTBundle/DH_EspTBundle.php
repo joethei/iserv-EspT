@@ -1,8 +1,11 @@
 <?php declare(strict_types = 1);
 namespace DigiHelfer\EspTBundle;
 
+use Doctrine\DBAL\Types\Type;
+use Doctrine\ORM\EntityManagerInterface;
 use IServ\CoreBundle\Routing\AutoloadRoutingBundleInterface;
 use DigiHelfer\EspTBundle\DependencyInjection\EsptExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /*
@@ -29,8 +32,8 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  * THE SOFTWARE.
  */
 
-class DH_EspTBundle extends Bundle implements AutoloadRoutingBundleInterface
-{
+class DH_EspTBundle extends Bundle implements AutoloadRoutingBundleInterface {
+
     /**
      * {@inheritdoc}
      */
@@ -38,4 +41,5 @@ class DH_EspTBundle extends Bundle implements AutoloadRoutingBundleInterface
     {
         return new EsptExtension();
     }
+
 }

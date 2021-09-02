@@ -11,7 +11,6 @@ class AdminMenuListener implements AdminMenuListenerInterface {
      * {@inheritDoc}
      */
     public function onBuildAdminMenu(MenuEvent $event) : void {
-
         if(!$event->getAuthorizationChecker()->isGranted("PRIV_ESPT_ADMIN"))
             return;
 

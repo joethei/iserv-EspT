@@ -15,10 +15,6 @@ class MenuListener implements MainMenuListenerInterface
      */
     public function onBuildMainMenu(MenuEvent $event)
     {
-        if (!$event->getAuthorizationChecker()->isGranted(Privilege::ADMIN)) {
-            return;
-        }
-
         $event->getMenu()->addChild('espt', [
             'route' => 'espt_index',
             'label' => _('EspT'),

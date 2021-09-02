@@ -2,7 +2,9 @@
 
 namespace DigiHelfer\EspTBundle\DependencyInjection;
 
+use Doctrine\DBAL\Types\Type;
 use IServ\CoreBundle\DependencyInjection\IServBaseExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /*
  * The MIT License

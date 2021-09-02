@@ -139,16 +139,16 @@ class Timeslot implements CrudInterface {
     }
 
     /**
-     * @return User
+     * @return User|null
      */
-    public function getUser(): User {
+    public function getUser(): ?User {
         return $this->user;
     }
 
     /**
-     * @param User $user
+     * @param User|null $user
      */
-    public function setUser(User $user): void {
+    public function setUser(?User $user): void {
         $this->user = $user;
     }
 }
