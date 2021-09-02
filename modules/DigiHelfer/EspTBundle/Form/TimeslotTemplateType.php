@@ -4,6 +4,7 @@ namespace DigiHelfer\EspTBundle\Form;
 
 use DigiHelfer\EspTBundle\Entity\EventType;
 use DigiHelfer\EspTBundle\Entity\TimeslotTemplate;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
@@ -24,15 +25,13 @@ class TimeslotTemplateType extends AbstractType {
                 'help' => _('espt_timeslot_end_help'),
                 'input' => 'datetime_immutable',
                 ])
-            ->add('type', ChoiceType::class, [
+            ->add('type', EntityType::class, [
                 'label' => _('espt_timeslot_type'),
                 'help' => _('espt_timeslot_type_help'),
-                'choices' => [
-                    _('espt_timeslot_type_blocked') => EventType::BLOCKED,
-                    _('espt_timeslot_type_break') => EventType::BREAK,
-                    _('espt_timeslot_type_book') => EventType::BOOK,
-                    _('espt_timeslot_type_invite') => EventType::INVITE
-                ]
+                'class' => EventType::class,
+                'choice_label' => function(EventType $type) {
+                    return _('espt_timeslot_type_' . $type->getName());
+                }
             ]);
     }
 

@@ -41,8 +41,9 @@ class TimeslotTemplate implements CrudInterface {
     private $end;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column
      * @var EventType|null
+     * @ORM\ManyToOne(targetEntity="DigiHelfer\EspTBundle\Entity\EventType")
      * @Assert\NotBlank()
      */
     private $type;

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace DigiHelfer\EspTBundle\Controller;
 
+use DigiHelfer\EspTBundle\Entity\CreationSettings;
 use DigiHelfer\EspTBundle\Entity\CreationSettingsRepository;
 use DigiHelfer\EspTBundle\Entity\EventType;
 use DigiHelfer\EspTBundle\Entity\EventState;
-use DigiHelfer\EspTBundle\Entity\TeacherGroup;
 use DigiHelfer\EspTBundle\Entity\TeacherGroupRepository;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
 use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
@@ -27,10 +27,11 @@ final class MainController extends AbstractPageController {
 
     /**
      * @param CreationSettingsRepository $creationSettingsRepository
+     * @param TeacherGroupRepository $groupRepository
      * @param TimeslotRepository $timeslotRepository
      * @return Response
-     * @Route("/", name="espt_index")
      * @throws \Doctrine\ORM\NonUniqueResultException
+     * @Route("/", name="espt_index")
      */
     public function index(CreationSettingsRepository $creationSettingsRepository, TeacherGroupRepository $groupRepository, TimeslotRepository $timeslotRepository): Response {
         $this->addBreadcrumb(_("EspT"));
@@ -97,61 +98,7 @@ final class MainController extends AbstractPageController {
             if ($state == EventState::REGISTRATION) {
                 $timeslots = $timeslotRepository->findAll();
 
-                $events = array();
-                /** @var Timeslot $timeslot */
-                foreach ($timeslots as $timeslot) {
-                    $data_timeslot = array();
-                    $data_timeslot['start'] = $timeslot->getStart();
-                    $data_timeslot['end'] = $timeslot->getEnd();
-                    $data_timeslot['id'] = $timeslot->getId();
-
-                    $color = 'red';
-                    $name = '';
-                    switch ($timeslot->getType()) {
-                        case EventType::BOOK:
-                        case EventType::INVITE :
-                            $color = 'green';
-                            $name = 'FREI';
-                            break;
-                        case EventType::BREAK :
-                            $color = 'gray';
-                            $name = 'PAUSE';
-                            break;
-                    }
-
-                    if ($timeslot->getUser() != null) {
-                        $name = 'BELEGT';
-                        $color = 'red';
-                        if ($timeslot->getUser() === $this->authenticatedUser()) {
-                            $name = 'GEBUCHT';
-                            $color = 'yellow';
-                        }
-                    }
-
-                    $data_timeslot['color'] = $color;
-                    $data_timeslot['name'] = $name;
-
-                    $data_event = array('events' => $data_timeslot);
-                    $data_event['id'] = $timeslot->getGroup()->getId();
-
-                    $usernames = '';
-                    /** @var User $user **/
-                    foreach ($timeslot->getGroup()->getUsers() as $user) {
-                        $usernames = $usernames . "\n" . $user->getNameByFirstname();
-                    }
-                    $data_event['title'] = $usernames;
-                    $data_event['subtitle'] = $timeslot->getGroup()->getRoom();
-
-                    $events = array_merge_recursive($events, $data_event);
-                }
-                $result = array();
-
-                $result['events'] = $events;
-
-                $settings = array('start' => $settings->getStart(), 'end' => $settings->getEnd());
-                $result['settings'] = $settings;
-
-                return $this->json($result);
+                return $this->json($this->buildTimeslotArray($timeslots, $settings));
             }
         }
 
@@ -198,6 +145,68 @@ final class MainController extends AbstractPageController {
         $entityManager->flush();
 
         return $this->json([]);
+    }
+
+    /**
+     * @param Timeslot[] $timeslots
+     * @param CreationSettings $settings
+     * @return array
+     */
+    private function buildTimeslotArray(array $timeslots, CreationSettings $settings) : array {
+        $events = array();
+        foreach ($timeslots as $timeslot) {
+            $data_timeslot = array();
+            $data_timeslot['start'] = $timeslot->getStart();
+            $data_timeslot['end'] = $timeslot->getEnd();
+            $data_timeslot['id'] = $timeslot->getId();
+
+            $color = 'red';
+            $name = '';
+            switch ($timeslot->getType()) {
+                case EventType::BOOK:
+                case EventType::INVITE :
+                    $color = 'green';
+                    $name = 'FREI';
+                    break;
+                case EventType::BREAK :
+                    $color = 'gray';
+                    $name = 'PAUSE';
+                    break;
+            }
+
+            if ($timeslot->getUser() != null) {
+                $name = 'BELEGT';
+                $color = 'red';
+                if ($timeslot->getUser() === $this->authenticatedUser()) {
+                    $name = 'GEBUCHT';
+                    $color = 'yellow';
+                }
+            }
+
+            $data_timeslot['color'] = $color;
+            $data_timeslot['name'] = $name;
+
+            $data_event = array('events' => $data_timeslot);
+            $data_event['id'] = $timeslot->getGroup()->getId();
+
+            $usernames = '';
+            /** @var User $user **/
+            foreach ($timeslot->getGroup()->getUsers() as $user) {
+                $usernames = $usernames . "\n" . $user->getNameByFirstname();
+            }
+            $data_event['title'] = $usernames;
+            $data_event['subtitle'] = $timeslot->getGroup()->getRoom();
+
+            $events = array_merge_recursive($events, $data_event);
+        }
+        $result = array();
+
+        $result['events'] = $events;
+
+        $settings = array('start' => $settings->getStart(), 'end' => $settings->getEnd());
+        $result['settings'] = $settings;
+
+        return $result;
     }
 
     /**
