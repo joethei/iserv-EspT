@@ -29,6 +29,7 @@ class EventType {
     private $id;
 
     /**
+     * @ORM\Column(type="text")
      * @var string|null
      */
     private $name;
@@ -50,7 +51,7 @@ class EventType {
     /**
      * @return string|null
      */
-    public function getName(): ?string {
+    public function getName(): string {
         return $this->name;
     }
 
@@ -59,5 +60,9 @@ class EventType {
      */
     public function setName(?string $name): void {
         $this->name = $name;
+    }
+
+    public function __toString() : string {
+        return $this->name;
     }
 }

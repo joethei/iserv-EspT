@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DigiHelfer\EspTBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -33,7 +35,7 @@ class TimeslotTemplateCollection implements CrudInterface {
     /**
      *
      * @var Collection|TimeslotTemplate[]
-     * @ORM\OneToMany(targetEntity="DigiHelfer\EspTBundle\Entity\TimeslotTemplate", mappedBy="collection")
+     * @ORM\OneToMany(targetEntity="DigiHelfer\EspTBundle\Entity\TimeslotTemplate", mappedBy="collection", cascade={"persist"})
      */
     private $timeslots;
 

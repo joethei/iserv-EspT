@@ -40,7 +40,8 @@ class TeacherGroupCrud extends AdminServiceCrud {
             ->add('users', UserType::class, [
                 'label' => _('espt_teachers'),
                 'order_by' => $this->locator->get(NamesSortingDirectorInterface::class)->getSortBy(),
-                'entity_format' => EntityFormatter::FORMAT_USER,])
+                'entity_format' => EntityFormatter::FORMAT_USER
+            ])
             ->add('timeslotTemplate', null, ['label' => _('espt_timeslot_template')]);
     }
 

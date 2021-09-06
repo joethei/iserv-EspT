@@ -6,28 +6,23 @@ CREATE TABLE espt_settings
     registration_start TIMESTAMPTZ           NOT NULL,
     registration_end   TIMESTAMPTZ           NOT NULL
 );
-
 GRANT USAGE, SELECT ON "espt_settings_id_seq" to "symfony";
-GRANT
-SELECT,
-INSERT
-,
-UPDATE,
-DELETE
-, TRUNCATE
-ON "espt_settings" TO "symfony";
+
+GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON "espt_settings" TO "symfony";
 
 CREATE TABLE espt_eventType
 (
     id   BIGSERIAL PRIMARY KEY NOT NULL,
-    name text                  NOT NULL
+    name TEXT                  NOT NULL
 );
-
 
 GRANT USAGE, SELECT ON "espt_eventType_id_seq" to "symfony";
 GRANT SELECT, INSERT, UPDATE, DELETE ON "espt_eventType" TO "symfony";
 
-INSERT INTO espt_eventType(name) VALUES ('invite'), ('blocked'), ('book'), ('break');
+INSERT INTO espt_eventType (name) VALUES ('invite');
+INSERT INTO espt_eventType (name) VALUES ('book');
+INSERT INTO espt_eventType (name) VALUES ('blocked');
+INSERT INTO espt_eventType (name) VALUES ('break');
 
 CREATE TABLE espt_timeslot_template_collection
 (
@@ -41,10 +36,10 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON "espt_timeslot_template_collection" TO "
 CREATE TABLE espt_timeslot_template
 (
     id         BIGSERIAL PRIMARY KEY NOT NULL,
-    start_time TIMESTAMPTZ           NOT NULL,
-    end_time   TIMESTAMPTZ           NOT NULL,
+    start_time TIMESTAMPTZ             NOT NULL,
+    end_time   TIMESTAMPTZ             NOT NULL,
     type       BIGINT                NOT NULL REFERENCES espt_eventType (id),
-    collection BIGINT REFERENCES espt_timeslot_template_collection (id)
+    collection_id BIGINT REFERENCES espt_timeslot_template_collection (id)
 );
 
 GRANT USAGE, SELECT ON "espt_timeslot_template_id_seq" to "symfony";

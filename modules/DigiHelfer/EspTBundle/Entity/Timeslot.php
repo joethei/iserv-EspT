@@ -44,7 +44,7 @@ class Timeslot implements CrudInterface {
     private $end;
 
     /**
-     * @ORM\Column(type="espt_eventtype")
+     * @ORM\ManyToOne(targetEntity="DigiHelfer\EspTBundle\Entity\EventType")
      * @var EventType
      * @Assert\NotBlank()
      */

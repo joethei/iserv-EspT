@@ -29,6 +29,7 @@ class TeacherGroup implements CrudInterface {
     private $id;
 
     /**
+     * @ORM\Column(type="string")
      * @var string|null
      */
     private $room;

@@ -25,7 +25,7 @@ class TimeslotTemplatesCrud extends AdminServiceCrud {
 
     protected function configureListFields(ListMapper $listMapper): void {
         $listMapper
-            ->addIdentifier('name', null)
+            ->addIdentifier('name')
             ->add('timeslots', null, ['label' => _('espt_timeslot')]);
     }
 
