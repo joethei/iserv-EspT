@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class TimeslotDisplayArrayTest extends TestCase {
 
-    public function testEmptyData() {
-        \PHPUnit\Framework\assertEquals(5, 5);
+    public function testEmptyData() : void {
+        $this->assertEquals(5, 5);
     }
 }

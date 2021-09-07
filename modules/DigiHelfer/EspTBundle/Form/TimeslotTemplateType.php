@@ -19,12 +19,14 @@ class TimeslotTemplateType extends AbstractType {
             ->add('start', TimeType::class, [
                 'label' => _('espt_starttime'),
                 'help' => _('espt_timeslot_start_help'),
-                'input' => 'datetime_immutable'
+                'input' => 'datetime_immutable',
+                'input_format' => 'H:i',
                 ])
             ->add('end', TimeType::class, [
                 'label' => _('espt_endtime'),
                 'help' => _('espt_timeslot_end_help'),
                 'input' => 'datetime_immutable',
+                'input_format' => 'H:i',
                 ])
             ->add('type', EntityType::class, [
                 'label' => _('espt_timeslot_type'),
