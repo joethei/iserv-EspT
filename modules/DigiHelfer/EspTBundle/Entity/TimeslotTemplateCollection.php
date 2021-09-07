@@ -95,6 +95,16 @@ class TimeslotTemplateCollection implements CrudInterface {
         $this->timeslots = $timeslots;
     }
 
+    public function addTimeslot(TimeslotTemplate $timeslot) : void {
+        if(!$this->timeslots->contains($timeslot)) {
+            $this->timeslots->add($timeslot);
+        }
+    }
+
+    public function removeTimeslot(TimeslotTemplate $timeslot) : void {
+        $this->timeslots->remove($timeslot);
+    }
+
     /**
      * @return TeacherGroup[]
      */

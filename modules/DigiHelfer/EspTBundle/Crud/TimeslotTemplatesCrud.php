@@ -21,6 +21,7 @@ class TimeslotTemplatesCrud extends AdminServiceCrud {
     protected function configure(): void {
         $this->title = _('espt_timeslot_templates');
         $this->itemTitle = _('espt_timeslot_template');
+        $this->templates['crud_index'] = '@DH_EspT/AdminMenu.html.twig';
     }
 
     protected function configureListFields(ListMapper $listMapper): void {
@@ -42,6 +43,7 @@ class TimeslotTemplatesCrud extends AdminServiceCrud {
             ])
             ->add('timeslots', BootstrapCollectionType::class, [
                 'entry_type' => TimeslotTemplateType::class,
+                'by_reference' => false,
                 'label' => _('espt_timeslot'),
                 'allow_add'          => true,
                 'allow_delete'       => true,

@@ -90,7 +90,7 @@ final class MainController extends AbstractPageController {
         if ($this->isGranted("ROLE_TEACHER")) {
             if ($state == EventState::INVITE) {
                 $timeslots = $timeslotRepository->findForTeacher($this->authenticatedUser());
-                return $this->json($timeslots);
+                return $this->json($this->buildTimeslotArray($timeslots, $settings));
             }
         }
 
@@ -148,6 +148,7 @@ final class MainController extends AbstractPageController {
     }
 
     /**
+     * reformat data for consumption by vue-schedule-view component.
      * @param Timeslot[] $timeslots
      * @param CreationSettings $settings
      * @return array
@@ -166,19 +167,19 @@ final class MainController extends AbstractPageController {
                 case EventType::BOOK:
                 case EventType::INVITE :
                     $color = 'green';
-                    $name = 'FREI';
+                    $name = _('espt_timeslot_type_free');
                     break;
                 case EventType::BREAK :
                     $color = 'gray';
-                    $name = 'PAUSE';
+                    $name = _('espt_timeslot_type_break');
                     break;
             }
 
             if ($timeslot->getUser() != null) {
-                $name = 'BELEGT';
+                $name = _('espt_timeslot_type_blocked');
                 $color = 'red';
                 if ($timeslot->getUser() === $this->authenticatedUser()) {
-                    $name = 'GEBUCHT';
+                    $name = _('espt_timeslot_type_booked');
                     $color = 'yellow';
                 }
             }

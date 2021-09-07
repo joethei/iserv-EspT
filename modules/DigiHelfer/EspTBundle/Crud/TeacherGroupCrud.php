@@ -24,6 +24,7 @@ class TeacherGroupCrud extends AdminServiceCrud {
     protected function configure(): void {
         $this->title = _('espt_groups');
         $this->itemTitle = _('espt_group');
+        $this->templates['crud_index'] = '@DH_EspT/AdminMenu.html.twig';
     }
 
     protected function configureListFields(ListMapper $listMapper): void {

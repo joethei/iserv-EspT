@@ -1,0 +1,32 @@
+{% extends index ? '@DH_EspT/Default/index.html.twig' : '@IServCrud/Crud/index.html.twig' %}
+
+{% block content %}
+
+    {% set route = app.request.get('_route') %}
+
+    <ul class="nav nav-tabs" data-automatic="false">
+        <li role="presentation" class="{{% route == 'espt_admin_settings' ? 'active' %}}">
+            <a href="{{ path('espt_admin_settings') }}">
+                {{ icon('pro-settings') }}{{ _('espt_settings') }}
+            </a>
+        </li>
+        <li role="presentation" class="{{% route == 'espt_admin_teachergroup_index' ? 'active' %}}">
+            <a href="{{ path('espt_admin_teachergroup_index') }}">
+                {{ icon('group') }}{{ _('espt_groups') }}
+            </a>
+        </li>
+        <li role="presentation" class="{{% route == 'espt_admin_timeslottemplatecollection_index' ? 'active' %}}>
+            <a href="{{ path('espt_admin_timeslottemplatecollection_index') }}">
+                {{ icon('time') }}{{ _('espt_timeslot_templates') }}
+            </a>
+        </li>
+        <li role="presentation" class="{{% route == 'espt_admin_timeslot_index' ? 'active' %}}>
+            <a href="{{ path('espt_admin_timeslot_index') }}">
+                {{ ico('calender') }}{{ _('espt_timeslot') }}
+            </a>
+        </li>
+
+    </ul>
+
+    {{ parent() }}
+{% endblock %}

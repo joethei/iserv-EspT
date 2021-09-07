@@ -119,7 +119,13 @@ msgstr ""
 msgid "espt_timeslot_type_book"
 msgstr ""
 
+msgid "espt_timeslot_type_booked"
+msgstr ""
+
 msgid "espt_timeslot_type_invite"
+msgstr ""
+
+msgid "espt_timeslot_type_free"
 msgstr ""
 
 msgid "espt_timeslot_type_blocked"

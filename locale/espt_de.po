@@ -120,8 +120,14 @@ msgstr "Pause"
 msgid "espt_timeslot_type_book"
 msgstr "Buchbar"
 
+msgid "espt_timeslot_type_booked"
+msgstr "Gebucht"
+
 msgid "espt_timeslot_type_invite"
 msgstr "Einladung"
+
+msgid "espt_timeslot_type_free"
+msgstr "Frei"
 
 msgid "espt_timeslot_type_blocked"
 msgstr "Blockiert"

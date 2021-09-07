@@ -33,7 +33,7 @@ class AdminController extends AbstractPageController {
      * @return array
      * @throws \Doctrine\DBAL\Exception
      * @Route("/settings", name="_settings")
-     * @Template("@DH_EspT/Default/index.html.twig")
+     * @Template("@DH_EspT/AdminMenu.html.twig")
      */
     public function index(Request $request, EntityManagerInterface $entityManager, TeacherGroupRepository $groupRepository, TimeslotRepository $timeslotRepository): array {
         $this->addBreadcrumb(_("EspT"));
@@ -76,26 +76,8 @@ class AdminController extends AbstractPageController {
 
         return [
             'form' => $form->createView(),
-            'menu' => $this->getMenu(_('espt_settings'))
+            'index' => true
         ];
-    }
-
-    private function getMenu(?string $current = null): ItemInterface {
-        $menu = $this->get(FactoryInterface::class)->createItem('root');
-        $menu->addChild(_('espt_groups'), ['route' => 'espt_admin_teachergroup_index']);
-        $menu->addChild(_('espt_timeslot'), ['route' => 'espt_admin_timeslot_index']);
-        $menu->addChild(_('espt_timeslot_templates'), ['route' => 'espt_admin_timeslottemplatecollection_index']);
-        $menu->addChild(_('espt_settings'), ['route' => 'espt_admin_settings']);
-
-        if (null !== $current) {
-            if (null === $item = $menu->getChild($current)) {
-                throw new \LogicException(sprintf('No child "%s" found!', $current));
-            }
-
-            $item->setCurrent(true);
-        }
-
-        return $menu;
     }
 
     /**

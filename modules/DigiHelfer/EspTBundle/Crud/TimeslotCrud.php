@@ -20,6 +20,7 @@ class TimeslotCrud extends AdminServiceCrud {
     protected function configure(): void {
         $this->title = _('espt_timeslot');
         $this->itemTitle = _('espt_timeslot');
+        $this->templates['crud_index'] = '@DH_EspT/AdminMenu.html.twig';
     }
 
     protected function configureListFields(ListMapper $listMapper): void {
