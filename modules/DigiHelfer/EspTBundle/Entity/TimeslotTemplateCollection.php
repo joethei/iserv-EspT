@@ -35,12 +35,12 @@ class TimeslotTemplateCollection implements CrudInterface {
     /**
      *
      * @var Collection|TimeslotTemplate[]
-     * @ORM\OneToMany(targetEntity="DigiHelfer\EspTBundle\Entity\TimeslotTemplate", mappedBy="collection", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="DigiHelfer\EspTBundle\Entity\TimeslotTemplate", mappedBy="collection", cascade={"all"}, orphanRemoval=true)
      */
     private $timeslots;
 
     /**
-     * @var TeacherGroup[]
+     * @var Collection|TeacherGroup[]
      * @ORM\OneToMany(targetEntity="DigiHelfer\EspTBundle\Entity\TeacherGroup", mappedBy="timeslotTemplate")
      */
     private $groups;
@@ -82,9 +82,9 @@ class TimeslotTemplateCollection implements CrudInterface {
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection|TimeslotTemplate[]
      */
-    public function getTimeslots(): ArrayCollection {
+    public function getTimeslots(): Collection {
         return $this->timeslots;
     }
 
@@ -98,24 +98,25 @@ class TimeslotTemplateCollection implements CrudInterface {
     public function addTimeslot(TimeslotTemplate $timeslot) : void {
         if(!$this->timeslots->contains($timeslot)) {
             $this->timeslots->add($timeslot);
+            $timeslot->setCollection($this);
         }
     }
 
     public function removeTimeslot(TimeslotTemplate $timeslot) : void {
-        $this->timeslots->remove($timeslot);
+        $this->timeslots->removeElement($timeslot);
     }
 
     /**
-     * @return TeacherGroup[]
+     * @return Collection|TeacherGroup[]
      */
-    public function getGroups(): array {
+    public function getGroups(): Collection {
         return $this->groups;
     }
 
     /**
-     * @param TeacherGroup[] $groups
+     * @param Collection|TeacherGroup[] $groups
      */
-    public function setGroups(array $groups): void {
+    public function setGroups(Collection $groups): void {
         $this->groups = $groups;
     }
 }

@@ -77,6 +77,9 @@ msgstr ""
 msgid "espt_settings"
 msgstr ""
 
+msgid "espt_settings_warning"
+msgstr ""
+
 msgid "espt_teacher"
 msgstr ""
 

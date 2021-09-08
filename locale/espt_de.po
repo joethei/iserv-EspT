@@ -60,6 +60,9 @@ msgstr "Stunden"
 msgid "espt_settings"
 msgstr "Einstellungen"
 
+msgid "espt_settings_warning"
+msgstr "Durch das absenden dieses Formulars werden alle aktuellen Zeitfenster gelöscht und nach Vorlage wieder neu erstellt"
+
 msgid "espt_groups"
 msgstr "Gruppen"
 

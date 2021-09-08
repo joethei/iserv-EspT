@@ -39,33 +39,57 @@ final class MainController extends AbstractPageController {
         $settings = $creationSettingsRepository->findFirst();
         $state = EventState::getState($settings);
 
+        //render different pages depending on user role and the state of the event
         if ($state == EventState::NONE) {
             return $this->render("@DH_EspT/User/None.twig");
         }
 
         if ($state == EventState::INVITE) {
             if ($this->isGranted("ROLE_TEACHER")) {
-                return $this->render("@DH_EspT/User/TeacherInvite.twig", ["startTime" => $settings->getStart(), "endTime" => $settings->getEnd(), "regStart" => $settings->getRegStart(), "timeslots" => $timeslotRepository->findForTeacher($this->authenticatedUser()),]);
+                return $this->render("@DH_EspT/User/TeacherInvite.twig", [
+                    "startTime" => $settings->getStart(),
+                    "endTime" => $settings->getEnd(),
+                    "regStart" => $settings->getRegStart(),
+                    "timeslots" => $timeslotRepository->findForTeacher($this->authenticatedUser()),
+                    ]);
             }
 
             if ($this->isGranted("ROLE_STUDENT") || $this->isGranted("ROLE_PARENT")) {
-                return $this->render("@DH_EspT/User/UserInvite.twig", ["startTime" => $settings->getStart(), "endTime" => $settings->getEnd(), "regStart" => $settings->getRegStart(), "regEnd" => $settings->getRegEnd()]);
+                return $this->render("@DH_EspT/User/UserInvite.twig", [
+                    "startTime" => $settings->getStart(),
+                    "endTime" => $settings->getEnd(),
+                    "regStart" => $settings->getRegStart(),
+                    "regEnd" => $settings->getRegEnd()]);
             }
         }
 
         if ($state == EventState::REGISTRATION) {
             if ($this->isGranted("ROLE_TEACHER")) {
-                return $this->render("@DH_EspT/User/TeacherRegister.twig", ["regEnd" => $settings->getRegEnd(), "startTime" => $settings->getStart(), "endTime" => $settings->getEnd(),]);
+                return $this->render("@DH_EspT/User/TeacherRegister.twig", [
+                    "regEnd" => $settings->getRegEnd(),
+                    "startTime" => $settings->getStart(),
+                    "endTime" => $settings->getEnd(),
+                    ]);
             }
 
             if ($this->isGranted("ROLE_STUDENT") || $this->isGranted("ROLE_PARENT")) {
-                return $this->render("@DH_EspT/User/UserRegister.twig", ["timeslots" => $timeslotRepository->findAll(), "regEnd" => $settings->getRegEnd(), "startTime" => $settings->getStart(), "endTime" => $settings->getEnd(),]);
+                return $this->render("@DH_EspT/User/UserRegister.twig", [
+                    "timeslots" => $timeslotRepository->findAll(),
+                    "regEnd" => $settings->getRegEnd(),
+                    "startTime" => $settings->getStart(),
+                    "endTime" => $settings->getEnd(),
+                    ]);
             }
         }
 
         if ($state == EventState::PRINT) {
             if ($this->isGranted("ROLE_TEACHER")) {
-                return $this->render("@DH_EspT/User/TeacherPrint.twig", ["startTime" => $settings->getStart(), "endTime" => $settings->getEnd(), "group" => $groupRepository->findFor($this->authenticatedUser()), "timeslots" => $timeslotRepository->findForTeacher($this->authenticatedUser()),]);
+                return $this->render("@DH_EspT/User/TeacherPrint.twig", [
+                    "startTime" => $settings->getStart(),
+                    "endTime" => $settings->getEnd(),
+                    "group" => $groupRepository->findFor($this->authenticatedUser()),
+                    "timeslots" => $timeslotRepository->findForTeacher($this->authenticatedUser()),
+                    ]);
             }
 
             if ($this->isGranted("ROLE_STUDENT") || $this->isGranted("ROLE_PARENT")) {
@@ -130,7 +154,7 @@ final class MainController extends AbstractPageController {
 
         if ($timeslot->getUser() != null) {
             if ($timeslot->getUser() === $this->authenticatedUser()) {
-
+                //remove booking for user
                 $timeslot->setUser(null);
                 $entityManager->persist($timeslot);
                 $entityManager->flush();
@@ -153,7 +177,7 @@ final class MainController extends AbstractPageController {
      * @param CreationSettings $settings
      * @return array
      */
-    private function buildTimeslotArray(array $timeslots, CreationSettings $settings) : array {
+    private function buildTimeslotArray(array $timeslots, CreationSettings $settings): array {
         $events = array();
         foreach ($timeslots as $timeslot) {
             $data_timeslot = array();
@@ -191,7 +215,7 @@ final class MainController extends AbstractPageController {
             $data_event['id'] = $timeslot->getGroup()->getId();
 
             $usernames = '';
-            /** @var User $user **/
+            /** @var User $user * */
             foreach ($timeslot->getGroup()->getUsers() as $user) {
                 $usernames = $usernames . "\n" . $user->getNameByFirstname();
             }

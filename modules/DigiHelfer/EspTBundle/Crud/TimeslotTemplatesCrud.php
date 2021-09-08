@@ -33,7 +33,7 @@ class TimeslotTemplatesCrud extends AdminServiceCrud {
     protected function configureShowFields(ShowMapper $showMapper): void {
         $showMapper
             ->add('name', null, ['label' => _('espt_name')])
-            ->add('timeslots', null, ['label' => _('espt_timeslots')]);
+            ->add('timeslots', null, ['label' => _('espt_timeslot')]);
     }
 
     protected function configureFormFields(FormMapper $formMapper): void {
@@ -50,7 +50,7 @@ class TimeslotTemplatesCrud extends AdminServiceCrud {
                 'add_button_text'    => _('espt_timeslot_add'),
                 'delete_button_text' => _('espt_timeslot_remove'),
                 'sub_widget_col'     => 9,
-                'button_col'         => 3
+                'button_col'         => 3,
             ]);
     }
 

@@ -20,6 +20,7 @@ export default {
           confirmButton: {
             text: _('OK'),
             action: function () {
+
             }
           },
           cancelButton: {
@@ -29,7 +30,16 @@ export default {
           }
         }
       })
+    },
+    updateData() {
+      $.ajax({url: '', success: function(result) {
+          this.$set(this.data().settings, result.settings, true);
+          this.$set(this.data().schedules, result.schedules, true);
+        }});
     }
+  },
+  beforeUpdate: function() {
+    this.methods.updateData();
   },
   data: function () {
     return {

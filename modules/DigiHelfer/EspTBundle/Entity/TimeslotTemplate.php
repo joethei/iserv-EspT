@@ -41,7 +41,6 @@ class TimeslotTemplate implements CrudInterface {
     private $end;
 
     /**
-     * @ORM\Column
      * @var EventType|null
      * @ORM\ManyToOne(targetEntity="DigiHelfer\EspTBundle\Entity\EventType")
      * @Assert\NotBlank()
@@ -55,7 +54,9 @@ class TimeslotTemplate implements CrudInterface {
     private $collection;
 
     public function __toString() : string {
-        return (string)$this->id;
+        return $this->getStart()->format("H:i")
+            . " - " . $this->getEnd()->format("H:i")
+            . ": " . $this->getType()->getName();
     }
 
     /**

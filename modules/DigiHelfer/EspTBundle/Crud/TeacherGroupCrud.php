@@ -6,8 +6,10 @@ namespace DigiHelfer\EspTBundle\Crud;
 
 use DigiHelfer\EspTBundle\Entity\TeacherGroup;
 use DigiHelfer\EspTBundle\Entity\TimeslotTemplateCollection;
+use DigiHelfer\EspTBundle\Security\Privilege;
 use IServ\AdminBundle\Admin\AdminServiceCrud;
 use IServ\CoreBundle\NameSort\NamesSortingDirectorInterface;
+use IServ\CoreBundle\Repository\UserRepository;
 use IServ\CoreBundle\Twig\EntityFormatter;
 use IServ\CrudBundle\Model\Breadcrumb;
 use IServ\CoreBundle\Form\Type\UserType;
@@ -38,7 +40,7 @@ class TeacherGroupCrud extends AdminServiceCrud {
     protected function configureShowFields(ShowMapper $showMapper): void {
         $showMapper
             ->add('room', null, ['label' => _('espt_room')])
-            ->add('users', UserType::class, [
+            ->add('users', null, [
                 'label' => _('espt_teachers'),
                 'order_by' => $this->locator->get(NamesSortingDirectorInterface::class)->getSortBy(),
                 'entity_format' => EntityFormatter::FORMAT_USER
@@ -51,13 +53,18 @@ class TeacherGroupCrud extends AdminServiceCrud {
             ->add('room', null, ['label' => _('espt_room'), 'required' => false,])
             ->add('users', UserType::class, [
                 'label' => _('espt_teachers'),
-                'by_reference' => false
+                'by_reference' => false,
+                'query_builder' => function(UserRepository $repository) {
+                    //only show teachers in selection
+                    return $repository->createPrivilegeQueryBuilder(Privilege::TEACHER);
+                }
             ])
             ->add('timeslotTemplate', EntityType::class, [
+                'class' => TimeslotTemplateCollection::class,
                 'label' => _('espt_timeslot_template'),
                 'help' => _('espt_timeslot_template_help'),
-                'class' => TimeslotTemplateCollection::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'crud_create_remote' => $this->router()->generate('espt_admin_timeslottemplatecollection_add')
             ]);
 
     }

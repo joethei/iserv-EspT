@@ -1,4 +1,4 @@
-{% extends index ? '@DH_EspT/Default/index.html.twig' : '@IServCrud/Crud/index.html.twig' %}
+{% extends index is not empty ? '@DH_EspT/Default/index.html.twig' : '@IServCrud/Crud/index.html.twig' %}
 
 {% block content %}
 
@@ -15,18 +15,29 @@
                 {{ icon('group') }}{{ _('espt_groups') }}
             </a>
         </li>
-        <li role="presentation" class="{{ route == 'espt_admin_timeslottemplatecollection_index' ? 'active' }}>
+        <li role="presentation" class="{{ route == 'espt_admin_timeslottemplatecollection_index' ? 'active' }}">
             <a href="{{ path('espt_admin_timeslottemplatecollection_index') }}">
                 {{ icon('time') }}{{ _('espt_timeslot_templates') }}
             </a>
         </li>
-        <li role="presentation" class="{{ route == 'espt_admin_timeslot_index' ? 'active' }}>
+        <li role="presentation" class="{{ route == 'espt_admin_timeslot_index' ? 'active' }}">
             <a href="{{ path('espt_admin_timeslot_index') }}">
-                {{ ico('calender') }}{{ _('espt_timeslot') }}
+                {{ icon('calendar') }}{{ _('espt_timeslot') }}
             </a>
         </li>
-
     </ul>
 
-    {{ parent() }}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {% if route == 'espt_admin_settings' %}
+                <div class="alert alert-warning" role="alert">
+                    {{ _('espt_settings_warning') }}
+                </div>
+            {% endif %}
+
+            {{ parent() }}
+        </div>
+    </div>
+
+
 {% endblock %}

@@ -26,7 +26,7 @@ class TimeslotCrud extends AdminServiceCrud {
     protected function configureListFields(ListMapper $listMapper): void {
         $listMapper
             ->addIdentifier('id')
-            ->add('group', null, ['label' => _('espt_teachers')])
+            ->add('group', null, ['label' => _('espt_group')])
             ->add('user', null, ['label' => _('espt_student')])
             ->add('start', null, ['label' => _('espt_starttime')])
             ->add('end', null, ['label' => _('espt_endtime')]);
@@ -34,7 +34,7 @@ class TimeslotCrud extends AdminServiceCrud {
 
     protected function configureShowFields(ShowMapper $showMapper): void {
         $showMapper
-            ->add('group', null, ['label' => _('espt_teachers')])
+            ->add('group', null, ['label' => _('espt_group')])
             ->add('user', null, ['label' => _('espt_student')])
             ->add('start', null, ['label' => _('espt_starttime')])
             ->add('end', null, ['label' => _('espt_endtime')]);

@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace DigiHelfer\EspTBundle\Controller;
 
 use DigiHelfer\EspTBundle\Entity\CreationSettings;
+use DigiHelfer\EspTBundle\Entity\CreationSettingsRepository;
 use DigiHelfer\EspTBundle\Entity\TeacherGroupRepository;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
 use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
 use DigiHelfer\EspTBundle\Entity\TimeslotTemplate;
 use DigiHelfer\EspTBundle\Form\CreationSettingsType;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 use IServ\CoreBundle\Controller\AbstractPageController;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
@@ -31,20 +34,25 @@ class AdminController extends AbstractPageController {
      * @param TeacherGroupRepository $groupRepository
      * @param TimeslotRepository $timeslotRepository
      * @return array
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
+     * @throws NonUniqueResultException
      * @Route("/settings", name="_settings")
      * @Template("@DH_EspT/AdminMenu.html.twig")
      */
-    public function index(Request $request, EntityManagerInterface $entityManager, TeacherGroupRepository $groupRepository, TimeslotRepository $timeslotRepository): array {
+    public function index(Request $request, EntityManagerInterface $entityManager, TeacherGroupRepository $groupRepository, TimeslotRepository $timeslotRepository, CreationSettingsRepository $settingsRepository): array {
         $this->addBreadcrumb(_("EspT"));
 
-        $settings = new CreationSettings();
+        $settings = $settingsRepository->findFirst();
+        if($settings === null) {
+            $settings = new CreationSettings();
 
-        //set default form values
-        $settings->setStart(new \DateTimeImmutable('tomorrow'));
-        $settings->setEnd(new \DateTimeImmutable('tomorrow'));
-        $settings->setRegStart(new \DateTimeImmutable('tomorrow'));
-        $settings->setRegEnd(new \DateTimeImmutable('tomorrow'));
+            //set default form values
+            $settings->setStart(new \DateTimeImmutable('tomorrow'));
+            $settings->setEnd(new \DateTimeImmutable('tomorrow'));
+            $settings->setRegStart(new \DateTimeImmutable('tomorrow'));
+            $settings->setRegEnd(new \DateTimeImmutable('tomorrow'));
+        }
+
 
         $form = $this->createForm(CreationSettingsType::class, $settings);
 
@@ -58,7 +66,8 @@ class AdminController extends AbstractPageController {
             //create timeslots for all groups according to template
             $groups = $groupRepository->findAll();
             foreach ($groups as $group) {
-                foreach ($group->getTimeslotTemplate()->getTimeslots() as $template) {
+                $templates = $group->getTimeslotTemplate()->getTimeslots();
+                foreach ($templates as $template) {
 
                     /** @var TimeslotTemplate $template */
                     $timeslot = new Timeslot();

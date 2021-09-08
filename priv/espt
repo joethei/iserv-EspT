@@ -1,4 +1,9 @@
 priv.espt_admin:
 module      EspT
-title       Elternsprechtag Verwaltung
+title       Verwaltung von Elternsprechtagen
 description Erstellen & Verwalten von Sprechtagsterminen
+
+priv.espt_teacher:
+module      EspT
+title       Als Lehrkraft an Elternsprechtagen teilnehmen
+description Darf an Elternsprechtagen Schüler einladen und kann von Verwalter als Lehrkraft einer Gruppe zugeordnet werden

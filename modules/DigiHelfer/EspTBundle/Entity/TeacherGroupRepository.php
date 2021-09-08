@@ -3,6 +3,7 @@
 namespace DigiHelfer\EspTBundle\Entity;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 use IServ\CoreBundle\Entity\User;
 
@@ -17,7 +18,7 @@ class TeacherGroupRepository extends ServiceEntityRepository {
      * @param null $lockMode
      * @param null $lockVersion
      * @return int|mixed|object|string|null
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function find($id, $lockMode = null, $lockVersion = null) {
         $entityManager = $this->getEntityManager();
@@ -29,14 +30,13 @@ class TeacherGroupRepository extends ServiceEntityRepository {
 
     /**
      * @return TeacherGroup[]
-     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function findFor(User $user): array {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\TeacherGroup s WHERE :user MEMBER OF s.users");
         $query->setParameter('user', $user);
 
-        return $query->getArrayResult();
+        return $query->getResult();
     }
 
     /**
@@ -46,7 +46,7 @@ class TeacherGroupRepository extends ServiceEntityRepository {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\TeacherGroup s");
 
-        return $query->getArrayResult();
+        return $query->getResult();
     }
 
 }
