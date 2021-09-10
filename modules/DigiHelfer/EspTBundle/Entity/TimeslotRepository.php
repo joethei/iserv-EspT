@@ -3,6 +3,8 @@
 namespace DigiHelfer\EspTBundle\Entity;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Persistence\ManagerRegistry;
 use IServ\CoreBundle\Entity\User;
 
@@ -23,47 +25,50 @@ class TimeslotRepository extends ServiceEntityRepository {
         return $query->getOneOrNullResult();
     }
 
-    public function findAll() {
+    /**
+     * @return Collection
+     */
+    public function findAll() : Collection {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s");
 
-        return $query->getArrayResult();
+        return new ArrayCollection($query->getResult());
     }
 
     /**
      * @param User $user
-     * @return Timeslot[]
+     * @return Collection|Timeslot
      */
-    public function findForTeacher(User $user) : array {
+    public function findForTeacher(User $user) : Collection {
         $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery("SELECT t FROM DigiHelfer\EspTBundle\Entity\Timeslot s JOIN s.group g WHERE :user MEMBER OF g.users");
+        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s JOIN s.group g WHERE :user MEMBER OF g.users");
         $query->setParameter('user', $user);
 
-        return $query->getArrayResult();
+        return new ArrayCollection($query->getResult());
     }
 
     /**
      * @param User $user
-     * @return Timeslot[]
+     * @return Collection|Timeslot
      */
-    public function findForUser(User $user) : array {
+    public function findForUser(User $user) : Collection {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s WHERE s.user = :user");
         $query->setParameter('user', $user);
 
-        return $query->getArrayResult();
+        return new ArrayCollection($query->getResult());
     }
 
     /**
      * @param TeacherGroup $group
-     * @return Timeslot[]
+     * @return Collection|Timeslot
      */
-    public function findForGroup(TeacherGroup $group) : array {
+    public function findForGroup(TeacherGroup $group) : Collection {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s WHERE group = :teacherGroup");
         $query->setParameter('teacherGroup', $group);
 
-        return $query->getArrayResult();
+        return new ArrayCollection($query->getResult());
     }
 
     /**

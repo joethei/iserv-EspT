@@ -30,7 +30,7 @@ class EventState {
     /**
      * get current state of the event depending on current time and times defined in settings.
      * @param CreationSettings|null $settings settings to base the calculations on.
-     * @return string current state, valid states are defined as const's on this class
+     * @return string current state, valid states are defined as const on this class
      */
     public static function getState(?CreationSettings $settings) : string {
         $now = new DateTime('now');
@@ -39,7 +39,7 @@ class EventState {
             return EventState::NONE;
         if ($now < $settings->getRegStart())
             return EventState::INVITE;
-        if ($settings->getRegStart() < $now && $now < $settings->getRegEnd())
+        if ($settings->getRegStart() < $now && $now <= $settings->getRegEnd())
             return EventState::REGISTRATION;
         if($settings->getRegEnd() < $now)
             return EventState::PRINT;

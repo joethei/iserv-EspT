@@ -5,8 +5,7 @@ let base = require(path.join(process.env.WEBPACK_BASE_PATH, 'webpack.config.base
 let webpackConfig = {
     entry: {
         'js/espt': './assets/js/espt.js',
-        'img/interview.svg': './assets/img/interview.svg',
-        'js/Schedule': './assets/js/Schedule.vue'
+        'img/interview.svg': './assets/img/interview.svg'
     },
     resolve: {
         modules: [path.resolve(__dirname, './assets/node_modules'), 'node_modules'],

@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace DigiHelfer\EspTBundle\Crud;
 
+use DigiHelfer\EspTBundle\Entity\TeacherGroup;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
 use IServ\AdminBundle\Admin\AdminServiceCrud;
+use IServ\CoreBundle\Entity\User;
 use IServ\CoreBundle\Form\Type\UserType;
 use IServ\CrudBundle\Mapper\FormMapper;
 use IServ\CrudBundle\Mapper\ListMapper;
 use IServ\CrudBundle\Mapper\ShowMapper;
 use IServ\CrudBundle\Model\Breadcrumb;
 use IServ\CrudBundle\Routing\RoutingDefinition;
+use IServ\CrudBundle\Table\Filter\ListPropertyFilter;
+use IServ\CrudBundle\Table\Filter\ListSearchFilter;
+use IServ\CrudBundle\Table\ListHandler;
 
 class TimeslotCrud extends AdminServiceCrud {
 
@@ -29,7 +34,14 @@ class TimeslotCrud extends AdminServiceCrud {
             ->add('group', null, ['label' => _('espt_group')])
             ->add('user', null, ['label' => _('espt_student')])
             ->add('start', null, ['label' => _('espt_starttime')])
-            ->add('end', null, ['label' => _('espt_endtime')]);
+            ->add('end', null, ['label' => _('espt_endtime')])
+            ->add('type', null, ['label' => _('espt_timeslot_type')]);
+    }
+
+    protected function configureListFilter(ListHandler $listHandler): void {
+        $listHandler
+            ->addListFilter(new ListPropertyFilter(_('espt_group'), 'group', TeacherGroup::class, 'users', 'id')
+            )->addListFilter(new ListSearchFilter(_('Search'), ['user', 'group']));
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void {
@@ -37,7 +49,8 @@ class TimeslotCrud extends AdminServiceCrud {
             ->add('group', null, ['label' => _('espt_group')])
             ->add('user', null, ['label' => _('espt_student')])
             ->add('start', null, ['label' => _('espt_starttime')])
-            ->add('end', null, ['label' => _('espt_endtime')]);
+            ->add('end', null, ['label' => _('espt_endtime')])
+            ->add('type', null, ['label' => _('espt_timeslot_type')]);
 
     }
 

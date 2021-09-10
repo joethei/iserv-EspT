@@ -50,8 +50,8 @@ class CreationSettings {
      */
     private $regEnd;
 
-    public function __toString() {
-        return "";
+    public function __toString() : string {
+        return (string)$this->getId();
     }
 
     /**

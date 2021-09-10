@@ -3,6 +3,8 @@
 namespace DigiHelfer\EspTBundle\Entity;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 use IServ\CoreBundle\Entity\User;
@@ -29,24 +31,24 @@ class TeacherGroupRepository extends ServiceEntityRepository {
     }
 
     /**
-     * @return TeacherGroup[]
+     * @return Collection|TeacherGroup
      */
-    public function findFor(User $user): array {
+    public function findFor(User $user): TeacherGroup {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\TeacherGroup s WHERE :user MEMBER OF s.users");
         $query->setParameter('user', $user);
 
-        return $query->getResult();
+        return new ArrayCollection($query->getResult());
     }
 
     /**
-     * @return TeacherGroup[]
+     * @return Collection|TeacherGroup
      */
-    public function findAll(): array {
+    public function findAll(): Collection {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\TeacherGroup s");
 
-        return $query->getResult();
+        return new ArrayCollection($query->getResult());
     }
 
 }

@@ -11,6 +11,8 @@ use DigiHelfer\EspTBundle\Entity\EventState;
 use DigiHelfer\EspTBundle\Entity\TeacherGroupRepository;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
 use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
+use DigiHelfer\EspTBundle\Helpers\DateUtils;
+use DigiHelfer\EspTBundle\Security\Privilege;
 use Doctrine\ORM\EntityManager;
 use IServ\CoreBundle\Controller\AbstractPageController;
 use IServ\CoreBundle\Entity\User;
@@ -29,6 +31,7 @@ final class MainController extends AbstractPageController {
      * @param CreationSettingsRepository $creationSettingsRepository
      * @param TeacherGroupRepository $groupRepository
      * @param TimeslotRepository $timeslotRepository
+     * @param LoggerInterface $logger
      * @return Response
      * @throws \Doctrine\ORM\NonUniqueResultException
      * @Route("/", name="espt_index")
@@ -111,10 +114,10 @@ final class MainController extends AbstractPageController {
         $settings = $settingsRepository->findFirst();
         $state = EventState::getState($settings);
 
-        if ($this->isGranted("ROLE_TEACHER")) {
+        if ($this->isGranted(Privilege::TEACHER)) {
             if ($state == EventState::INVITE) {
                 $timeslots = $timeslotRepository->findForTeacher($this->authenticatedUser());
-                return $this->json($this->buildTimeslotArray($timeslots, $settings));
+                return $this->json(DateUtils::buildTimeslotArray($settings, $this->authenticatedUser(), $timeslots));
             }
         }
 
@@ -122,7 +125,7 @@ final class MainController extends AbstractPageController {
             if ($state == EventState::REGISTRATION) {
                 $timeslots = $timeslotRepository->findAll();
 
-                return $this->json($this->buildTimeslotArray($timeslots, $settings));
+                return $this->json(DateUtils::buildTimeslotArray($settings, $this->authenticatedUser(), $timeslots));
             }
         }
 
@@ -169,69 +172,6 @@ final class MainController extends AbstractPageController {
         $entityManager->flush();
 
         return $this->json([]);
-    }
-
-    /**
-     * reformat data for consumption by vue-schedule-view component.
-     * @param Timeslot[] $timeslots
-     * @param CreationSettings $settings
-     * @return array
-     */
-    private function buildTimeslotArray(array $timeslots, CreationSettings $settings): array {
-        $events = array();
-        foreach ($timeslots as $timeslot) {
-            $data_timeslot = array();
-            $data_timeslot['start'] = $timeslot->getStart();
-            $data_timeslot['end'] = $timeslot->getEnd();
-            $data_timeslot['id'] = $timeslot->getId();
-
-            $color = 'red';
-            $name = '';
-            switch ($timeslot->getType()) {
-                case EventType::BOOK:
-                case EventType::INVITE :
-                    $color = 'green';
-                    $name = _('espt_timeslot_type_free');
-                    break;
-                case EventType::BREAK :
-                    $color = 'gray';
-                    $name = _('espt_timeslot_type_break');
-                    break;
-            }
-
-            if ($timeslot->getUser() != null) {
-                $name = _('espt_timeslot_type_blocked');
-                $color = 'red';
-                if ($timeslot->getUser() === $this->authenticatedUser()) {
-                    $name = _('espt_timeslot_type_booked');
-                    $color = 'yellow';
-                }
-            }
-
-            $data_timeslot['color'] = $color;
-            $data_timeslot['name'] = $name;
-
-            $data_event = array('events' => $data_timeslot);
-            $data_event['id'] = $timeslot->getGroup()->getId();
-
-            $usernames = '';
-            /** @var User $user * */
-            foreach ($timeslot->getGroup()->getUsers() as $user) {
-                $usernames = $usernames . "\n" . $user->getNameByFirstname();
-            }
-            $data_event['title'] = $usernames;
-            $data_event['subtitle'] = $timeslot->getGroup()->getRoom();
-
-            $events = array_merge_recursive($events, $data_event);
-        }
-        $result = array();
-
-        $result['events'] = $events;
-
-        $settings = array('start' => $settings->getStart(), 'end' => $settings->getEnd());
-        $result['settings'] = $settings;
-
-        return $result;
     }
 
     /**

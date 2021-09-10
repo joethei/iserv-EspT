@@ -63,6 +63,6 @@ class EventType {
     }
 
     public function __toString() : string {
-        return $this->name;
+        return _('espt_timeslot_type_' . $this->name);
     }
 }

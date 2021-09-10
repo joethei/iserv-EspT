@@ -4,11 +4,12 @@
 
 <script>
 
-import ScheduleTimelineView from 'vue-schedule-timeline-view';
+import ScheduleTimelineView from './ScheduleTimelineView';
 import Confirm from 'IServ.Confirm';
 import Locale from 'IServ.Locale';
 
 export default {
+  name: "Schedule",
   components: {ScheduleTimelineView},
   methods: {
     onClickEvent: function(id) {

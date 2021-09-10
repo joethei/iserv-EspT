@@ -32,7 +32,7 @@ class TimeslotTemplateType extends AbstractType {
                 'label' => _('espt_timeslot_type'),
                 'help' => _('espt_timeslot_type_help'),
                 'class' => EventType::class,
-                'by_reference' => false,
+                'by_reference' => true,
                 'choice_label' => function(EventType $type) {
                     return _('espt_timeslot_type_' . $type->getName());
                 }

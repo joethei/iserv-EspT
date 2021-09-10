@@ -1,21 +1,8 @@
 "use strict";
-import Schedule from "./Schedule.vue";
+import Schedule from './Schedule.vue';
+import Vue from 'vue';
 
-IServ.EspT = IServ.register(function ($) {
-    'use strict';
-
-    return {
-        init: function () {
-            new Vue({
-                el: '#espt-schedule',
-                template: '<Schedule/>',
-                components: {Schedule},
-                data: {
-                },
-            })
-        }
-    };
-}(jQuery));
-
-
-export default IServ.EspT;
+new Vue({
+    el: '#espt-schedule',
+    render: h => h(Schedule)
+})

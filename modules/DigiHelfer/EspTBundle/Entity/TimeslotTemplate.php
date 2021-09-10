@@ -56,7 +56,7 @@ class TimeslotTemplate implements CrudInterface {
     public function __toString() : string {
         return $this->getStart()->format("H:i")
             . " - " . $this->getEnd()->format("H:i")
-            . ": " . $this->getType()->getName();
+            . ": " . $this->getType();
     }
 
     /**
