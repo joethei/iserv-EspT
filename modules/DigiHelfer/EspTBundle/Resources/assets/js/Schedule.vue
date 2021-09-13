@@ -29,6 +29,7 @@ export default {
         buttons: {
           confirmButton: {
             text: _('OK'),
+            btnClass: 'btn-primary',
             action: function () {
             }
           },
@@ -41,9 +42,9 @@ export default {
       });
     },
     updateData() {
-      $.ajax({url: '', success: (result) => {
-          this.$set(this.data.settings, result.settings, true);
-          this.$set(this.data.schedules, result.schedules, true);
+      $.ajax({url: path('espt_timeslots'), success: (result) => {
+          this.$set(this.settings, result.settings, true);
+          this.$set(this.schedules, result.schedules, true);
         }});
     }
   },
