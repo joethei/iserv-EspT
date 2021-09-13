@@ -6,6 +6,7 @@
 
 import Confirm from 'IServ.Confirm';
 import Locale from 'IServ.Locale';
+import Routing from 'IServ.Routing';
 import ScheduleView from "./ScheduleView";
 
 import Vue from 'vue';
@@ -42,7 +43,7 @@ export default {
       });
     },
     updateData() {
-      $.ajax({url: path('espt_timeslots'), success: (result) => {
+      $.ajax({url: Routing.generate('espt_timeslots'), success: (result) => {
           this.$set(this.settings, result.settings, true);
           this.$set(this.schedules, result.schedules, true);
         }});
