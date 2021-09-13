@@ -33,7 +33,7 @@ class TeacherGroupRepository extends ServiceEntityRepository {
     /**
      * @return Collection|TeacherGroup
      */
-    public function findFor(User $user): TeacherGroup {
+    public function findFor(User $user): Collection {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\TeacherGroup s WHERE :user MEMBER OF s.users");
         $query->setParameter('user', $user);
