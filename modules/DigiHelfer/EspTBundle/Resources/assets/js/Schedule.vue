@@ -35,7 +35,7 @@ export default {
       })
     },
     updateData() {
-      $.ajax({url: '', success: function(result) {
+      $.ajax({url: '', success: (result) => {
           this.$set(this.data().settings, result.settings, true);
           this.$set(this.data().schedules, result.schedules, true);
         }});
@@ -44,7 +44,7 @@ export default {
   beforeUpdate: function() {
     this.methods.updateData();
   },
-  data: function () {
+  data: () => {
     return {
       settings: {
         start: new Date(2021, 8, 20, 15, 30, 0),

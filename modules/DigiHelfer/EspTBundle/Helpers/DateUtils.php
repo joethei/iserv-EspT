@@ -80,7 +80,7 @@ class DateUtils {
             $data_event['title'] = $usernames;
             $data_event['subtitle'] = $timeslot->getGroup()->getRoom();
 
-            $events = array_push($events, $data_event);
+            $events[] = $data_event;
         }
         $result = array();
 

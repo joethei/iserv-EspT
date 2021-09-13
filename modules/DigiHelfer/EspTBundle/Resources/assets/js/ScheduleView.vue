@@ -32,7 +32,7 @@ import moment from 'moment';
 export default {
   name: 'ScheduleView',
   props: {
-    schedules: [],
+    schedules: Array,
     settings: {
       start: Date,
       end: Date,

@@ -18,7 +18,7 @@ export default {
     ScheduleView,
   },
   props: {
-    schedules: [],
+    schedules: Array,
     settings: {
       start: Date,
       end: Date,
