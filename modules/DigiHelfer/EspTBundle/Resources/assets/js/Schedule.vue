@@ -1,7 +1,6 @@
 <template>
   <ScheduleView v-bind:schedules="this.schedules" v-bind:settings="this.settings" @onClickEvent="(id) => onClick(id)"/>
-
-  </template>
+</template>
 
 <script>
 
@@ -22,14 +21,15 @@ export default {
   methods: {
     onClick: function(id) {
       console.log("clicked event #" + id);
-      Confirm.confirm('', {
+      //const modal = Modal.createFromPage({'remote': path('espt_timeslot_edit')});
+      //modal.show();
+      Confirm.confirm({
         title: _('espt_confirm'),
         content: _('espt_confirm_text'),
         buttons: {
           confirmButton: {
             text: _('OK'),
             action: function () {
-
             }
           },
           cancelButton: {
@@ -38,12 +38,12 @@ export default {
             }
           }
         }
-      })
+      });
     },
     updateData() {
       $.ajax({url: '', success: (result) => {
-          this.$set(this.data().settings, result.settings, true);
-          this.$set(this.data().schedules, result.schedules, true);
+          this.$set(this.data.settings, result.settings, true);
+          this.$set(this.data.schedules, result.schedules, true);
         }});
     }
   },
