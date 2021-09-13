@@ -4,13 +4,15 @@
 
 <script>
 
-import ScheduleTimelineView from './ScheduleTimelineView';
 import Confirm from 'IServ.Confirm';
 import Locale from 'IServ.Locale';
+import ScheduleTimelineView from "./ScheduleTimelineView";
 
 export default {
   name: "Schedule",
-  components: {ScheduleTimelineView},
+  components: {
+    ScheduleTimelineView
+  },
   methods: {
     onClickEvent: function(id) {
       console.log("clicked event #" + id);

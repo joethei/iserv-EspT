@@ -28,7 +28,6 @@ class DateUtils {
     }
 
     //TODO: move this to a better place
-
     /**
      * reformat data for consumption by vue-schedule-view component.
      * @param CreationSettings $settings
@@ -81,7 +80,7 @@ class DateUtils {
             $data_event['title'] = $usernames;
             $data_event['subtitle'] = $timeslot->getGroup()->getRoom();
 
-            $events = array_merge_recursive($events, $data_event);
+            $events = array_push($events, $data_event);
         }
         $result = array();
 

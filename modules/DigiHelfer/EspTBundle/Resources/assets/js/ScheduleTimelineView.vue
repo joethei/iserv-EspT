@@ -5,7 +5,12 @@
 </template>
 
 <script lang="ts">
-import ScheduleView from './ScheduleView.vue'
+import ScheduleView from './ScheduleView'
+
+import Vue from 'vue';
+import vToolTip from "v-tooltip";
+
+Vue.use(vToolTip);
 
 export default {
   name: 'ScheduleTimelineView',
