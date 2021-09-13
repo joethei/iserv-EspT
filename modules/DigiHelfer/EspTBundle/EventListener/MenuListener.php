@@ -13,17 +13,13 @@ class MenuListener implements MainMenuListenerInterface
     /**
      * {@inheritDoc}
      */
-    public function onBuildMainMenu(MenuEvent $event)
-    {
-        $event->getMenu()->addChild('espt', [
-            'route' => 'espt_index',
-            'label' => _('EspT'),
-            'extras' => [
-                'icon' => 'interview',
-                'icon_style' => 'iserv',
-                'icon_fallback' => 'users',
-                'icon_fallback_style' => 'fugue'
-            ],
-        ]);
+    public function onBuildMainMenu(MenuEvent $event) {
+        $event->getMenu()
+            ->addChild('espt', ['route' => 'espt_index', 'label' => _('EspT')])
+            ->setExtra('icon', 'interview')
+            ->setExtra('icon_style', 'iserv')
+            ->setExtra('icon_fallback', 'users')
+            ->setExtra('icon_fallback_style', 'fugue')
+        ;
     }
 }

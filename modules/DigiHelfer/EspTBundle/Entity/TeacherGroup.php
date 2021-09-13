@@ -66,6 +66,11 @@ class TeacherGroup implements CrudInterface {
         return $this->getRoom() . "- " . implode(', ', $this->getUsers()->toArray());
     }
 
+    //redirect to toString, for usage in TimeslotCrud filter.
+    public function getName() : string {
+        return $this->__toString();
+    }
+
     /**
      * @return int
      */

@@ -72,7 +72,7 @@ class DateUtils {
             $data_event = array('events' => $data_timeslot);
             $data_event['id'] = $timeslot->getGroup()->getId();
 
-            $usernames = implode('\n', $timeslot->getGroup()->getUsers());
+            $usernames = implode('\n', $timeslot->getGroup()->getUsers()->toArray());
 
             $data_event['title'] = $usernames;
             $data_event['subtitle'] = $timeslot->getGroup()->getRoom();
