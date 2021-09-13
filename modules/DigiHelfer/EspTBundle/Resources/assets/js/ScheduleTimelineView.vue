@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <ScheduleView v-bind:schedules="this.props.schedules" v-bind:settings="this.props.settings" @onClickEvent="(id) => click(id)"/>
+    <ScheduleView v-bind:schedules="this.schedules" v-bind:settings="this.settings" @onClickEvent="(id) => click(id)"/>
   </div>
 </template>
 
@@ -26,7 +26,7 @@ export default {
     }
   },
   methods: {
-    click: function(id) {
+    click: (id) => {
       this.$emit('onClickEvent', id);
     }
   },

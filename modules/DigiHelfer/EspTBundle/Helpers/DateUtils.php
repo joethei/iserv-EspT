@@ -36,7 +36,7 @@ class DateUtils {
      * @return array
      */
     public static function buildTimeslotArray(CreationSettings $settings, User $user, Collection $timeslots): array {
-        $events = array();
+        $schedules = array();
         foreach ($timeslots as $timeslot) {
             $data_timeslot = array();
             $data_timeslot['start'] = $timeslot->getStart();
@@ -72,21 +72,19 @@ class DateUtils {
             $data_event = array('events' => $data_timeslot);
             $data_event['id'] = $timeslot->getGroup()->getId();
 
-            $usernames = '';
-            /** @var User $user * */
-            foreach ($timeslot->getGroup()->getUsers() as $user) {
-                $usernames = $usernames . "\n" . $user->getNameByFirstname();
-            }
+            $usernames = implode('\n', $timeslot->getGroup()->getUsers());
+
             $data_event['title'] = $usernames;
             $data_event['subtitle'] = $timeslot->getGroup()->getRoom();
 
-            $events[] = $data_event;
+            $schedules[] = $data_event;
         }
         $result = array();
 
-        $result['events'] = $events;
+        $result['schedules'] = $schedules;
 
-        $settings = array('start' => $settings->getStart(), 'end' => $settings->getEnd());
+        //TODO: don't hardcode scaleFactor
+        $settings = array('start' => $settings->getStart(), 'end' => $settings->getEnd(), 'scaleFactor' => 2);
         $result['settings'] = $settings;
 
         return $result;
