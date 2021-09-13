@@ -40,7 +40,7 @@ export default {
     }
   },
   methods: {
-    click: (event) => {
+    click: function (event) {
       this.$emit('onClickEvent', event.id);
     },
     duration: function (event) {

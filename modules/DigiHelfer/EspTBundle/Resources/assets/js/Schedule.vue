@@ -1,20 +1,26 @@
 <template>
-  <ScheduleTimelineView v-bind:schedules="schedules" v-bind:settings="settings" @onClickEvent="(id) => onClickEvent(id)"/>
-</template>
+  <ScheduleView v-bind:schedules="this.schedules" v-bind:settings="this.settings" @onClickEvent="(id) => onClick(id)"/>
+
+  </template>
 
 <script>
 
 import Confirm from 'IServ.Confirm';
 import Locale from 'IServ.Locale';
-import ScheduleTimelineView from "./ScheduleTimelineView";
+import ScheduleView from "./ScheduleView";
+
+import Vue from 'vue';
+import vToolTip from "v-tooltip";
+
+Vue.use(vToolTip);
 
 export default {
   name: "Schedule",
   components: {
-    ScheduleTimelineView
+    ScheduleView
   },
   methods: {
-    onClickEvent: function(id) {
+    onClick: function(id) {
       console.log("clicked event #" + id);
       Confirm.confirm('', {
         title: _('espt_confirm'),
@@ -41,8 +47,11 @@ export default {
         }});
     }
   },
-  beforeUpdate: function() {
-    this.methods.updateData();
+  created: function () {
+    this.updateData();
+  },
+  updated: function() {
+    this.updateData();
   },
   data: () => {
     return {

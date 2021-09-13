@@ -14,7 +14,7 @@ class MenuListener implements MainMenuListenerInterface
      * {@inheritDoc}
      */
     public function onBuildMainMenu(MenuEvent $event) {
-        $event->getMenu()
+         $event->getMenu()
             ->addChild('espt', ['route' => 'espt_index', 'label' => _('EspT')])
             ->setExtra('icon', 'interview')
             ->setExtra('icon_style', 'iserv')
