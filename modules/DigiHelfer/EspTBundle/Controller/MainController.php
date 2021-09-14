@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace DigiHelfer\EspTBundle\Controller;
 
-use DigiHelfer\EspTBundle\Entity\CreationSettings;
 use DigiHelfer\EspTBundle\Entity\CreationSettingsRepository;
 use DigiHelfer\EspTBundle\Entity\EventType;
 use DigiHelfer\EspTBundle\Entity\EventState;
 use DigiHelfer\EspTBundle\Entity\TeacherGroupRepository;
-use DigiHelfer\EspTBundle\Entity\Timeslot;
 use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
 use DigiHelfer\EspTBundle\Helpers\DateUtils;
 use DigiHelfer\EspTBundle\Security\Privilege;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use IServ\CoreBundle\Controller\AbstractPageController;
-use IServ\CoreBundle\Entity\User;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -136,14 +133,14 @@ final class MainController extends AbstractPageController {
     /**
      * @param int $id
      * @param TimeslotRepository $timeslotRepository
-     * @param EntityManager $entityManager
+     * @param EntityManagerInterface $entityManager
      * @return Response
      * @throws \Doctrine\ORM\NonUniqueResultException
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @Route("/timeslots/reserve/", name="espt_timeslots_reserve", options={"expose": true}, methods={"POST"})
      */
-    public function reserveTimeslot(Request $request, TimeslotRepository $timeslotRepository, EntityManager $entityManager): Response {
+    public function reserveTimeslot(Request $request, TimeslotRepository $timeslotRepository, EntityManagerInterface $entityManager): Response {
         $id = $request->get('id');
         if($id == null) return $this->json([]);
 

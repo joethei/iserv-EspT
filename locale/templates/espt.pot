@@ -145,3 +145,6 @@ msgstr ""
 
 msgid "espt_timeslot_template_help"
 msgstr ""
+
+msgid "espt_registered"
+msgstr ""

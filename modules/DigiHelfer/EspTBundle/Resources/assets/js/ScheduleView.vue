@@ -7,7 +7,7 @@
     </div>
     <div class="schedule" v-for="schedule in schedules" :key="schedule.id">
       <div class="info">
-        <span>{{ schedule.title }}</span>
+        <b>{{ schedule.title }}</b>
         <br>
         <span>{{ schedule.subtitle }}</span>
       </div>

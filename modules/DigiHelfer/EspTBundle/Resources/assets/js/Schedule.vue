@@ -26,7 +26,7 @@ export default {
       console.log("clicked event #" + id);
 
       if ($("#invite").length) {
-        const modal = Modal.createFromForm({'remote': Routing.generate('espt_timeslots_invite', {id: id})});
+        const modal = Modal.createFromForm({'remote': Routing.generate('espt_invite', {id: id})});
         modal.show();
       }else {
         Confirm.confirm({

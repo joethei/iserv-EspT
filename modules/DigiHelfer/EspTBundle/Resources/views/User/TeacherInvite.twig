@@ -9,8 +9,12 @@
         <p class="text-center">Sprechtag ist: {{ startTime|ldatetime }} - {{ endTime|ltime }}</p>
     </div>
 
-    <div id="invite" style="visibility: hidden"></div>
+    <div id="invite">
+        <!--If this is defined, open invite modal instead of reservation confirmation-->
+    </div>
 
-    <div id="espt-schedule"></div>
+    <div id="espt-schedule">
+        <!--Vue component inserted here-->
+    </div>
 
 {% endblock %}

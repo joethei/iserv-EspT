@@ -143,3 +143,6 @@ msgstr "Bestätigung"
 
 msgid "espt_confirm_text"
 msgstr "Willst du diesen Termin buchen?"
+
+msgid "espt_registered"
+msgstr "Termin erfolgreich gebucht"
