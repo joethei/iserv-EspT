@@ -17,8 +17,7 @@
         <div class="event" v-for="event in schedule.events" :key="event.id"
              v-bind:style="{width: (duration(event) / settings.scaleFactor) + '%', backgroundColor: event.color}"
              @click="click(event)"
-             v-tooltip="format(event)"
-        >
+             v-tooltip="format(event)">
           <p>{{ event.name }}</p>
         </div>
       </div>

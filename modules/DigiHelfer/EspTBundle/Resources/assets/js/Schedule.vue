@@ -7,6 +7,8 @@
 import Confirm from 'IServ.Confirm';
 import Locale from 'IServ.Locale';
 import Routing from 'IServ.Routing';
+import Message from 'IServ.Message';
+import Modal from 'IServ.Modal';
 import ScheduleView from "./ScheduleView";
 
 import Vue from 'vue';
@@ -22,31 +24,40 @@ export default {
   methods: {
     onClick: function(id) {
       console.log("clicked event #" + id);
-      //const modal = Modal.createFromPage({'remote': path('espt_timeslot_edit')});
-      //modal.show();
-      Confirm.confirm({
-        title: _('espt_confirm'),
-        content: _('espt_confirm_text'),
-        buttons: {
-          confirmButton: {
-            text: _('OK'),
-            btnClass: 'btn-primary',
-            action: function () {
-            }
-          },
-          cancelButton: {
-            text: _('Cancel'),
-            action: function () {
+
+      if ($("#invite").length) {
+        const modal = Modal.createFromForm({'remote': Routing.generate('espt_timeslots_invite', {id: id})});
+        modal.show();
+      }else {
+        Confirm.confirm({
+          title: _('espt_confirm'),
+          content: _('espt_confirm_text'),
+          buttons: {
+            confirmButton: {
+              text: _('OK'),
+              btnClass: 'btn-primary',
+              action: function () {
+                $.post(Routing.generate('espt_timeslots_reserve'), {id: id}, (data) => {
+                  if(data.success !== undefined && data.success === true) {
+                    Message.success(_('espt_registered'), 5000, false);
+                  }
+                });
+              }
+            },
+            cancelButton: {
+              text: _('Cancel'),
+              action: function () {
+              }
             }
           }
-        }
-      });
+        });
+      }
     },
     updateData() {
-      $.ajax({url: Routing.generate('espt_timeslots'), success: (result) => {
+      $.getJSON(Routing.generate('espt_timeslots'), (result) => {
           this.$set(this.settings, result.settings, true);
           this.$set(this.schedules, result.schedules, true);
-        }});
+        });
     }
   },
   created: function () {

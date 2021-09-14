@@ -93,6 +93,9 @@ msgstr "Raum"
 msgid "espt_student"
 msgstr "Schüler"
 
+msgid "espt_student_help"
+msgstr "Welcher Schüler soll eingeladen werden?"
+
 msgid "espt_name"
 msgstr "Name"
 

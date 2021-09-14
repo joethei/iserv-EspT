@@ -17,6 +17,7 @@ use Doctrine\ORM\EntityManager;
 use IServ\CoreBundle\Controller\AbstractPageController;
 use IServ\CoreBundle\Entity\User;
 use Knp\Menu\FactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -107,7 +108,7 @@ final class MainController extends AbstractPageController {
      * @param CreationSettingsRepository $settingsRepository
      * @param TimeslotRepository $timeslotRepository
      * @return Response
-     * @Route("/timeslots", name="espt_timeslots")
+     * @Route("/timeslots", name="espt_timeslots", options={"expose": true})
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function timeslots(CreationSettingsRepository $settingsRepository, TimeslotRepository $timeslotRepository): Response {
@@ -140,9 +141,11 @@ final class MainController extends AbstractPageController {
      * @throws \Doctrine\ORM\NonUniqueResultException
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
-     * @Route("/timeslots/reserve/{id}", name="espt_timeslots_reserve")
+     * @Route("/timeslots/reserve/", name="espt_timeslots_reserve", options={"expose": true}, methods={"POST"})
      */
-    public function reserveTimeslot(int $id, TimeslotRepository $timeslotRepository, EntityManager $entityManager): Response {
+    public function reserveTimeslot(Request $request, TimeslotRepository $timeslotRepository, EntityManager $entityManager): Response {
+        $id = $request->get('id');
+        if($id == null) return $this->json([]);
 
         if (!$this->isGranted("ROLE_STUDENT") && !$this->isGranted("ROLE_PARENT")) {
             return $this->json([]);
@@ -161,10 +164,10 @@ final class MainController extends AbstractPageController {
                 $timeslot->setUser(null);
                 $entityManager->persist($timeslot);
                 $entityManager->flush();
-                return $this->json([]);
+                return $this->json(array('success' => true));
             }
 
-            return $this->json([]);
+            return $this->json(array('success' => true));
         }
 
         $timeslot->setUser($this->authenticatedUser());

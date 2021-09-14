@@ -92,6 +92,9 @@ msgstr ""
 msgid "espt_student"
 msgstr ""
 
+msgid "espt_student_help"
+msgstr ""
+
 msgid "espt_name"
 msgstr ""
 
