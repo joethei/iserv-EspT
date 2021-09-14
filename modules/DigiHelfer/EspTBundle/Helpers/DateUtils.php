@@ -69,15 +69,24 @@ class DateUtils {
             $data_timeslot['color'] = $color;
             $data_timeslot['name'] = $name;
 
-            $data_event = array('events' => $data_timeslot);
-            $data_event['id'] = $timeslot->getGroup()->getId();
+            $id = $timeslot->getGroup()->getId();
 
-            $usernames = implode('\n', $timeslot->getGroup()->getUsers()->toArray());
+            foreach ($schedules as $schedule) {
+                if($id == $schedule['id']) {
+                    $schedule['events'][] = $data_timeslot;
 
-            $data_event['title'] = $usernames;
-            $data_event['subtitle'] = $timeslot->getGroup()->getRoom();
+                }else {
+                    $data_event = array('events' => $data_timeslot);
+                    $data_event['id'] = $timeslot->getGroup()->getId();
 
-            $schedules[] = $data_event;
+                    $usernames = implode(' & ', $timeslot->getGroup()->getUsers()->toArray());
+
+                    $data_event['title'] = $usernames;
+                    $data_event['subtitle'] = $timeslot->getGroup()->getRoom();
+
+                    $schedules[] = $data_event;
+                }
+            }
         }
         $result = array();
 
