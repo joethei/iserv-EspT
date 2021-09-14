@@ -54,10 +54,10 @@ export default {
       }
     },
     updateData() {
-      $.getJSON(Routing.generate('espt_timeslots'), (result) => {
-          this.$set(this.settings, result.settings, true);
-          this.$set(this.schedules, result.schedules, true);
-        });
+      $.ajax({url: Routing.generate('espt_timeslots')}).done(data => {
+          this.settings = data.settings;
+          this.schedules = data.schedules;
+      });
     }
   },
   created: function () {
@@ -93,56 +93,6 @@ export default {
               end: new Date(2021, 8, 20, 16, 0, 0),
               color: "red",
             },
-            {
-              id: 3,
-              name: "",
-              start: new Date(2021, 8, 20, 16, 0, 0),
-              end: new Date(2021, 8, 20, 16, 20, 0),
-              color: "gray",
-            },
-            {
-              id: 4,
-              name: "",
-              start: new Date(2021, 8, 20, 16, 20, 0),
-              end: new Date(2021, 8, 20, 16, 40, 0),
-              color: "gray",
-            },
-            {
-              id: 5,
-              name: "",
-              start: new Date(2021, 8, 20, 16, 40, 0),
-              end: new Date(2021, 8, 20, 17, 0, 0),
-              color: "gray",
-            },
-            {
-              id: 6,
-              name: "",
-              start: new Date(2021, 8, 20, 17, 0, 0),
-              end: new Date(2021, 8, 20, 17, 10, 0),
-              color: "green",
-            },
-            {
-              id: 7,
-              name: "",
-              start: new Date(2021, 8, 20, 17, 10, 0),
-              end: new Date(2021, 8, 20, 17, 30, 0),
-              color: "red",
-            },
-            {
-              id: 8,
-              name: "",
-              start: new Date(2021, 8, 20, 17, 30, 0),
-              end: new Date(2021, 8, 20, 17, 40, 0),
-              color: "green",
-            },
-            {
-              id: 9,
-              name: "",
-              start: new Date(2021, 8, 20, 17, 40, 0),
-              end: new Date(2021, 8, 20, 18, 0, 0),
-              color: "green",
-            },
-
           ]
         },
         {
@@ -164,56 +114,6 @@ export default {
               end: new Date(2021, 8, 20, 16, 0, 0),
               color: "red",
             },
-            {
-              id: 3,
-              name: "PAUSE",
-              start: new Date(2021, 8, 20, 16, 0, 0),
-              end: new Date(2021, 8, 20, 16, 20, 0),
-              color: "gray",
-            },
-            {
-              id: 4,
-              name: "PAUSE",
-              start: new Date(2021, 8, 20, 16, 20, 0),
-              end: new Date(2021, 8, 20, 16, 40, 0),
-              color: "gray",
-            },
-            {
-              id: 5,
-              name: "PAUSE",
-              start: new Date(2021, 8, 20, 16, 40, 0),
-              end: new Date(2021, 8, 20, 17, 0, 0),
-              color: "gray",
-            },
-            {
-              id: 6,
-              name: "RESERVIERT",
-              start: new Date(2021, 8, 20, 17, 0, 0),
-              end: new Date(2021, 8, 20, 17, 10, 0),
-              color: "green",
-            },
-            {
-              id: 7,
-              name: "BELEGT",
-              start: new Date(2021, 8, 20, 17, 10, 0),
-              end: new Date(2021, 8, 20, 17, 30, 0),
-              color: "red",
-            },
-            {
-              id: 8,
-              name: "FREI",
-              start: new Date(2021, 8, 20, 17, 30, 0),
-              end: new Date(2021, 8, 20, 17, 40, 0),
-              color: "lightgreen",
-            },
-            {
-              id: 9,
-              name: "FREI",
-              start: new Date(2021, 8, 20, 17, 40, 0),
-              end: new Date(2021, 8, 20, 18, 0, 0),
-              color: "lightgreen",
-            },
-
           ]
         },
       ]
