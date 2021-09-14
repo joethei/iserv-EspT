@@ -65,6 +65,7 @@ class AdminController extends AbstractPageController {
 
             //create timeslots for all groups according to template
             $groups = $groupRepository->findAll();
+
             foreach ($groups as $group) {
                 $templates = $group->getTimeslotTemplate()->getTimeslots();
                 foreach ($templates as $template) {

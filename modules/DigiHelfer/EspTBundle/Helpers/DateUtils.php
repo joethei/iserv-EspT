@@ -37,10 +37,17 @@ class DateUtils {
      */
     public static function buildTimeslotArray(CreationSettings $settings, User $user, Collection $timeslots): array {
         $schedules = array();
+        /**@var Timeslot $timeslot*/
         foreach ($timeslots as $timeslot) {
             $data_timeslot = array();
-            $data_timeslot['start'] = $timeslot->getStart();
-            $data_timeslot['end'] = $timeslot->getEnd();
+
+            $startDate = $settings->getStart();
+            $startYear = (int)$startDate->format("Y");
+            $startMonth = (int)$startDate->format("m");
+            $startDay = (int)$startDate->format("d");
+
+            $data_timeslot['start'] = $timeslot->getStart()->setDate($startYear, $startMonth, $startDay);
+            $data_timeslot['end'] = $timeslot->getEnd()->setDate($startYear, $startMonth, $startDay);
             $data_timeslot['id'] = $timeslot->getId();
 
             $color = 'red';
@@ -71,24 +78,38 @@ class DateUtils {
 
             $id = $timeslot->getGroup()->getId();
 
-            foreach ($schedules as $schedule) {
-                if($id == $schedule['id']) {
-                    $schedule['events'][] = $data_timeslot;
+            $groupExists = false;
 
-                }else {
-                    $data_event = array('events' => $data_timeslot);
-                    $data_event['id'] = $timeslot->getGroup()->getId();
-
-                    $usernames = implode(' & ', $timeslot->getGroup()->getUsers()->toArray());
-
-                    $data_event['title'] = $usernames;
-                    $data_event['subtitle'] = $timeslot->getGroup()->getRoom();
-
-                    $schedules[] = $data_event;
+            for ($i = 0; $i < sizeof($schedules); ++$i) {
+                if($id === $schedules[$i]['id']) {
+                    $schedules[$i]['events'][] = $data_timeslot;
+                    $groupExists = true;
                 }
             }
+            if(!$groupExists) {
+                $data_event = array('events' => array($data_timeslot));
+                $data_event['id'] = $timeslot->getGroup()->getId();
+
+                $usernames = implode(' & ', $timeslot->getGroup()->getUsers()->toArray());
+
+                $data_event['title'] = $usernames;
+                $data_event['subtitle'] = $timeslot->getGroup()->getRoom();
+
+                $schedules[] = $data_event;
+            }
+
+            //events need to be sorted for correct display in ScheduleView
+            for ($i = 0; $i < sizeof($schedules); ++$i) {
+                usort($schedules[$i]['events'], function ($a, $b) {
+                    return $a['id'] <=> $b['id'];
+                });
+            }
+
+
         }
         $result = array();
+
+
 
         $result['schedules'] = $schedules;
 

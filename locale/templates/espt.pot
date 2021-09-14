@@ -148,3 +148,6 @@ msgstr ""
 
 msgid "espt_registered"
 msgstr ""
+
+msgid "espt_invited"
+msgstr ""

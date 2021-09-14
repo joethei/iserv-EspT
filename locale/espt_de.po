@@ -146,3 +146,6 @@ msgstr "Willst du diesen Termin buchen?"
 
 msgid "espt_registered"
 msgstr "Termin erfolgreich gebucht"
+
+msgid "espt_invited"
+msgstr "Schüler erfolgreich eingeladen"

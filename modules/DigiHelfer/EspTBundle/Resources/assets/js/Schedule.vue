@@ -26,7 +26,25 @@ export default {
       console.log("clicked event #" + id);
 
       if ($("#invite").length) {
-        const modal = Modal.createFromForm({'remote': Routing.generate('espt_invite', {id: id})});
+        const modal = Modal.createFromForm({
+          'remote': Routing.generate('espt_invite', {id: id}),
+          'id': 'espt_invite',
+          'title': _('espt_timeslot_type_invite'),
+          'onSuccess': function ($modal, data, options) {
+            switch (data.status) {
+              case 'success':
+                modal.hide();
+                Message.success(_('espt_invited'), 5000, false);
+                break;
+              case 'error':
+                Message.error(data.message, false, false);
+                break;
+              default:
+                Message.error(_('Unknown response!'), false, false);
+                break;
+            }
+          },
+        });
         modal.show();
       }else {
         Confirm.confirm({
@@ -54,16 +72,13 @@ export default {
       }
     },
     updateData() {
-      $.ajax({url: Routing.generate('espt_timeslots')}).done(data => {
+      $.getJSON({url: Routing.generate('espt_timeslots')}).done(data => {
           this.settings = data.settings;
           this.schedules = data.schedules;
       });
     }
   },
   created: function () {
-    this.updateData();
-  },
-  updated: function() {
     this.updateData();
   },
   data: () => {
