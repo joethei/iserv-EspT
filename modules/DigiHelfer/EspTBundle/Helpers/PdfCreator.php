@@ -9,6 +9,16 @@ use TCPDF;
 
 class PdfCreator extends TCPDF {
 
+    private $customFooterText = "";
+
+    /**
+     * @param string $customFooterText
+     */
+    public function setCustomFooterText($customFooterText)
+    {
+        $this->customFooterText = $customFooterText;
+    }
+
     public function Table($header,$data) {
         // Colors, line width and bold font
         $this->SetFillColor(255, 0, 0);
@@ -17,7 +27,7 @@ class PdfCreator extends TCPDF {
         $this->SetLineWidth(0.3);
         $this->SetFont('', 'B');
         // Header
-        $w = array(40, 35, 40, 45);
+        $w = array(70, 100);
         $num_headers = count($header);
         for($i = 0; $i < $num_headers; ++$i) {
             $this->Cell($w[$i], 7, $header[$i], 1, 0, 'C', 1);
@@ -45,5 +55,13 @@ class PdfCreator extends TCPDF {
         $this->Image($image_file, 10, 10, 15, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         $this->SetFont('helvetica', 'B', 20);
         $this->Cell(0, 15, _('EspT'), 0, false, 'C', 0, '', 0, false, 'M', 'M');
+    }
+
+    public function Footer() {
+        $this->SetY(-15);
+        // Set font
+        $this->SetFont('helvetica', 'I', 8);
+        // Page number
+        $this->Cell(0, 10, $this->customFooterText, 0, false, 'C', 0, '', 0, false, 'T', 'M');
     }
 }

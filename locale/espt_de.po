@@ -172,4 +172,4 @@ msgid "espt_registration_open_till"
 msgstr "Die Registrierung ist bis %s geöffnet"
 
 msgid "espt_on"
-msgstr " am "
+msgstr "am"
