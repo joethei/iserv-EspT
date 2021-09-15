@@ -151,3 +151,27 @@ msgstr ""
 
 msgid "espt_invited"
 msgstr ""
+
+msgid "espt_invite_time"
+msgstr ""
+
+msgid "espt_invite_time_window"
+msgstr ""
+
+msgid "espt_registration_active"
+msgstr ""
+
+msgid "espt_registration_end_time"
+msgstr ""
+
+msgid "espt_start_end_time"
+msgstr ""
+
+msgid "espt_registration_possible"
+msgstr ""
+
+msgid "espt_next_event"
+msgstr ""
+
+msgid "espt_registration_open_till"
+msgstr ""

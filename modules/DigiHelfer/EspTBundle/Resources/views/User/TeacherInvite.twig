@@ -1,12 +1,12 @@
 {% extends "@DH_EspT/Default/base.html.twig" %}
 
-{% block page_title 'Elternsprechtag' %}
+{% block page_title _('EspT') %}
 
 {% block content %}
 
     <div class="jumbotron">
-        <p class="text-center">Bis {{ regStart|ldatetime }} können Schüler eingeladen werden</p>
-        <p class="text-center">Sprechtag ist: {{ startTime|ldatetime }} - {{ endTime|ltime }}</p>
+        <p class="text-center">{{ __('espt_invite_time', regStart|ldatetime) }}</p>
+        <p class="text-center">{{ __('espt_invite_time_window', startTime|ldatetime, endTime|ltime) }}</p>
     </div>
 
     <div id="invite">

@@ -72,7 +72,7 @@ export default {
       }
     },
     updateData() {
-      $.getJSON({url: Routing.generate('espt_timeslots')}).done(data => {
+      $.getJSON(Routing.generate('espt_timeslots')).done(data => {
           this.settings = data.settings;
           this.schedules = data.schedules;
       });

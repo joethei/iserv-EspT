@@ -1,13 +1,13 @@
 {% extends "@DH_EspT/Default/base.html.twig" %}
 
-{% block page_title 'Elternsprechtag' %}
+{% block page_title _('EspT') %}
 
 {% block content %}
 
     <div class="jumbotron">
-        <p class="text-center">Aktuell ist die Registrierung aktiv</p>
-        <p class="text-center">Ab {{ regEnd|ldatetime }} können hier die Teilnehmerlisten eingesehen werden</p>
-        <p class="text-center">{{ startTime|ldatetime }} - {{ endTime|ltime }}</p>
+        <p class="text-center">{{ _('espt_registration_active') }}</p>
+        <p class="text-center">{{ __('espt_registration_end_time', regEnd|ldatetime) }}</p>
+        <p class="text-center">{{ __('espt_start_end_time', startTime|ldatetime, endTime|ltime) }}</p>
     </div>
 
 {% endblock %}

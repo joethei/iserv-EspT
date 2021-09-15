@@ -12,16 +12,16 @@ GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON espt_settings TO "symfony";
 CREATE TABLE espt_eventType
 (
     id   BIGSERIAL PRIMARY KEY NOT NULL,
-    name TEXT                  NOT NULL
+    name TEXT                  NOT NULL UNIQUE
 );
 
 GRANT USAGE, SELECT ON espt_eventType_id_seq to "symfony";
 GRANT SELECT, INSERT, UPDATE, DELETE ON espt_eventType TO "symfony";
 
----INSERT INTO espt_eventType (name) VALUES ('invite');
----INSERT INTO espt_eventType (name) VALUES ('book');
----INSERT INTO espt_eventType (name) VALUES ('blocked');
----INSERT INTO espt_eventType (name) VALUES ('break');
+INSERT INTO espt_eventType (name) VALUES ('invite') ON CONFLICT (name) DO NOTHING;
+INSERT INTO espt_eventType (name) VALUES ('book') ON CONFLICT (name) DO NOTHING;
+INSERT INTO espt_eventType (name) VALUES ('blocked') ON CONFLICT (name) DO NOTHING;
+INSERT INTO espt_eventType (name) VALUES ('break') ON CONFLICT (name) DO NOTHING;
 
 CREATE TABLE espt_timeslot_template_collection
 (
