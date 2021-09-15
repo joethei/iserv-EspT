@@ -28,7 +28,7 @@ export default {
       if ($("#invite").length) {
         const modal = Modal.createFromForm({
           'remote': Routing.generate('espt_invite', {id: id}),
-          'id': 'espt_invite',
+          'id': 'espt_invite_' + id,
           'title': _('espt_timeslot_type_invite'),
           'onSuccess': function ($modal, data, options) {
             switch (data.status) {
@@ -80,57 +80,24 @@ export default {
   },
   created: function () {
     this.updateData();
+    //update data every minute
+    this.timer = setInterval(() => {
+      this.updateData();
+    }, 1000 * 60)
+  },
+  beforeDestroy: function () {
+    clearInterval(this.timer);
   },
   data: () => {
     return {
+      timer: null,
       settings: {
         start: new Date(2021, 8, 20, 15, 30, 0),
         end: new Date(2021, 8, 20, 18, 0, 0),
         scaleFactor: 2
       },
       schedules: [
-        {
-          id: 0,
-          title: "Max Mustermann",
-          subtitle: "206",
-          events: [
-            {
-              id: 1,
-              name: "",
-              start: new Date(2021, 8, 20, 15, 30, 0),
-              end: new Date(2021, 8, 20, 15, 40, 0),
-              color: "red",
-            },
-            {
-              id: 2,
-              name: "",
-              start: new Date(2021, 8, 20, 15, 40, 0),
-              end: new Date(2021, 8, 20, 16, 0, 0),
-              color: "red",
-            },
-          ]
-        },
-        {
-          id: 1,
-          title: "Maria Mustermann & Test Lehrer",
-          subtitle: "303",
-          events: [
-            {
-              id: 1,
-              name: "BELEGT",
-              start: new Date(2021, 8, 20, 15, 30, 0),
-              end: new Date(2021, 8, 20, 15, 40, 0),
-              color: "red",
-            },
-            {
-              id: 2,
-              name: "BELEGT",
-              start: new Date(2021, 8, 20, 15, 40, 0),
-              end: new Date(2021, 8, 20, 16, 0, 0),
-              color: "red",
-            },
-          ]
-        },
+        {},
       ]
     };
   }

@@ -90,9 +90,6 @@ msgstr "Lehrkräfte"
 msgid "espt_room"
 msgstr "Raum"
 
-msgid "espt_student"
-msgstr "Schüler"
-
 msgid "espt_student_help"
 msgstr "Welcher Schüler soll eingeladen werden?"
 
@@ -163,7 +160,7 @@ msgid "espt_registration_end_time"
 msgstr "Ab %s können hier die Teilnehmerlisten eingesehen werden"
 
 msgid "espt_start_end_time"
-msgstr "%s - %s"
+msgstr "%s bis %s"
 
 msgid "espt_registration_possible"
 msgstr "Registration ist möglich von "
@@ -173,3 +170,6 @@ msgstr "Der nächste Elternsprechtag ist am "
 
 msgid "espt_registration_open_till"
 msgstr "Die Registrierung ist bis %s geöffnet"
+
+msgid "espt_on"
+msgstr " am "

@@ -7,8 +7,6 @@ namespace DigiHelfer\EspTBundle\Crud;
 use DigiHelfer\EspTBundle\Entity\TeacherGroup;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
 use IServ\AdminBundle\Admin\AdminServiceCrud;
-use IServ\CoreBundle\Entity\User;
-use IServ\CoreBundle\Form\Type\UserType;
 use IServ\CrudBundle\Mapper\FormMapper;
 use IServ\CrudBundle\Mapper\ListMapper;
 use IServ\CrudBundle\Mapper\ShowMapper;
@@ -32,7 +30,7 @@ class TimeslotCrud extends AdminServiceCrud {
         $listMapper
             ->addIdentifier('id')
             ->add('group', null, ['label' => _('espt_group')])
-            ->add('user', null, ['label' => _('espt_student')])
+            ->add('user', null, ['label' => _('Student')])
             ->add('start', null, ['label' => _('espt_starttime')])
             ->add('end', null, ['label' => _('espt_endtime')])
             ->add('type', null, ['label' => _('espt_timeslot_type')]);
@@ -47,7 +45,7 @@ class TimeslotCrud extends AdminServiceCrud {
     protected function configureShowFields(ShowMapper $showMapper): void {
         $showMapper
             ->add('group', null, ['label' => _('espt_group')])
-            ->add('user', null, ['label' => _('espt_student')])
+            ->add('user', null, ['label' => _('Student')])
             ->add('start', null, ['label' => _('espt_starttime')])
             ->add('end', null, ['label' => _('espt_endtime')])
             ->add('type', null, ['label' => _('espt_timeslot_type')]);
@@ -56,7 +54,7 @@ class TimeslotCrud extends AdminServiceCrud {
 
     protected function configureFormFields(FormMapper $formMapper): void {
         $formMapper
-            ->add('user', null, ['label' => _('espt_student')]);
+            ->add('user', null, ['label' => _('Student')]);
     }
 
     public function isAuthorized(): bool {

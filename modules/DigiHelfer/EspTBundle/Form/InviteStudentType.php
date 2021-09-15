@@ -14,11 +14,11 @@ class InviteStudentType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options): void {
         $builder
             ->add('user', UserType::class, [
-                'label' => _('espt_student'),
+                'label' => _('Student'),
                 'help' => _('espt_student_help'),
             ])
             ->add('save', SubmitType::class, [
-                'label' => _("Save"),
+                'label' => _('Save'),
                 'icon' => 'ok',
                 'buttonClass' => 'btn-success',
             ]);

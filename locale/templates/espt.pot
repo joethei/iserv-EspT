@@ -89,9 +89,6 @@ msgstr ""
 msgid "espt_room"
 msgstr ""
 
-msgid "espt_student"
-msgstr ""
-
 msgid "espt_student_help"
 msgstr ""
 

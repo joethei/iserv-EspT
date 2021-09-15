@@ -76,6 +76,7 @@ final class MainController extends AbstractPageController {
             if ($this->isGranted("ROLE_STUDENT") || $this->isGranted("ROLE_PARENT")) {
                 return $this->render("@DH_EspT/User/UserRegister.twig", [
                     "timeslots" => $timeslotRepository->findAll(),
+                    "regStart" => $settings->getRegStart(),
                     "regEnd" => $settings->getRegEnd(),
                     "startTime" => $settings->getStart(),
                     "endTime" => $settings->getEnd(),
