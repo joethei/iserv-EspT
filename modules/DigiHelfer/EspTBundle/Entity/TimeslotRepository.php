@@ -5,6 +5,7 @@ namespace DigiHelfer\EspTBundle\Entity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 use IServ\CoreBundle\Entity\User;
 
@@ -30,7 +31,7 @@ class TimeslotRepository extends ServiceEntityRepository {
      */
     public function findAll() : Collection {
         $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s");
+        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s ORDER BY s.id ASC");
 
         return new ArrayCollection($query->getResult());
     }
@@ -41,7 +42,7 @@ class TimeslotRepository extends ServiceEntityRepository {
      */
     public function findForTeacher(User $user) : Collection {
         $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s JOIN s.group g WHERE :user MEMBER OF g.users");
+        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s JOIN s.group g WHERE :user MEMBER OF g.users ORDER BY s.id ASC");
         $query->setParameter('user', $user);
 
         return new ArrayCollection($query->getResult());
@@ -53,7 +54,7 @@ class TimeslotRepository extends ServiceEntityRepository {
      */
     public function findForUser(User $user) : Collection {
         $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s WHERE s.user = :user");
+        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s WHERE s.user = :user ORDER BY s.id ASC");
         $query->setParameter('user', $user);
 
         return new ArrayCollection($query->getResult());
@@ -65,7 +66,7 @@ class TimeslotRepository extends ServiceEntityRepository {
      */
     public function findForGroup(TeacherGroup $group) : Collection {
         $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s WHERE s.group = :teacherGroup");
+        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\Timeslot s WHERE s.group = :teacherGroup ORDER BY s.id ASC");
         $query->setParameter('teacherGroup', $group);
 
         return new ArrayCollection($query->getResult());

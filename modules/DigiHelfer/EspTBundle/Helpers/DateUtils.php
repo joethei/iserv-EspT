@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DigiHelfer\EspTBundle\Helpers;
 
-use DateTime;
 use DigiHelfer\EspTBundle\Entity\CreationSettings;
 use DigiHelfer\EspTBundle\Entity\EventType;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
@@ -21,9 +20,9 @@ class DateUtils {
      * @param $end_two
      * @return int overlap in minutes
      */
-    public static function datesOverlap(DateTime $start_one, DateTime $end_one, DateTime $start_two, DateTime $end_two): int {
+    public static function datesOverlap(\DateTimeImmutable $start_one, \DateTimeImmutable $end_one, \DateTimeImmutable $start_two, \DateTimeImmutable $end_two): int {
         if ($start_one <= $end_two && $end_one >= $start_two) { //If the dates overlap
-            return min($end_one, $end_two)->diff(max($start_two, $start_one))->minutes + 1; //return how many days overlap
+            return min($end_one, $end_two)->diff(max($start_two, $start_one))->i + 1; //return how many days overlap
         }
         return 0; //no overlap
     }

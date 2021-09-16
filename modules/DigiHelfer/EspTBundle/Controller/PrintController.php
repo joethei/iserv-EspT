@@ -154,6 +154,7 @@ final class PrintController extends AbstractPageController {
         }
 
         $pdf = $this->buildPdf($settings, 15);
+        $pdf->Ln();
         $pdf->Table($header, $data);
 
         $filename = '/tmp/espt_temp' .$this->authenticatedUser()->getUuid() . '.pdf';
@@ -187,6 +188,7 @@ final class PrintController extends AbstractPageController {
 
         $pdf = $this->buildPdf($settings, 15);
         $pdf->setCustomFooterText("");
+        $pdf->Ln();
         $pdf->Table($header, $data, array(30, 130));
 
         $filename = '/tmp/espt_temp' .$this->authenticatedUser()->getUuid() . '.pdf';

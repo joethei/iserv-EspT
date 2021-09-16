@@ -3,7 +3,9 @@
 namespace DigiHelfer\EspTBundle\Controller;
 
 use DigiHelfer\EspTBundle\Entity\EventType;
+use DigiHelfer\EspTBundle\Entity\EventTypeRepository;
 use DigiHelfer\EspTBundle\Entity\TeacherGroupRepository;
+use DigiHelfer\EspTBundle\Entity\Timeslot;
 use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
 use DigiHelfer\EspTBundle\Form\InviteStudentType;
 use DigiHelfer\EspTBundle\Helpers\DateUtils;
@@ -23,36 +25,39 @@ use Symfony\Component\Routing\Annotation\Route;
 class InviteController extends AbstractPageController {
 
     /**
+     * @param int $id
      * @param Request $request
      * @param EntityManagerInterface $entityManager
-     * @param TeacherGroupRepository $groupRepository
      * @param TimeslotRepository $timeslotRepository
+     * @param EventTypeRepository $typeRepository
      * @return array
      * @throws NonUniqueResultException
      * @Route("/invite/{id}", name="espt_invite", options={"expose": true})
      * @Template("@DH_EspT/Default/index.html.twig")
      */
-    public function invite(int $id, Request $request, EntityManagerInterface $entityManager, TimeslotRepository $timeslotRepository): array {
+    public function invite(int $id, Request $request, EntityManagerInterface $entityManager, TimeslotRepository $timeslotRepository, EventTypeRepository $typeRepository): array {
         $timeslot = $timeslotRepository->find($id);
         $form = $this->createForm(InviteStudentType::class, $timeslot);
 
         $form->handleRequest($request);
 
+        /** @var Timeslot $timeslot*/
         if ($form->isSubmitted() && $form->isValid()) {
+            $timeslot = $form->getData();
 
             //only save if timeslot is correct type
-            if($timeslot->getType() == EventType::INVITE) {
-                $timeslot = $form->getData();
+            if($timeslot->getType()->getName() == EventType::INVITE) {
 
                 //block all timeslots that overlap for this group
                 //if the teacher decides to remove this invite this will be rolled back
                 $groupTimeslots = $timeslotRepository->findForGroup($timeslot->getGroup());
+                /** @var Timeslot $groupTimeslot */
                 foreach($groupTimeslots as $groupTimeslot) {
                     if(DateUtils::datesOverlap($groupTimeslot->getStart(), $groupTimeslot->getEnd(), $timeslot->getStart(), $timeslot->getEnd()) > 0) {
-                        if($timeslot->getUser() != null && $groupTimeslot->getType() == EventType::BOOK) {
-                            $groupTimeslot->setType(EventType::BLOCKED);
-                        }else if ($groupTimeslot->getType() == EventType::BLOCKED) {
-                            $groupTimeslot->setType(EventType::BOOK);
+                        if($timeslot->getUser() != null && $groupTimeslot->getType()->getName() == EventType::BOOK) {
+                            $groupTimeslot->setType($typeRepository->findFor(EventType::BLOCKED));
+                        }else if ($groupTimeslot->getType()->getName() == EventType::BLOCKED) {
+                            $groupTimeslot->setType($typeRepository->findFor(EventType::BOOK));
                         }
                         $entityManager->persist($groupTimeslot);
                     }

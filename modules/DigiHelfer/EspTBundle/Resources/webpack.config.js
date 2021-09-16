@@ -5,7 +5,6 @@ let base = require(path.join(process.env.WEBPACK_BASE_PATH, 'webpack.config.base
 let webpackConfig = {
     entry: {
         'js/espt': './assets/js/espt.js',
-        'js/espt-modal': './assets/js/espt-modal.js',
         'img/espt.svg': './assets/img/espt.svg',
         'css/espt': './assets/less/espt.less'
     },
