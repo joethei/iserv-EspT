@@ -7,11 +7,11 @@ namespace DigiHelfer\EspTBundle\Controller;
 use DigiHelfer\EspTBundle\Entity\CreationSettingsRepository;
 use DigiHelfer\EspTBundle\Entity\EventType;
 use DigiHelfer\EspTBundle\Entity\EventState;
-use DigiHelfer\EspTBundle\Entity\TeacherGroupRepository;
 use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
 use DigiHelfer\EspTBundle\Helpers\DateUtils;
 use DigiHelfer\EspTBundle\Security\Privilege;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 use IServ\CoreBundle\Controller\AbstractPageController;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,14 +27,12 @@ final class MainController extends AbstractPageController {
 
     /**
      * @param CreationSettingsRepository $creationSettingsRepository
-     * @param TeacherGroupRepository $groupRepository
      * @param TimeslotRepository $timeslotRepository
-     * @param LoggerInterface $logger
      * @return Response
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      * @Route("/", name="espt_index")
      */
-    public function index(CreationSettingsRepository $creationSettingsRepository, TeacherGroupRepository $groupRepository, TimeslotRepository $timeslotRepository): Response {
+    public function index(CreationSettingsRepository $creationSettingsRepository, TimeslotRepository $timeslotRepository): Response {
         $this->addBreadcrumb(_("EspT"));
 
         $settings = $creationSettingsRepository->findFirst();
@@ -46,7 +44,7 @@ final class MainController extends AbstractPageController {
         }
 
         if ($state == EventState::INVITE) {
-            if ($this->isGranted("ROLE_TEACHER")) {
+            if ($this->isGranted(Privilege::TEACHER)) {
                 return $this->render("@DH_EspT/User/TeacherInvite.twig", [
                     "startTime" => $settings->getStart(),
                     "endTime" => $settings->getEnd(),
@@ -65,7 +63,7 @@ final class MainController extends AbstractPageController {
         }
 
         if ($state == EventState::REGISTRATION) {
-            if ($this->isGranted("ROLE_TEACHER")) {
+            if ($this->isGranted(Privilege::TEACHER)) {
                 return $this->render("@DH_EspT/User/TeacherRegister.twig", [
                     "regEnd" => $settings->getRegEnd(),
                     "startTime" => $settings->getStart(),
@@ -85,18 +83,8 @@ final class MainController extends AbstractPageController {
         }
 
         if ($state == EventState::PRINT) {
-            if ($this->isGranted("ROLE_TEACHER")) {
-                return $this->render("@DH_EspT/User/TeacherPrint.twig", [
-                    "startTime" => $settings->getStart(),
-                    "endTime" => $settings->getEnd(),
-                    "group" => $groupRepository->findFor($this->authenticatedUser()),
-                    "timeslots" => $timeslotRepository->findForTeacher($this->authenticatedUser()),
-                    ]);
-            }
+            return $this->render("@DH_EspT/User/Print.twig");
 
-            if ($this->isGranted("ROLE_STUDENT") || $this->isGranted("ROLE_PARENT")) {
-                return $this->render("@DH_EspT/User/UserPrint.twig", ["startTime" => $settings->getStart(), "endTime" => $settings->getEnd(), "timeslots" => $timeslotRepository->findForUser($this->authenticatedUser()),]);
-            }
         }
 
         return $this->render("@DH_EspT/User/None.twig");
@@ -107,7 +95,7 @@ final class MainController extends AbstractPageController {
      * @param TimeslotRepository $timeslotRepository
      * @return Response
      * @Route("/timeslots", name="espt_timeslots", options={"expose": true})
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function timeslots(CreationSettingsRepository $settingsRepository, TimeslotRepository $timeslotRepository): Response {
         $settings = $settingsRepository->findFirst();
@@ -132,29 +120,27 @@ final class MainController extends AbstractPageController {
     }
 
     /**
-     * @param int $id
+     * @param Request $request
      * @param TimeslotRepository $timeslotRepository
      * @param EntityManagerInterface $entityManager
      * @return Response
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws NonUniqueResultException
      * @Route("/timeslots/reserve/", name="espt_timeslots_reserve", options={"expose": true}, methods={"POST"})
      */
     public function reserveTimeslot(Request $request, TimeslotRepository $timeslotRepository, EntityManagerInterface $entityManager): Response {
         $id = $request->get('id');
-        if($id == null) return $this->json([]);
+        if($id == null) return $this->json(array('success' => false));
 
         if (!$this->isGranted("ROLE_STUDENT") && !$this->isGranted("ROLE_PARENT")) {
-            return $this->json([]);
+            return $this->json(array('success' => false));
         }
 
         $timeslot = $timeslotRepository->find($id);
         if ($timeslot == null) {
-            return $this->json([]);
+            return $this->json(array('success' => false));
         }
 
-        if ($timeslot->getType() != EventType::BOOK) return $this->json([]);
+        if ($timeslot->getType() != EventType::BOOK) return $this->json(array('success' => false));
 
         if ($timeslot->getUser() != null) {
             if ($timeslot->getUser() === $this->authenticatedUser()) {
@@ -172,7 +158,7 @@ final class MainController extends AbstractPageController {
         $entityManager->persist($timeslot);
         $entityManager->flush();
 
-        return $this->json([]);
+        return $this->json(array('success' => true));
     }
 
     /**

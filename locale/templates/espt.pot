@@ -172,3 +172,9 @@ msgstr ""
 
 msgid "espt_registration_open_till"
 msgstr ""
+
+msgid "espt_on"
+msgstr ""
+
+msgid "espt_print_for"
+msgstr ""

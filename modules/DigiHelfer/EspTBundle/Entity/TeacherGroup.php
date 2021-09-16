@@ -63,7 +63,7 @@ class TeacherGroup implements CrudInterface {
     }
 
     public function __toString() : string {
-        return $this->getRoom() . "- " . implode(', ', $this->getUsers()->toArray());
+        return implode(', ', $this->getUsers()->toArray()) . " " . _('Room') . $this->getRoom();
     }
 
     /**

@@ -1,0 +1,14 @@
+{% extends "@DH_EspT/Default/base.html.twig" %}
+
+{% block page_title _('EspT') %}
+
+{% block content %}
+
+    {% if is_granted('PRIV_ESPT_TEACHER') %}
+        <a href="{{ path('espt_print_teacher') }}">_('Print')</a>
+    {% else %}
+        <a href="{{ path('espt_print_student') }}">_('Print')</a>
+    {% endif %}
+
+
+{% endblock %}

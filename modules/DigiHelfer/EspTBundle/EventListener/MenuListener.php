@@ -13,7 +13,14 @@ class MenuListener implements MainMenuListenerInterface {
      * {@inheritDoc}
      */
     public function onBuildMainMenu(MenuEvent $event) {
-         $event->getMenu()
+        if(!$event->getAuthorizationChecker()->isGranted(Privilege::ADMIN)
+        && !$event->getAuthorizationChecker()->isGranted(Privilege::TEACHER)
+        && !$event->getAuthorizationChecker()->isGranted("ROLE_STUDENT")
+        && !$event->getAuthorizationChecker()->isGranted("ROLE_PARENT"))
+            return;
+
+
+        $event->getMenu()
             ->addChild('espt', ['route' => 'espt_index', 'label' => _('EspT')])
             ->setExtra('icon', 'espt')
             ->setExtra('icon_style', 'iserv')
