@@ -94,7 +94,7 @@ class DateUtils {
                 $usernames = implode(' & ', $timeslot->getGroup()->getUsers()->toArray());
 
                 $data_event['title'] = $usernames;
-                $data_event['subtitle'] = $timeslot->getGroup()->getRoom();
+                $data_event['subtitle'] = _('Room') . " " . $timeslot->getGroup()->getRoom();
 
                 $schedules[] = $data_event;
             }

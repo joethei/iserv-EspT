@@ -7,6 +7,7 @@ namespace DigiHelfer\EspTBundle\Controller;
 use DigiHelfer\EspTBundle\Entity\CreationSettingsRepository;
 use DigiHelfer\EspTBundle\Entity\EventType;
 use DigiHelfer\EspTBundle\Entity\EventState;
+use DigiHelfer\EspTBundle\Entity\Timeslot;
 use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
 use DigiHelfer\EspTBundle\Helpers\DateUtils;
 use DigiHelfer\EspTBundle\Security\Privilege;
@@ -104,6 +105,12 @@ final class MainController extends AbstractPageController {
         if ($this->isGranted(Privilege::TEACHER)) {
             if ($state == EventState::INVITE) {
                 $timeslots = $timeslotRepository->findForTeacher($this->authenticatedUser());
+
+                $timeslots = $timeslots->filter(function ($entry) {
+                    /** @var Timeslot $entry */
+                   return $entry->getType()->getName() == EventType::INVITE;
+                });
+
                 return $this->json(DateUtils::buildTimeslotArray($settings, $this->authenticatedUser(), $timeslots));
             }
         }
@@ -111,6 +118,11 @@ final class MainController extends AbstractPageController {
         if ($this->isGranted("ROLE_STUDENT") || $this->isGranted("ROLE_PARENT")) {
             if ($state == EventState::REGISTRATION) {
                 $timeslots = $timeslotRepository->findAll();
+
+                $timeslots = $timeslots->filter(function ($entry) {
+                    /** @var Timeslot $entry */
+                    return $entry->getType()->getName() != EventType::INVITE;
+                });
 
                 return $this->json(DateUtils::buildTimeslotArray($settings, $this->authenticatedUser(), $timeslots));
             }

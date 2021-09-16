@@ -22,17 +22,22 @@ export default {
     ScheduleView
   },
   methods: {
+    closeModal: function() {
+      this.modal.hide();
+      this.modal.destroy();
+    },
     onClick: function(id) {
       //only open invite dialog when div is specified
       if ($("#invite").length) {
-        const modal = Modal.createFromForm({
+        this.modal = Modal.createFromForm({
           'remote': Routing.generate('espt_invite', {id: id}),
           'id': 'espt_invite_' + id,
+          'size': 'lg',
           'title': _('espt_timeslot_type_invite'),
           'onSuccess': function ($modal, data, options) {
             switch (data.status) {
               case 'success':
-                modal.hide();
+                this.closeModal();
                 Message.success(_('espt_invited'), 5000, false);
                 break;
               case 'error':
@@ -44,7 +49,7 @@ export default {
             }
           },
         });
-        modal.show();
+        this.modal.show();
       }else {
         Confirm.confirm({
           title: _('espt_confirm'),
@@ -57,6 +62,7 @@ export default {
                 $.post(Routing.generate('espt_timeslots_reserve'), {id: id}, (data) => {
                   if(data.success !== undefined && data.success === true) {
                     Message.success(_('espt_registered'), 5000, false);
+                    this.updateData();
                   }
                 });
               }
@@ -89,6 +95,7 @@ export default {
   },
   data: () => {
     return {
+      modal: null,
       timer: null,
       settings: {
         start: new Date(2021, 8, 20, 15, 30, 0),

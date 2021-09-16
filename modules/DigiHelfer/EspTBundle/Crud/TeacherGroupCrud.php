@@ -74,7 +74,7 @@ class TeacherGroupCrud extends AdminServiceCrud {
 
     public function getShowActions(CrudInterface $item) : OrderedCollection {
         $actions = parent::getShowActions($item);
-        $actions['pdf'] = Link::create($this->router()->generate('espt_print_group', ['groupId' => $item->getId()]), _('espt_generate_print'), 'list', 'btn-success');
+        $actions['pdf'] = Link::create($this->router()->generate('espt_print_group', ['groupId' => $item->getId()]), _('espt_generate_print'), 'list', 'btn-primary');
         return $actions;
     }
 

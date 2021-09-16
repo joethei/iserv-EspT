@@ -106,11 +106,11 @@ final class PrintController extends AbstractPageController {
         }
         $pdf = $this->buildPdf($settings);
         $pdf->setCustomFooterText("");
-
+        $pdf->Ln(5);
         $pdf->Cell(0, 10, implode(", ", $teacherGroup->getUsers()->toArray()), 0, false, 'C', 0, '', 0, false, 'M', 'M');
-        $pdf->Ln();
+        $pdf->Ln(5);
         $pdf->Cell(0, 10, _('Room') . " " . $teacherGroup->getRoom(), 0, false, 'C', 0, '', 0, false, 'M', 'M');
-        $pdf->Ln();
+        $pdf->Ln(5);
         $pdf->Table($header, $data);
 
         $filename = '/tmp/espt_temp' .$this->authenticatedUser()->getUuid() . '.pdf';
