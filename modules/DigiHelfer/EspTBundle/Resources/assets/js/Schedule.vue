@@ -23,8 +23,7 @@ export default {
   },
   methods: {
     onClick: function(id) {
-      console.log("clicked event #" + id);
-
+      //only open invite dialog when div is specified
       if ($("#invite").length) {
         const modal = Modal.createFromForm({
           'remote': Routing.generate('espt_invite', {id: id}),

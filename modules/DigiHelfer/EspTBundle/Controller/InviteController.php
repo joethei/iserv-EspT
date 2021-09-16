@@ -6,7 +6,7 @@ use DigiHelfer\EspTBundle\Entity\EventType;
 use DigiHelfer\EspTBundle\Entity\TeacherGroupRepository;
 use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
 use DigiHelfer\EspTBundle\Form\InviteStudentType;
-use Doctrine\DBAL\Exception;
+use DigiHelfer\EspTBundle\Helpers\DateUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use IServ\CoreBundle\Controller\AbstractPageController;
@@ -28,7 +28,6 @@ class InviteController extends AbstractPageController {
      * @param TeacherGroupRepository $groupRepository
      * @param TimeslotRepository $timeslotRepository
      * @return array
-     * @throws Exception
      * @throws NonUniqueResultException
      * @Route("/invite/{id}", name="espt_invite", options={"expose": true})
      * @Template("@DH_EspT/Default/index.html.twig")
@@ -44,6 +43,20 @@ class InviteController extends AbstractPageController {
             //only save if timeslot is correct type
             if($timeslot->getType() == EventType::INVITE) {
                 $timeslot = $form->getData();
+
+                //block all timeslots that overlap for this group
+                //if the teacher decides to remove this invite this will be rolled back
+                $groupTimeslots = $timeslotRepository->findForGroup($timeslot->getGroup());
+                foreach($groupTimeslots as $groupTimeslot) {
+                    if(DateUtils::datesOverlap($groupTimeslot->getStart(), $groupTimeslot->getEnd(), $timeslot->getStart(), $timeslot->getEnd()) > 0) {
+                        if($timeslot->getUser() != null && $groupTimeslot->getType() == EventType::BOOK) {
+                            $groupTimeslot->setType(EventType::BLOCKED);
+                        }else if ($groupTimeslot->getType() == EventType::BLOCKED) {
+                            $groupTimeslot->setType(EventType::BOOK);
+                        }
+                        $entityManager->persist($groupTimeslot);
+                    }
+                }
 
                 $entityManager->persist($timeslot);
                 $entityManager->flush();

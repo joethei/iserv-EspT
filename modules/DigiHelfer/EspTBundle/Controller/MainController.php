@@ -128,19 +128,19 @@ final class MainController extends AbstractPageController {
      * @Route("/timeslots/reserve/", name="espt_timeslots_reserve", options={"expose": true}, methods={"POST"})
      */
     public function reserveTimeslot(Request $request, TimeslotRepository $timeslotRepository, EntityManagerInterface $entityManager): Response {
-        $id = $request->get('id');
-        if($id == null) return $this->json(array('success' => false));
+        $id = $request->request->get('id');
+        if($id == null) return $this->json(array('success' => false, 'error'=> 'no id'));
 
         if (!$this->isGranted("ROLE_STUDENT") && !$this->isGranted("ROLE_PARENT")) {
-            return $this->json(array('success' => false));
+            return $this->json(array('success' => false, 'error' => 'no perms'));
         }
 
         $timeslot = $timeslotRepository->find($id);
         if ($timeslot == null) {
-            return $this->json(array('success' => false));
+            return $this->json(array('success' => false, 'error' => 'no timeslot'));
         }
 
-        if ($timeslot->getType() != EventType::BOOK) return $this->json(array('success' => false));
+        if ($timeslot->getType()->getName() != EventType::BOOK) return $this->json(array('success' => false, 'error' => 'wrong type', 'type' => $timeslot->getType()));
 
         if ($timeslot->getUser() != null) {
             if ($timeslot->getUser() === $this->authenticatedUser()) {
@@ -151,7 +151,7 @@ final class MainController extends AbstractPageController {
                 return $this->json(array('success' => true));
             }
 
-            return $this->json(array('success' => true));
+            return $this->json(array('success' => false, 'error' => 'already booked'));
         }
 
         $timeslot->setUser($this->authenticatedUser());

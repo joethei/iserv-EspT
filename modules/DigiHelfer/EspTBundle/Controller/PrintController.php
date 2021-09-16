@@ -6,10 +6,13 @@ namespace DigiHelfer\EspTBundle\Controller;
 
 use DigiHelfer\EspTBundle\Entity\CreationSettings;
 use DigiHelfer\EspTBundle\Entity\CreationSettingsRepository;
+use DigiHelfer\EspTBundle\Entity\TeacherGroup;
+use DigiHelfer\EspTBundle\Entity\TeacherGroupRepository;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
 use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
 use DigiHelfer\EspTBundle\Helpers\PdfCreator;
 use DigiHelfer\EspTBundle\Security\Privilege;
+use Doctrine\ORM\NonUniqueResultException;
 use IServ\CoreBundle\Controller\AbstractPageController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -22,10 +25,10 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class PrintController extends AbstractPageController {
 
-    private function buildPdf(CreationSettings $settings, array $headers, array $data) : PdfCreator {
+    private function buildPdf(CreationSettings $settings, int $logoWidth = 30) : PdfCreator {
         $pdf = new PdfCreator(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-        $subject = _('espt_on') . strftime('%A %e.%B %G', $settings->getStart()->getTimestamp())
+        $subject = _('espt_on') . " " . strftime('%A %e.%B %G', $settings->getStart()->getTimestamp())
             . " " . __('espt_start_end_time',
                 $settings->getStart()->format('G:i'),
                 $settings->getEnd()->format('G:i'));
@@ -36,6 +39,7 @@ final class PrintController extends AbstractPageController {
         $pdf->SetTitle(_('EspT'));
         $pdf->SetSubject($subject);
 
+        $pdf->setLogoSize($logoWidth);
         $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
         $pdf->setCustomHeaderText($subject);
         $pdf->setCustomFooterText(_('espt_print_for') . $this->authenticatedUser()->getNameByFirstname());
@@ -53,32 +57,32 @@ final class PrintController extends AbstractPageController {
         // set image scale factor
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-
         $pdf->SetFont('helvetica', '', 12);
 
         $pdf->AddPage();
-
-        $pdf->Table($headers, $data);
 
         return $pdf;
     }
 
 
     /**
+     * @param int $groupId
      * @param CreationSettingsRepository $settingsRepository
      * @param TimeslotRepository $timeslotRepository
+     * @param TeacherGroupRepository $groupRepository
      * @return Response
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     * @Route("/teacher", name="espt_print_teacher")
+     * @throws NonUniqueResultException
+     * @Route("/group/{groupId}", name="espt_print_group")
      */
-    public function printTeacher(CreationSettingsRepository $settingsRepository, TimeslotRepository $timeslotRepository) : Response {
+    public function printGroup(int $groupId, CreationSettingsRepository $settingsRepository, TimeslotRepository $timeslotRepository, TeacherGroupRepository $groupRepository) : Response {
         $this->denyAccessUnlessGranted(Privilege::TEACHER);
         $settings = $settingsRepository->findFirst();
 
         // column titles
         $header = array(_('Time'), _('Student'));
 
-        $timeslots = $timeslotRepository->findForTeacher($this->authenticatedUser());
+        $teacherGroup = $groupRepository->find($groupId);
+        $timeslots = $timeslotRepository->findForGroup($teacherGroup);
         $data = array();
 
         /** @var Timeslot $timeslot */
@@ -100,8 +104,14 @@ final class PrintController extends AbstractPageController {
                 );
             }
         }
+        $pdf = $this->buildPdf($settings);
+        $pdf->setCustomFooterText("");
 
-        $pdf = $this->buildPdf($settings, $header, $data);
+        $pdf->Cell(0, 10, implode(", ", $teacherGroup->getUsers()->toArray()), 0, false, 'C', 0, '', 0, false, 'M', 'M');
+        $pdf->Ln();
+        $pdf->Cell(0, 10, _('Room') . " " . $teacherGroup->getRoom(), 0, false, 'C', 0, '', 0, false, 'M', 'M');
+        $pdf->Ln();
+        $pdf->Table($header, $data);
 
         $filename = '/tmp/espt_temp' .$this->authenticatedUser()->getUuid() . '.pdf';
         $pdf->Output($filename, 'F');
@@ -114,7 +124,7 @@ final class PrintController extends AbstractPageController {
      * @param CreationSettingsRepository $settingsRepository
      * @param TimeslotRepository $timeslotRepository
      * @return Response
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      * @Route("/student", name="espt_print_student")
      */
     public function printStudent(CreationSettingsRepository $settingsRepository, TimeslotRepository $timeslotRepository) : Response {
@@ -143,7 +153,41 @@ final class PrintController extends AbstractPageController {
             }
         }
 
-        $pdf = $this->buildPdf($settings, $header, $data);
+        $pdf = $this->buildPdf($settings, 15);
+        $pdf->Table($header, $data);
+
+        $filename = '/tmp/espt_temp' .$this->authenticatedUser()->getUuid() . '.pdf';
+        $pdf->Output($filename, 'F');
+
+        // display the file contents in the browser instead of downloading it
+        return $this->file($filename, _('EspT') . $settings->getStart()->format('j.n.Y') . '.pdf', ResponseHeaderBag::DISPOSITION_INLINE);
+    }
+
+    /**
+     * @param CreationSettingsRepository $settingsRepository
+     * @param TeacherGroupRepository $teacherGroupRepository
+     * @return Response
+     * @throws NonUniqueResultException
+     * @Route("/rooms", name="espt_print_rooms")
+     */
+    public function printRooms(CreationSettingsRepository $settingsRepository, TeacherGroupRepository $teacherGroupRepository) : Response {
+        $this->denyAccessUnlessGranted(Privilege::ADMIN);
+        $settings = $settingsRepository->findFirst();
+
+        // column titles
+        $header = array(_('Room'), _('Teacher'));
+
+        $groups = $teacherGroupRepository->findAll();
+        $data = array();
+
+        /** @var TeacherGroup $group */
+        foreach ($groups as $group) {
+            $data[] = array($group->getRoom(), implode(", ", $group->getUsers()->toArray()));
+        }
+
+        $pdf = $this->buildPdf($settings, 15);
+        $pdf->setCustomFooterText("");
+        $pdf->Table($header, $data, array(30, 130));
 
         $filename = '/tmp/espt_temp' .$this->authenticatedUser()->getUuid() . '.pdf';
         $pdf->Output($filename, 'F');

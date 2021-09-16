@@ -11,6 +11,9 @@ use IServ\AdminBundle\Admin\AdminServiceCrud;
 use IServ\CoreBundle\NameSort\NamesSortingDirectorInterface;
 use IServ\CoreBundle\Repository\UserRepository;
 use IServ\CoreBundle\Twig\EntityFormatter;
+use IServ\CoreBundle\Util\Collection\OrderedCollection;
+use IServ\CrudBundle\Crud\Action\Link;
+use IServ\CrudBundle\Entity\CrudInterface;
 use IServ\CrudBundle\Model\Breadcrumb;
 use IServ\CoreBundle\Form\Type\UserType;
 use IServ\CrudBundle\Mapper\FormMapper;
@@ -67,6 +70,18 @@ class TeacherGroupCrud extends AdminServiceCrud {
                 'crud_create_remote' => $this->router()->generate('espt_admin_timeslottemplatecollection_add')
             ]);
 
+    }
+
+    public function getShowActions(CrudInterface $item) : OrderedCollection {
+        $actions = parent::getShowActions($item);
+        $actions['pdf'] = Link::create($this->router()->generate('espt_print_group', ['groupId' => $item->getId()]), _('espt_generate_print'), 'list', 'btn-success');
+        return $actions;
+    }
+
+    public function getIndexActions() : OrderedCollection {
+        $actions = parent::getIndexActions();
+        $actions['roomlist'] = Link::create($this->router()->generate('espt_print_rooms'), _('espt_room_list'), 'list', 'btn-primary');
+        return $actions;
     }
 
     public function isAuthorized(): bool {

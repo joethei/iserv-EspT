@@ -178,3 +178,9 @@ msgstr ""
 
 msgid "espt_print_for"
 msgstr ""
+
+msgid "espt_generate_print"
+msgstr ""
+
+msgid "espt_room_list"
+msgstr ""

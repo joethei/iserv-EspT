@@ -38,8 +38,7 @@ class TimeslotCrud extends AdminServiceCrud {
 
     protected function configureListFilter(ListHandler $listHandler): void {
         $listHandler
-            ->addListFilter(new ListPropertyFilter(_('espt_group'), 'group', TeacherGroup::class, 'room', 'id'))
-            ->addListFilter(new ListSearchFilter(_('Search'), ['user', 'group']));
+            ->addListFilter(new ListPropertyFilter(_('Room'), 'group', TeacherGroup::class, 'room', 'id'));
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void {

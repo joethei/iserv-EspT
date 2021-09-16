@@ -171,3 +171,9 @@ msgstr "am"
 
 msgid "espt_print_for"
 msgstr "Ausdruck für "
+
+msgid "espt_generate_print"
+msgstr "Ausdruck erstellen"
+
+msgid "espt_room_list"
+msgstr "Raumliste"

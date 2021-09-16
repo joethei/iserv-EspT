@@ -53,7 +53,7 @@ class DateUtils {
 
             $color = 'red';
             $name = '';
-            switch ($timeslot->getType()) {
+            switch ($timeslot->getType()->getName()) {
                 case EventType::BOOK:
                 case EventType::INVITE :
                     $color = 'green';
