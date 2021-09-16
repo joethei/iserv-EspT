@@ -33,7 +33,7 @@ class InviteController extends AbstractPageController {
      * @return array
      * @throws NonUniqueResultException
      * @Route("/invite/{id}", name="espt_invite", options={"expose": true})
-     * @Template("@DH_EspT/Default/index.html.twig")
+     * @Template("@DH_EspT/Default/UserForm.html.twig")
      */
     public function invite(int $id, Request $request, EntityManagerInterface $entityManager, TimeslotRepository $timeslotRepository, EventTypeRepository $typeRepository): array {
         $timeslot = $timeslotRepository->find($id);

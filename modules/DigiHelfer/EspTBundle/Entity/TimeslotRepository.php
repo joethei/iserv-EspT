@@ -6,6 +6,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 use IServ\CoreBundle\Entity\User;
 
@@ -16,7 +17,7 @@ class TimeslotRepository extends ServiceEntityRepository {
     }
 
     /**
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function find($id, $lockMode = null, $lockVersion = null) : Timeslot {
         $entityManager = $this->getEntityManager();

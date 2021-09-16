@@ -21,7 +21,7 @@ export default {
     ScheduleView
   },
   methods: {
-    onClick: function(id) {
+    onClick: (id) => {
       //only open invite dialog when div is specified
       if ($("#invite").length) {
         /*let modal = IServ.Modal.createFromForm({
@@ -54,10 +54,13 @@ export default {
             confirmButton: {
               text: _('OK'),
               btnClass: 'btn-primary',
-              action: function () {
+              action: () => {
                 $.post(Routing.generate('espt_timeslots_reserve'), {id: id}, (data) => {
                   if(data.success !== undefined && data.success === true) {
                     Message.success(_('espt_registered'), 5000, false);
+                    this.updateData();
+                  }else {
+                    Message.error(_('Error') + " " + data.error, false);
                     this.updateData();
                   }
                 });
