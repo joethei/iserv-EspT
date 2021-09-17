@@ -1,4 +1,4 @@
-{% extends index is defined ? '@DH_EspT/Default/AdminForm.html.twig' : '@@IServCrud/Crud/index.html.twig' %}
+{% extends index is defined ? '@DH_EspT/Default/AdminForm.html.twig' : '@IServCrud/Crud/index.html.twig' %}
 
 {% block content %}
 
@@ -7,7 +7,7 @@
     <ul class="nav nav-tabs" data-automatic="false">
         <li role="presentation" class="{{ route == 'espt_admin_settings' ? 'active' }}">
             <a href="{{ path('espt_admin_settings') }}">
-                {{ icon('pro-settings') }}{{ _('espt_settings') }}
+                {{ icon('pro-settings') }}{{ _('Settings') }}
             </a>
         </li>
         <li role="presentation" class="{{ route == 'espt_admin_teachergroup_index' ? 'active' }}">

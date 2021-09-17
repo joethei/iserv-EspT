@@ -1,13 +1,19 @@
 {% extends "@DH_EspT/Default/base.html.twig" %}
 
+{# @var group \DigiHelfer\EspTBundle\Entity\TeacherGroup #}
+
 {% block page_title _('EspT') %}
 
 {% block content %}
 
     {% if is_granted('PRIV_ESPT_TEACHER') %}
-        <a href="{{ path('espt_print_teacher') }}">_('Print')</a>
+        {% if groups is defined %}
+            {% for group in groups %}
+                <a role="button" class="btn btn-primary" href="{{ path('espt_print_group', {'groupId': group.id}) }}">{{ _('Print') }}</a>
+            {% endfor %}
+        {% endif %}
     {% else %}
-        <a href="{{ path('espt_print_student') }}">_('Print')</a>
+        <a role="button" class="btn btn-primary" href="{{ path('espt_print_student') }}">{{ _('espt_generate_print') }}</a>
     {% endif %}
 
 

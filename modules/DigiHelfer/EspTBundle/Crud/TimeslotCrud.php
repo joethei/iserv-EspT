@@ -13,7 +13,6 @@ use IServ\CrudBundle\Mapper\ShowMapper;
 use IServ\CrudBundle\Model\Breadcrumb;
 use IServ\CrudBundle\Routing\RoutingDefinition;
 use IServ\CrudBundle\Table\Filter\ListPropertyFilter;
-use IServ\CrudBundle\Table\Filter\ListSearchFilter;
 use IServ\CrudBundle\Table\ListHandler;
 
 class TimeslotCrud extends AdminServiceCrud {

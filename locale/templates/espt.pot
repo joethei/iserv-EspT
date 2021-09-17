@@ -20,9 +20,6 @@ msgstr ""
 msgid "EspT"
 msgstr ""
 
-msgid "espt_date"
-msgstr ""
-
 msgid "espt_starttime"
 msgstr ""
 
@@ -72,9 +69,6 @@ msgid "espt_timeslot_templates"
 msgstr ""
 
 msgid "espt_timeslot_template"
-msgstr ""
-
-msgid "espt_settings"
 msgstr ""
 
 msgid "espt_settings_warning"

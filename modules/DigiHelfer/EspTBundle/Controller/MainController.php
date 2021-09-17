@@ -7,6 +7,7 @@ namespace DigiHelfer\EspTBundle\Controller;
 use DigiHelfer\EspTBundle\Entity\CreationSettingsRepository;
 use DigiHelfer\EspTBundle\Entity\EventType;
 use DigiHelfer\EspTBundle\Entity\EventState;
+use DigiHelfer\EspTBundle\Entity\TeacherGroupRepository;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
 use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
 use DigiHelfer\EspTBundle\Helpers\DateUtils;
@@ -29,11 +30,12 @@ final class MainController extends AbstractPageController {
     /**
      * @param CreationSettingsRepository $creationSettingsRepository
      * @param TimeslotRepository $timeslotRepository
+     * @param TeacherGroupRepository $groupRepository
      * @return Response
      * @throws NonUniqueResultException
      * @Route("/", name="espt_index")
      */
-    public function index(CreationSettingsRepository $creationSettingsRepository, TimeslotRepository $timeslotRepository): Response {
+    public function index(CreationSettingsRepository $creationSettingsRepository, TimeslotRepository $timeslotRepository, TeacherGroupRepository $groupRepository): Response {
         $this->addBreadcrumb(_("EspT"));
 
         $settings = $creationSettingsRepository->findFirst();
@@ -84,6 +86,12 @@ final class MainController extends AbstractPageController {
         }
 
         if ($state == EventState::PRINT) {
+            if($this->isGranted(Privilege::TEACHER)) {
+                $groups = $groupRepository->findFor($this->authenticatedUser());
+                return $this->render("@DH_EspT/User/Print.twig", [
+                    "groups" => $groups->toArray(),
+                ]);
+            }
             return $this->render("@DH_EspT/User/Print.twig");
 
         }
