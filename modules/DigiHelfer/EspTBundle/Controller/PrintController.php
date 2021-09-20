@@ -132,7 +132,8 @@ final class PrintController extends AbstractPageController {
         $settings = $settingsRepository->findFirst();
 
         // column titles
-        $header = array(_('Time'), _('Teacher'));
+        $header = array(_('Time'), _('Teacher'), _('Room'));
+        $headerWidth = array(50, 100, 20);
 
         $timeslots = $timeslotRepository->findForUser($this->authenticatedUser());
         $data = array();
@@ -140,22 +141,17 @@ final class PrintController extends AbstractPageController {
         /** @var Timeslot $timeslot */
         foreach ($timeslots as $timeslot) {
             $group = $timeslot->getGroup();
-            if($group != null) {
-                $data[] = array(
-                    __('espt_start_end_time', $timeslot->getStart()->format('G:i'), $timeslot->getEnd()->format('G:i')),
-                    $group
-                );
-            }else {
-                $data[] = array(
-                    __('espt_start_end_time', $timeslot->getStart()->format('G:i'), $timeslot->getEnd()->format('G:i')),
-                    ''
-                );
-            }
+
+            $data[] = array(
+                __('espt_start_end_time', $timeslot->getStart()->format('G:i'), $timeslot->getEnd()->format('G:i')),
+                $group,
+                $group->getRoom()
+            );
         }
 
         $pdf = $this->buildPdf($settings, 15);
         $pdf->Ln();
-        $pdf->Table($header, $data);
+        $pdf->Table($header, $data, $headerWidth);
 
         $filename = '/tmp/espt_temp' .$this->authenticatedUser()->getUuid() . '.pdf';
         $pdf->Output($filename, 'F');
@@ -183,7 +179,7 @@ final class PrintController extends AbstractPageController {
 
         /** @var TeacherGroup $group */
         foreach ($groups as $group) {
-            $data[] = array($group->getRoom(), implode(", ", $group->getUsers()->toArray()));
+            $data[] = array($group->getRoom(), $group);
         }
 
         $pdf = $this->buildPdf($settings, 15);

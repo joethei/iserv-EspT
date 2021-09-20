@@ -81,7 +81,6 @@ final class MainController extends AbstractPageController {
                     "regEnd" => $settings->getRegEnd(),
                     "startTime" => $settings->getStart(),
                     "endTime" => $settings->getEnd(),
-                    "events" => $timeslotRepository->findForUser($this->authenticatedUser())
                     ]);
             }
         }
@@ -141,12 +140,24 @@ final class MainController extends AbstractPageController {
     }
 
     /**
+     * @param TimeslotRepository $timeslotRepository
+     * @return Response
+     * @Route("timeslots/user", name="espt_timeslots_user", options={"expose": true})
+     */
+    public function timeslotsForUser(TimeslotRepository $timeslotRepository) : Response {
+        if($this->isGranted(Privilege::TEACHER)) {
+            return $this->json($timeslotRepository->findForTeacher($this->authenticatedUser()));
+        }
+        return $this->json($timeslotRepository->findForUser($this->authenticatedUser()));
+    }
+
+    /**
      * @param Request $request
      * @param TimeslotRepository $timeslotRepository
      * @param EntityManagerInterface $entityManager
      * @return Response
      * @throws NonUniqueResultException
-     * @Route("/timeslots/reserve/", name="espt_timeslots_reserve", options={"expose": true}, methods={"POST"})
+     * @Route("/timeslots/reserve", name="espt_timeslots_reserve", options={"expose": true}, methods={"POST"})
      */
     public function reserveTimeslot(Request $request, TimeslotRepository $timeslotRepository, EntityManagerInterface $entityManager): Response {
         $id = $request->request->get('id');

@@ -5,7 +5,6 @@
 <script>
 
 import Confirm from 'IServ.Confirm';
-import Locale from 'IServ.Locale';
 import Routing from 'IServ.Routing';
 import Message from 'IServ.Message';
 import ScheduleView from "./ScheduleView";
@@ -52,7 +51,9 @@ export default {
                 $.post(Routing.generate('espt_timeslots_reserve'), {id: id}, (data) => {
                   if(data.success !== undefined && data.success === true) {
                     Message.success(_('espt_registered'), 5000, false);
-                    this.updateData();
+
+                    let event = new Event("updateData", {bubbles: true});
+                    document.dispatchEvent(event);
                   }else {
                     Message.error(_('Error') + " " + data.error, false);
                     this.updateData();
@@ -78,6 +79,9 @@ export default {
   },
   created: function () {
     this.updateData();
+    document.addEventListener("updateData", () => {
+      this.updateData();
+    });
     //update data every minute
     this.timer = setInterval(() => {
       this.updateData();

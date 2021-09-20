@@ -102,7 +102,7 @@ class DateUtils {
             //events need to be sorted for correct display in ScheduleView
             for ($i = 0; $i < sizeof($schedules); ++$i) {
                 usort($schedules[$i]['events'], function ($a, $b) {
-                    return $a['id'] <=> $b['id'];
+                    return $a['start'] <=> $b['start'];
                 });
             }
 
