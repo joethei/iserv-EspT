@@ -1,21 +1,22 @@
 <template>
+  <div>
+    <p>{{ _('espt_your_events') }}</p>
 
-  <p>{{ _('espt_your_events') }}</p>
-
-  <table class="table table-striped">
-    <thead>
+    <table class="table table-striped">
+      <thead>
       <tr>
         <th>{{ _('Time') }}</th>
         <th>{{ _('Group') }}</th>
         <th>{{ _('Room') }}</th>
       </tr>
-    </thead>
-    <tr v-for="timeslot in timeslots">
-      <td>{{ timeslot['start'] }} - {{ timeslot['end'] }}</td>
-      <td>{{ timeslot['group'] }}</td>
-      <td>{{ timeslot['room'] }}</td>
-    </tr>
-  </table>
+      </thead>
+      <tr v-for="timeslot in timeslots">
+        <td>{{ timeslot['start'] }} - {{ timeslot['end'] }}</td>
+        <td>{{ timeslot['group'] }}</td>
+        <td>{{ timeslot['room'] }}</td>
+      </tr>
+    </table>
+  </div>
 
 </template>
 
