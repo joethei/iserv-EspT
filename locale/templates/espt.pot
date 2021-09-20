@@ -181,6 +181,3 @@ msgstr ""
 
 msgid "espt_your_events"
 msgstr ""
-
-msgid "espt_start_end_time_event"
-msgstr ""

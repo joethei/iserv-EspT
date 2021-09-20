@@ -133,7 +133,7 @@ final class PrintController extends AbstractPageController {
 
         // column titles
         $header = array(_('Time'), _('Teacher'), _('Room'));
-        $headerWidth = array(50, 100, 20);
+        $headerWidth = array(40, 100, 30);
 
         $timeslots = $timeslotRepository->findForUser($this->authenticatedUser());
         $data = array();

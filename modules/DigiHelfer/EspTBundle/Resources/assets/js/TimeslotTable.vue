@@ -6,15 +6,17 @@
       <thead>
       <tr>
         <th>{{ _('Time') }}</th>
-        <th>{{ _('Group') }}</th>
+        <th>{{ _('Teacher') }}</th>
         <th>{{ _('Room') }}</th>
       </tr>
       </thead>
-      <tr v-for="timeslot in timeslots">
-        <td>{{ timeslot['start'] }} - {{ timeslot['end'] }}</td>
-        <td>{{ timeslot['group'] }}</td>
-        <td>{{ timeslot['room'] }}</td>
-      </tr>
+      <tbody>
+        <tr v-for="timeslot in timeslots">
+          <td>{{ timeslot['start'] }} - {{ timeslot['end'] }}</td>
+          <td>{{ timeslot['group'] }}</td>
+          <td>{{ timeslot['room'] }}</td>
+        </tr>
+      </tbody>
     </table>
   </div>
 
@@ -38,21 +40,13 @@ export default {
   },
   created: function () {
     this.updateData();
-    //update data every minute
-    this.timer = setInterval(() => {
-      this.updateData();
-    }, 1000 * 60);
 
     document.addEventListener("updateData", () => {
       this.updateData();
     });
   },
-  beforeDestroy: function () {
-    clearInterval(this.timer);
-  },
   data: () => {
     return {
-      timer: null,
       timeslots: {}
     }
   }
