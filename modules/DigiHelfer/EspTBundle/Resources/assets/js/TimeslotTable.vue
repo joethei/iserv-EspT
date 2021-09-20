@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tr v-for="timeslot in timeslots">
-      <td>{{ __('espt_start_end_time', timeslot['start'], timeslot['end']) }}</td>
+      <td>{{ __('espt_start_end_time_event', timeslot['start'], timeslot['end']) }}</td>
       <td>{{ timeslot['group'] }}</td>
       <td>{{ timeslot['room'] }}</td>
     </tr>

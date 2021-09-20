@@ -29,6 +29,6 @@ msgstr "Willst du diesen Termin buchen?"
 msgid "espt_registered"
 msgstr "Termin erfolgreich gebucht"
 
-msgid "espt_start_end_time"
+msgid "espt_start_end_time_event"
 msgstr "{0} bis {1}"
 
