@@ -178,3 +178,6 @@ msgstr ""
 
 msgid "espt_room_list"
 msgstr ""
+
+msgid "espt_your_events"
+msgstr ""

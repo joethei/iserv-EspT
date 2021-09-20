@@ -171,3 +171,6 @@ msgstr "Ausdruck erstellen"
 
 msgid "espt_room_list"
 msgstr "Raumliste"
+
+msgid "espt_your_events"
+msgstr "Deine Termine"

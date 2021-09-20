@@ -24,13 +24,22 @@ export default {
     onClick: (id) => {
       //only open invite dialog when div is specified
       if ($("#invite").length) {
-        let modal = IServ.Modal.createFromForm({
-          'remote': IServ.Routing.generate('espt_invite', {id: id}),
-          'id': 'espt_invite_' + id,
-          'title': _('espt_timeslot_type_invite'),
+        let inviteModal = IServ.Modal.createFromForm({
+          remote: IServ.Routing.generate('espt_invite', {id: id}),
+          id: 'espt_invite',
+          title: _('espt_timeslot_type_invite'),
+          onLoad: function ($modal, options) {
+            console.log("loading");
+          },
+          onSuccess: function ($modal, data) {
+            console.log("success" + data);
+          },
+          onError: function($modal, data) {
+            console.log("error + " + data);
+          }
         });
-        modal.show();
-        //window.location.href = Routing.generate('espt_invite', {'id': id});
+        //inviteModal.show();
+        window.location.href = Routing.generate('espt_invite', {'id': id});
       }else {
         Confirm.confirm({
           title: _('espt_confirm'),

@@ -81,6 +81,7 @@ final class MainController extends AbstractPageController {
                     "regEnd" => $settings->getRegEnd(),
                     "startTime" => $settings->getStart(),
                     "endTime" => $settings->getEnd(),
+                    "events" => $timeslotRepository->findForUser($this->authenticatedUser())
                     ]);
             }
         }

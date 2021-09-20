@@ -18,7 +18,7 @@ class InviteStudentType extends AbstractType {
             ->add('user', null, [
                 'label' => _('Student'),
                 'help' => _('espt_student_help'),
-                'by_reference' => false,
+                'by_reference' => true,
                 'query_builder' => function(UserRepository $repository) {
                     //only show students in list
                     $queryBuilder = $repository->createDeletedAwareQueryBuilder('users');

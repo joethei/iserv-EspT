@@ -9,7 +9,7 @@
     {% if is_granted('PRIV_ESPT_TEACHER') %}
         {% if groups is defined %}
             {% for group in groups %}
-                <a role="button" class="btn btn-primary" href="{{ path('espt_print_group', {'groupId': group.id}) }}">{{ _('Print') }}</a>
+                <a role="button" class="btn btn-primary" href="{{ path('espt_print_group', {'groupId': group.id}) }}">{{ _('espt_generate_print') }}</a>
             {% endfor %}
         {% endif %}
     {% else %}

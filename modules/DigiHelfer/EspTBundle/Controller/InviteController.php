@@ -13,7 +13,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use IServ\CoreBundle\Controller\AbstractPageController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -30,12 +32,11 @@ class InviteController extends AbstractPageController {
      * @param EntityManagerInterface $entityManager
      * @param TimeslotRepository $timeslotRepository
      * @param EventTypeRepository $typeRepository
-     * @return array
+     * @return Response|JsonResponse
      * @throws NonUniqueResultException
      * @Route("/invite/{id}", name="espt_invite", options={"expose": true})
-     * @Template("@DH_EspT/Default/UserForm.html.twig")
      */
-    public function invite(int $id, Request $request, EntityManagerInterface $entityManager, TimeslotRepository $timeslotRepository, EventTypeRepository $typeRepository): array {
+    public function invite(int $id, Request $request, EntityManagerInterface $entityManager, TimeslotRepository $timeslotRepository, EventTypeRepository $typeRepository): Response {
         $timeslot = $timeslotRepository->find($id);
         $form = $this->createForm(InviteStudentType::class, $timeslot);
 
@@ -65,12 +66,21 @@ class InviteController extends AbstractPageController {
 
                 $entityManager->persist($timeslot);
                 $entityManager->flush();
+
+                return $this->redirectToRoute('espt_index');
+
+                //return $this->json([
+                //   'status' => 'success'
+                //]);
+            }else {
+                return $this->json([
+                   'status' => 'error',
+                   'message' => 'timeslot is of wrong type',
+                ]);
             }
         }
 
-        return [
-            'form' => $form->createView()
-        ];
+        return $this->render("@DH_EspT/Default/UserForm.html.twig", ["form" => $form->createView()]);
     }
 
 }

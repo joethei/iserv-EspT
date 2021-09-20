@@ -1,5 +1,7 @@
 {% extends "@DH_EspT/Default/base.html.twig" %}
 
+{# @var event \DigiHelfer\EspTBundle\Entity\Timeslot #}
+
 {% block page_title _('EspT') %}
 
 {% block content %}
@@ -8,6 +10,27 @@
         <p class="text-center">{{ __('espt_registration_open_till', regEnd|ldatetime) }}</p>
         <p class="text-center">{{ _('espt_next_event') }}{{ __('espt_start_end_time', startTime|ldatetime, endTime|ltime) }}</p>
         <p class="text-center">{{ _('espt_registration_possible') }}{{ __('espt_start_end_time', regStart|ldatetime, regEnd|ltime) }}</p>
+    </div>
+
+    <p>{{ _('espt_your_events') }}</p>
+
+    <table class="table table-striped">
+        <tr>
+            <th>{{ _('Time') }}</th>
+            <th>{{ _('Group') }}</th>
+        </tr>
+        {% for event in events %}
+            <tr>
+                <td>{{ __('espt_start_end_time', event.start|ltime, event.end|ltime) }}</td>
+                <td>{{ event.group }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <div>
+        <ul>
+
+        </ul>
     </div>
 
     <div id="espt-schedule"></div>
