@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     click: function (event) {
-      this.$emit('onClickEvent', event.id);
+      this.$emit('onClickEvent', event);
     },
     duration: function (event) {
       let diff = moment(event.end).diff(moment(event.start));

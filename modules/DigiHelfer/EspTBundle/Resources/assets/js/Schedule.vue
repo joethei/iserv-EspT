@@ -1,5 +1,5 @@
 <template>
-  <ScheduleView v-bind:schedules="this.schedules" v-bind:settings="this.settings" @onClickEvent="(id) => onClick(id)"/>
+  <ScheduleView v-bind:schedules="this.schedules" v-bind:settings="this.settings" @onClickEvent="(event) => onClick(event)"/>
 </template>
 
 <script>
@@ -20,11 +20,11 @@ export default {
     ScheduleView
   },
   methods: {
-    onClick: (id) => {
+    onClick: (event) => {
       //only open invite dialog when div is specified
       if ($("#teacher").length) {
         let inviteModal = IServ.Modal.createFromForm({
-          remote: IServ.Routing.generate('espt_invite', {id: id}),
+          remote: IServ.Routing.generate('espt_invite', {id: event.id}),
           id: 'espt_invite',
           title: _('espt_timeslot_type_invite'),
           onLoad: function ($modal, options) {
@@ -38,10 +38,10 @@ export default {
           }
         });
         //inviteModal.show();
-        window.location.href = Routing.generate('espt_invite', {'id': id});
+        window.location.href = Routing.generate('espt_invite', {'id': event.id});
       }else {
         //only confirmation if is allowed to book
-        if(this.schedules[id].color !== 'green') {
+        if(event.color !== 'green' && event.color !== 'yellow') {
           return;
         }
 
@@ -53,7 +53,7 @@ export default {
               text: _('OK'),
               btnClass: 'btn-primary',
               action: () => {
-                $.post(Routing.generate('espt_timeslots_reserve'), {id: id}, (data) => {
+                $.post(Routing.generate('espt_timeslots_reserve'), {id: event.id}, (data) => {
                   if(data.success !== undefined && data.success === true) {
                     Message.success(_('espt_registered'), 5000, false);
 
