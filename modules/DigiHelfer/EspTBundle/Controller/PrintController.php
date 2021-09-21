@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace DigiHelfer\EspTBundle\Controller;
 
 use DigiHelfer\EspTBundle\Entity\CreationSettings;
-use DigiHelfer\EspTBundle\Entity\CreationSettingsRepository;
+use DigiHelfer\EspTBundle\Repository\CreationSettingsRepository;
 use DigiHelfer\EspTBundle\Entity\TeacherGroup;
-use DigiHelfer\EspTBundle\Entity\TeacherGroupRepository;
+use DigiHelfer\EspTBundle\Repository\TeacherGroupRepository;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
-use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
+use DigiHelfer\EspTBundle\Repository\TimeslotRepository;
 use DigiHelfer\EspTBundle\Helpers\PdfCreator;
 use DigiHelfer\EspTBundle\Security\Privilege;
 use Doctrine\ORM\NonUniqueResultException;
@@ -76,6 +76,13 @@ final class PrintController extends AbstractPageController {
      */
     public function printGroup(int $groupId, CreationSettingsRepository $settingsRepository, TimeslotRepository $timeslotRepository, TeacherGroupRepository $groupRepository) : Response {
         $this->denyAccessUnlessGranted(Privilege::TEACHER);
+
+        //only allow admins to view lists for other groups
+        $group = $groupRepository->findFor($this->authenticatedUser());
+        if($group->getId() != $groupId) {
+            $this->denyAccessUnlessGranted(Privilege::ADMIN);
+        }
+
         $settings = $settingsRepository->findFirst();
 
         // column titles

@@ -1,19 +1,19 @@
 <template>
   <div>
-    <p>{{ _('espt_your_events') }}</p>
+    <strong>{{ _('espt_your_events') }}</strong>
 
     <table class="table table-striped">
       <thead>
       <tr>
         <th>{{ _('Time') }}</th>
-        <th>{{ _('Teacher') }}</th>
+        <th>{{ isTeacher() ? _('Student') : _('Teacher') }}</th>
         <th>{{ _('Room') }}</th>
       </tr>
       </thead>
       <tbody>
         <tr v-for="timeslot in timeslots">
           <td>{{ timeslot['start'] }} - {{ timeslot['end'] }}</td>
-          <td>{{ timeslot['group'] }}</td>
+          <td>{{ isTeacher() ? timeslot['user'] : timeslot['group'] }}</td>
           <td>{{ timeslot['room'] }}</td>
         </tr>
       </tbody>
@@ -31,6 +31,9 @@ import Routing from 'IServ.Routing';
 export default {
   name: "TimeslotTable",
   methods: {
+    isTeacher() {
+      return document.getElementById('teacher');
+    },
     updateData() {
       $.getJSON(Routing.generate('espt_timeslots_user')).done(data => {
         this.timeslots = data

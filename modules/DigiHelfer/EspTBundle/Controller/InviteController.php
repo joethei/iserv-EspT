@@ -3,9 +3,9 @@
 namespace DigiHelfer\EspTBundle\Controller;
 
 use DigiHelfer\EspTBundle\Entity\EventType;
-use DigiHelfer\EspTBundle\Entity\EventTypeRepository;
+use DigiHelfer\EspTBundle\Repository\EventTypeRepository;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
-use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
+use DigiHelfer\EspTBundle\Repository\TimeslotRepository;
 use DigiHelfer\EspTBundle\Form\InviteStudentType;
 use DigiHelfer\EspTBundle\Helpers\DateUtils;
 use Doctrine\ORM\EntityManagerInterface;

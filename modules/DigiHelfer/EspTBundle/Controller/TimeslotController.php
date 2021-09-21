@@ -2,11 +2,11 @@
 
 namespace DigiHelfer\EspTBundle\Controller;
 
-use DigiHelfer\EspTBundle\Entity\CreationSettingsRepository;
+use DigiHelfer\EspTBundle\Repository\CreationSettingsRepository;
 use DigiHelfer\EspTBundle\Entity\EventState;
 use DigiHelfer\EspTBundle\Entity\EventType;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
-use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
+use DigiHelfer\EspTBundle\Repository\TimeslotRepository;
 use DigiHelfer\EspTBundle\Helpers\DateUtils;
 use DigiHelfer\EspTBundle\Security\Privilege;
 use Doctrine\ORM\NonUniqueResultException;
@@ -77,14 +77,18 @@ class TimeslotController extends AbstractPageController {
 
         /** @var Timeslot $timeslot*/
         foreach ($timeslots as $timeslot) {
-            $result[] = array(
-                'start' => $timeslot->getStart()->format("G:i"),
-                'end' => $timeslot->getEnd()->format("G:i"),
-                'type' => $timeslot->getType()->getName(),
-                'user' => $timeslot->getUser() != null ? $timeslot->getUser()->getNameByFirstname() : '',
-                'group' => implode(', ', $timeslot->getGroup()->getUsers()->toArray()),
-                'room' => $timeslot->getGroup()->getRoom()
-            );
+
+            //don't show timeslots without bookings
+            if($timeslot->getUser() != null) {
+                $result[] = array(
+                    'start' => $timeslot->getStart()->format("G:i"),
+                    'end' => $timeslot->getEnd()->format("G:i"),
+                    'type' => $timeslot->getType()->getName(),
+                    'user' => $timeslot->getUser()->getNameByFirstname(),
+                    'group' => implode(', ', $timeslot->getGroup()->getUsers()->toArray()),
+                    'room' => $timeslot->getGroup()->getRoom()
+                );
+            }
         }
 
         return $this->json($result);

@@ -4,19 +4,14 @@ declare(strict_types=1);
 
 namespace DigiHelfer\EspTBundle\Controller;
 
-use DigiHelfer\EspTBundle\Entity\CreationSettingsRepository;
-use DigiHelfer\EspTBundle\Entity\EventType;
+use DigiHelfer\EspTBundle\Repository\CreationSettingsRepository;
 use DigiHelfer\EspTBundle\Entity\EventState;
-use DigiHelfer\EspTBundle\Entity\TeacherGroupRepository;
-use DigiHelfer\EspTBundle\Entity\Timeslot;
-use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
-use DigiHelfer\EspTBundle\Helpers\DateUtils;
+use DigiHelfer\EspTBundle\Repository\TeacherGroupRepository;
+use DigiHelfer\EspTBundle\Repository\TimeslotRepository;
 use DigiHelfer\EspTBundle\Security\Privilege;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use IServ\CoreBundle\Controller\AbstractPageController;
 use Knp\Menu\FactoryInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 

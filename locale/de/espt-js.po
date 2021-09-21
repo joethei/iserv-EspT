@@ -30,4 +30,10 @@ msgid "espt_registered"
 msgstr "Termin erfolgreich gebucht"
 
 msgid "espt_your_events"
-msgstr "Deine Termine"
+msgstr "Deine Termine:"
+
+msgid "Teacher"
+msgstr "Lehrer"
+
+msgid "Time"
+msgstr "Zeit"

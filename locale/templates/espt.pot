@@ -181,3 +181,9 @@ msgstr ""
 
 msgid "espt_your_events"
 msgstr ""
+
+msgid "espt_timeslot_overlap"
+msgstr ""
+
+msgid "espt_timeslot_group_duplicate"
+msgstr ""

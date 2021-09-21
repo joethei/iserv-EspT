@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace DigiHelfer\EspTBundle\Entity;
+namespace DigiHelfer\EspTBundle\Repository;
 
+use DigiHelfer\EspTBundle\Entity\CreationSettings;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

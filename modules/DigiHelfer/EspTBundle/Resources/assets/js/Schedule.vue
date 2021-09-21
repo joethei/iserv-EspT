@@ -22,7 +22,7 @@ export default {
   methods: {
     onClick: (id) => {
       //only open invite dialog when div is specified
-      if ($("#invite").length) {
+      if ($("#teacher").length) {
         let inviteModal = IServ.Modal.createFromForm({
           remote: IServ.Routing.generate('espt_invite', {id: id}),
           id: 'espt_invite',
@@ -40,6 +40,11 @@ export default {
         //inviteModal.show();
         window.location.href = Routing.generate('espt_invite', {'id': id});
       }else {
+        //only confirmation if is allowed to book
+        if(this.schedules[id].color !== 'green') {
+          return;
+        }
+
         Confirm.confirm({
           title: _('espt_confirm'),
           content: _('espt_confirm_text'),

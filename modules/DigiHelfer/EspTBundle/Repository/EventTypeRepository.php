@@ -1,7 +1,8 @@
 <?php
 
-namespace DigiHelfer\EspTBundle\Entity;
+namespace DigiHelfer\EspTBundle\Repository;
 
+use DigiHelfer\EspTBundle\Entity\EventType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;

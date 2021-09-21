@@ -106,6 +106,13 @@ class DateUtils {
                 });
             }
 
+            //sort groups by name
+            for ($i = 0; $i < sizeof($schedules); ++$i) {
+                usort($schedules, function ($a, $b) {
+                    return $a['title'] <=> $b['title'];
+                });
+            }
+
 
         }
         $result = array();

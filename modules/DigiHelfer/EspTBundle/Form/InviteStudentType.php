@@ -3,8 +3,6 @@
 namespace DigiHelfer\EspTBundle\Form;
 
 use DigiHelfer\EspTBundle\Entity\Timeslot;
-use DigiHelfer\EspTBundle\Security\Privilege;
-use IServ\CoreBundle\Form\Type\UserType;
 use IServ\CoreBundle\Repository\UserRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

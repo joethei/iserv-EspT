@@ -1,0 +1,13 @@
+EspTAllowDuplicates:
+name        Erlaube Duplikate
+description Schüler können mehrere Termine bei einer Gruppe buchen.
+type        bool
+group	    Modul: Elternsprechtag
+default	    false
+
+EspTAllowOverlap:
+name        Erlaube zeitliche Überlappung
+description Schüler können Termine buchen, auch wenn sich diese überlappen
+type        bool
+group	    Modul: Elternsprechtag
+default	    false

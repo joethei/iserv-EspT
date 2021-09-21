@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace DigiHelfer\EspTBundle\Controller;
 
 use DigiHelfer\EspTBundle\Entity\CreationSettings;
-use DigiHelfer\EspTBundle\Entity\CreationSettingsRepository;
-use DigiHelfer\EspTBundle\Entity\TeacherGroupRepository;
+use DigiHelfer\EspTBundle\Repository\CreationSettingsRepository;
+use DigiHelfer\EspTBundle\Repository\TeacherGroupRepository;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
-use DigiHelfer\EspTBundle\Entity\TimeslotRepository;
+use DigiHelfer\EspTBundle\Repository\TimeslotRepository;
 use DigiHelfer\EspTBundle\Entity\TimeslotTemplate;
 use DigiHelfer\EspTBundle\Form\CreationSettingsType;
 use Doctrine\DBAL\Exception;
