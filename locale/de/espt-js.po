@@ -37,3 +37,9 @@ msgstr "Lehrer"
 
 msgid "Time"
 msgstr "Zeit"
+
+msgid "Error"
+msgstr "Fehler:"
+
+msgid "Student"
+msgstr "Schüler"

@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class CreationSettings
  * @package DigiHelfer\EspTBundle\Entity
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="DigiHelfer\EspTBundle\Repository\CreationSettingsRepository")
  * @ORM\Table(name="espt_settings")
  * @ORM\HasLifecycleCallbacks
  */

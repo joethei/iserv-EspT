@@ -52,13 +52,14 @@ class PdfCreator extends TCPDF {
 
         // Color and font restoration
         $this->SetFillColor(224, 235, 255);
-        $this->SetTextColor(0);
+        $this->SetTextColor();
         $this->SetFont('');
         // Data
         $fill = 0;
         foreach($data as $row) {
-            $this->Cell($width[0], 6, $row[0], 'LR', 0, 'L', $fill);
-            $this->Cell($width[1], 6, $row[1], 'LR', 0, 'L', $fill);
+            for($i = 0; $i < count($width); $i++) {
+                $this->Cell($width[$i], 6, $row[$i], 'LR', 0, 'L', $fill);
+            }
             $this->Ln();
             $fill=!$fill;
         }

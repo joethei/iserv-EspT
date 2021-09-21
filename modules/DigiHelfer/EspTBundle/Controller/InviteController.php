@@ -49,7 +49,7 @@ class InviteController extends AbstractPageController {
 
                 //block all timeslots that overlap for this group
                 //if the teacher decides to remove this invite this will be rolled back
-                $groupTimeslots = $timeslotRepository->findForGroup($timeslot->getGroup());
+                $groupTimeslots = $timeslotRepository->findForTeacher($this->authenticatedUser());
                 /** @var Timeslot $groupTimeslot */
                 foreach($groupTimeslots as $groupTimeslot) {
                     if(DateUtils::datesOverlap($groupTimeslot->getStart(), $groupTimeslot->getEnd(), $timeslot->getStart(), $timeslot->getEnd()) > 0) {

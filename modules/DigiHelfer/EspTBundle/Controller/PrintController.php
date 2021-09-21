@@ -78,8 +78,17 @@ final class PrintController extends AbstractPageController {
         $this->denyAccessUnlessGranted(Privilege::TEACHER);
 
         //only allow admins to view lists for other groups
-        $group = $groupRepository->findFor($this->authenticatedUser());
-        if($group->getId() != $groupId) {
+        $groups = $groupRepository->findFor($this->authenticatedUser());
+
+        $isInGroup = false;
+        /** @var TeacherGroup $group*/
+        foreach ($groups as $group) {
+            if ($group->getId() == $groupId) {
+                $isInGroup = true;
+            }
+        }
+
+        if(!$isInGroup) {
             $this->denyAccessUnlessGranted(Privilege::ADMIN);
         }
 

@@ -14,7 +14,7 @@ use IServ\CrudBundle\Entity\CrudInterface;
 /**
  * Class TeacherGroup
  * @package DigiHelfer\EspTBundle\Entity
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="DigiHelfer\EspTBundle\Repository\TeacherGroupRepository")
  * @ORM\Table(name="espt_teacher_group")
  */
 class TeacherGroup implements CrudInterface {

@@ -50,7 +50,7 @@ msgid "espt_hours"
 msgstr "Stunden"
 
 msgid "espt_settings_warning"
-msgstr "Durch das absenden dieses Formulars werden alle aktuellen Zeitfenster gelöscht und nach Vorlage wieder neu erstellt"
+msgstr "Durch das Absenden dieses Formulars werden alle aktuellen Zeitfenster gelöscht und nach Vorlage wieder neu erstellt"
 
 msgid "espt_groups"
 msgstr "Gruppen"
@@ -173,7 +173,7 @@ msgid "espt_room_list"
 msgstr "Raumliste"
 
 msgid "espt_your_events"
-msgstr "Deine Termine"
+msgstr "Deine Termine:"
 
 msgid "espt_timeslot_overlap"
 msgstr "Du hast bereits einen Termin in diesen Zeitraum gebucht"

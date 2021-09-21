@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class Timeslot
  * @package DigiHelfer\EspTBundle\Entity
- * @ORM\Entity(repositoryClass="DigiHelfer\EspTBundle\Entity\TimeslotRepository")
+ * @ORM\Entity(repositoryClass="DigiHelfer\EspTBundle\Repository\TimeslotRepository")
  * @ORM\Table(name="espt_timeslot")
  * @ORM\HasLifecycleCallbacks
  */

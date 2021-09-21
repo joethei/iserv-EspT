@@ -85,6 +85,8 @@ final class MainController extends AbstractPageController {
                 $groups = $groupRepository->findFor($this->authenticatedUser());
                 return $this->render("@DH_EspT/User/Print.twig", [
                     "groups" => $groups->toArray(),
+                    "startTime" => $settings->getStart(),
+                    "endTime" => $settings->getEnd(),
                 ]);
             }
             return $this->render("@DH_EspT/User/Print.twig");

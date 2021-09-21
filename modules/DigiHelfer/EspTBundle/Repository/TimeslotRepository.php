@@ -2,6 +2,7 @@
 
 namespace DigiHelfer\EspTBundle\Repository;
 
+use DigiHelfer\EspTBundle\Entity\TeacherGroup;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
