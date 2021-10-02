@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="js" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$USER_HOME$/Downloads/IServ Daten/usr-share-iserv/web/modules/IServ/CoreBundle/Resources/assets/js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$USER_HOME$/Downloads/IServ Daten/usr-share-iserv/web/modules/IServ/CoreBundle/Resources/assets/js" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

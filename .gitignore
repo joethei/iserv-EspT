@@ -1,7 +1,8 @@
-.idea
+#.idea
 *.iml
 modules/DigiHelfer/EspTBundle/Resources/assets/package-lock.json
 modules/DigiHelfer/EspTBundle/Resources/assets/node_modules
 vendor/
 *.phar
 *.cache
+.DS_Store
