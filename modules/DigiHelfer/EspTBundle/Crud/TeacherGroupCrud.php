@@ -37,7 +37,7 @@ class TeacherGroupCrud extends AdminServiceCrud {
             ->addIdentifier('id')
             ->add('room', null, ['label' => _('espt_room')])
             ->add('users', null, ['label' => _('espt_teachers')])
-            ->add('timeslotTemplate', null, ['label' => _('espt_timeslot_template')]);
+            ->add('timeslotTemplates', null, ['label' => _('espt_timeslot_template')]);
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void {
@@ -48,7 +48,7 @@ class TeacherGroupCrud extends AdminServiceCrud {
                 'order_by' => $this->locator->get(NamesSortingDirectorInterface::class)->getSortBy(),
                 'entity_format' => EntityFormatter::FORMAT_USER
             ])
-            ->add('timeslotTemplate', null, ['label' => _('espt_timeslot_template')]);
+            ->add('timeslotTemplates', null, ['label' => _('espt_timeslot_template')]);
     }
 
     protected function configureFormFields(FormMapper $formMapper): void {
@@ -67,6 +67,7 @@ class TeacherGroupCrud extends AdminServiceCrud {
                 'label' => _('espt_timeslot_template'),
                 'help' => _('espt_timeslot_template_help'),
                 'choice_label' => 'name',
+                'multiple' => true,
                 'crud_create_remote' => $this->router()->generate('espt_admin_timeslottemplatecollection_add')
             ]);
 

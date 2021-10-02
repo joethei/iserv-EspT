@@ -30,14 +30,14 @@ class Timeslot implements CrudInterface {
     private $id;
 
     /**
-     * @ORM\Column(type="time_immutable", name="start_time")
+     * @ORM\Column(type="datetime_immutable", name="start_time")
      * @var DateTimeImmutable
      * @Assert\NotBlank()
      */
     private $start;
 
     /**
-     * @ORM\Column(type="time_immutable", name="end_time")
+     * @ORM\Column(type="datetime_immutable", name="end_time")
      * @var DateTimeImmutable
      * @Assert\NotBlank()
      */

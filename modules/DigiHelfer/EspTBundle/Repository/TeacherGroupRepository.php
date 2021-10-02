@@ -52,4 +52,15 @@ class TeacherGroupRepository extends ServiceEntityRepository {
         return new ArrayCollection($query->getResult());
     }
 
+    /**
+     * return Collection|TeacherGroup
+     */
+    public function findForSelection(User $user) : Collection {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\TeacherGroupSelection s WHERE s.user = :user");
+        $query->setParameter('user', $user);
+
+        return new ArrayCollection($query->getResult());
+    }
+
 }

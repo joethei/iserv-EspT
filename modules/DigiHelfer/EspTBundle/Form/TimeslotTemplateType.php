@@ -11,16 +11,22 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 
 class TimeslotTemplateType extends AbstractType {
 
+    /**
+     * @throws \Exception
+     */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
             ->add('start', TimeType::class, [
                 'label' => _('espt_starttime'),
                 'help' => _('espt_timeslot_start_help'),
                 'input' => 'datetime_immutable',
-                'input_format' => 'H:i',
+                'input_format' => 'H:i'
                 ])
             ->add('end', TimeType::class, [
                 'label' => _('espt_endtime'),

@@ -13,6 +13,7 @@ use IServ\CrudBundle\Mapper\ListMapper;
 use IServ\CrudBundle\Mapper\ShowMapper;
 use IServ\CrudBundle\Model\Breadcrumb;
 use IServ\CrudBundle\Routing\RoutingDefinition;
+use function Webmozart\Assert\Tests\StaticAnalysis\null;
 
 class TimeslotTemplatesCrud extends AdminServiceCrud {
 
@@ -27,19 +28,25 @@ class TimeslotTemplatesCrud extends AdminServiceCrud {
     protected function configureListFields(ListMapper $listMapper): void {
         $listMapper
             ->addIdentifier('name')
+            ->add('day', null, ['label' => _('Day')])
             ->add('timeslots', null, ['label' => _('espt_timeslot')]);
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void {
         $showMapper
             ->add('name', null, ['label' => _('espt_name')])
-            ->add('timeslots', null, ['label' => _('espt_timeslot')]);
+            ->add('day', null, ['label' => _('Day')])
+            ->add('timeslots', null, ['label' => _('espt_timeslot')])
+            ->add('groups', null, ['label' => _('espt_groups')]);
     }
 
     protected function configureFormFields(FormMapper $formMapper): void {
         $formMapper
             ->add('name', null, [
                 'label' => _('espt_name')
+            ])
+            ->add('day', null, [
+                'label' => _('Day'),
             ])
             ->add('timeslots', BootstrapCollectionType::class, [
                 'entry_type' => TimeslotTemplateType::class,

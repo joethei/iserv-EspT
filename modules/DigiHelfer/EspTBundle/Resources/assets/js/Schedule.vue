@@ -47,7 +47,7 @@ export default {
 
         Confirm.confirm({
           title: _('espt_confirm'),
-          content: _('espt_confirm_text'),
+          content: event.color === 'green' ? _('espt_confirm_text') : _('espt_confirm_cancel_text'),
           buttons: {
             confirmButton: {
               text: _('OK'),

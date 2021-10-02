@@ -40,6 +40,7 @@ class DateUtils {
         $schedules = array();
         /**@var Timeslot $timeslot*/
         foreach ($timeslots as $timeslot) {
+
             $data_timeslot = array();
 
             $startDate = $settings->getStart();
@@ -122,7 +123,12 @@ class DateUtils {
         $result['schedules'] = $schedules;
 
         //TODO: don't hardcode scaleFactor
-        $settings = array('start' => $settings->getStart(), 'end' => $settings->getEnd(), 'scaleFactor' => 2);
+        $scaleFactor = 2;
+        //if diff.hours <> 2 then = 2;
+        //if diff.hours > 2 then < 2;
+        //if diff.hours < 2 then > 2;
+
+        $settings = array('start' => $settings->getStart(), 'end' => $settings->getEnd(), 'scaleFactor' => $scaleFactor);
         $result['settings'] = $settings;
 
         return $result;

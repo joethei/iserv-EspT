@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\JoinColumn;
+use IServ\CoreBundle\Entity\Group;
 use IServ\CoreBundle\Entity\User;
 use IServ\CrudBundle\Entity\CrudInterface;
 
@@ -36,20 +37,28 @@ class TeacherGroup implements CrudInterface {
 
     /**
      * @ORM\ManyToMany(targetEntity="\IServ\CoreBundle\Entity\User")
-     *  @JoinTable(name="espt_teacher_groups",
-     *      joinColumns={@JoinColumn(name="group_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="act")}
-     *      )
+     * @JoinTable(name="espt_teacher_groups",
+     *    joinColumns={@JoinColumn(name="group_id", referencedColumnName="id")},
+     *    inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="act")}
+     *  )
      * @var User[]
      */
     private $users;
 
+    //TODO: associate user group with teacher group, only show to those, but only if setting is set
+    //TODO: Allow for two different days, in same booking period
+    //TODO: Allow for editing timeslots by teacher
+    //TODO: Warning that it overwrites on create
+
     /**
-     * @var TimeslotTemplateCollection|null
-     * @ORM\ManyToOne(targetEntity="DigiHelfer\EspTBundle\Entity\TimeslotTemplateCollection", inversedBy="groups")
-     * @ORM\JoinColumn(name="timeslot_template", referencedColumnName="id", nullable=true)
+     * @var Collection|TimeslotTemplateCollection[]|null
+     * @ORM\ManyToMany(targetEntity="DigiHelfer\EspTBundle\Entity\TimeslotTemplateCollection")
+     *  @JoinTable(name="espt_timeslot_templates",
+     *    joinColumns={@JoinColumn(name="group_id", referencedColumnName="id")},
+     *    inverseJoinColumns={@JoinColumn(name="template_id", referencedColumnName="id")}
+     *  )
      */
-    private $timeslotTemplate;
+    private $timeslotTemplates;
 
     /**
      * @var Timeslot[]
@@ -109,17 +118,17 @@ class TeacherGroup implements CrudInterface {
     }
 
     /**
-     * @return TimeslotTemplateCollection|null
+     * @return TimeslotTemplateCollection|Collection|null
      */
-    public function getTimeslotTemplate(): ?TimeslotTemplateCollection {
-        return $this->timeslotTemplate;
+    public function getTimeslotTemplates() {
+        return $this->timeslotTemplates;
     }
 
     /**
-     * @param TimeslotTemplateCollection|null $timeslotTemplate
+     * @param TimeslotTemplateCollection|Collection|null $timeslotTemplates
      */
-    public function setTimeslotTemplate(?TimeslotTemplateCollection $timeslotTemplate): void {
-        $this->timeslotTemplate = $timeslotTemplate;
+    public function setTimeslotTemplates($timeslotTemplates): void {
+        $this->timeslotTemplates = $timeslotTemplates;
     }
 
     /**

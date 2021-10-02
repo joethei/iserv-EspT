@@ -7,6 +7,7 @@ namespace DigiHelfer\EspTBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
 use IServ\CrudBundle\Entity\CrudInterface;
 
 /**
@@ -33,6 +34,12 @@ class TimeslotTemplateCollection implements CrudInterface {
     private $name;
 
     /**
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    private $day = 1;
+
+    /**
      *
      * @var Collection|TimeslotTemplate[]
      * @ORM\OneToMany(targetEntity="DigiHelfer\EspTBundle\Entity\TimeslotTemplate", mappedBy="collection", cascade={"all"}, orphanRemoval=true)
@@ -41,7 +48,11 @@ class TimeslotTemplateCollection implements CrudInterface {
 
     /**
      * @var Collection|TeacherGroup[]
-     * @ORM\OneToMany(targetEntity="DigiHelfer\EspTBundle\Entity\TeacherGroup", mappedBy="timeslotTemplate")
+     *  @ORM\ManyToMany(targetEntity="DigiHelfer\EspTBundle\Entity\TeacherGroup")
+     *  @JoinTable(name="espt_timeslot_templates",
+     *    joinColumns={@JoinColumn(name="template_id", referencedColumnName="id")},
+     *    inverseJoinColumns={@JoinColumn(name="group_id", referencedColumnName="id")}
+     *  )
      */
     private $groups;
 
@@ -79,6 +90,20 @@ class TimeslotTemplateCollection implements CrudInterface {
      */
     public function setName(string $name): void {
         $this->name = $name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDay(): int {
+        return $this->day;
+    }
+
+    /**
+     * @param int $day
+     */
+    public function setDay(int $day): void {
+        $this->day = $day;
     }
 
     /**

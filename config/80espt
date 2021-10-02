@@ -11,3 +11,10 @@ description Schüler können Termine buchen, auch wenn sich diese überlappen
 type        bool
 group	    Modul: Elternsprechtag
 default	    false
+
+EspTAllowEditByTeacher:
+name        Erlaube Bearbeitung
+description Lehrkräfte können ihre eigenen Termine bearbeiten
+type        bool
+group	    Modul: Elternsprechtag
+default	    false

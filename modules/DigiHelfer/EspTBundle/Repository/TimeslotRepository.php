@@ -75,15 +75,26 @@ class TimeslotRepository extends ServiceEntityRepository {
     }
 
     /**
-     * remove all entries in table and reset id generation
+     * remove all entries in tables and reset id generation
      * @throws \Doctrine\DBAL\Exception
      */
     public function truncate() {
-        //based on https://blog.nevercodealone.de/symfony-doctrine-truncate-table/
         $connection = parent::getEntityManager()->getConnection();
-        $platform   = $connection->getDatabasePlatform();
 
-        $connection->executeStatement($platform->getTruncateTableSQL('espt_timeslot', true));
+        $connection->executeStatement('TRUNCATE espt_timeslot RESTART IDENTITY CASCADE');
+        $connection->executeStatement('TRUNCATE espt_teacher_group_selections RESTART IDENTITY CASCADE');
+    }
+
+    /**
+     * @param User $user
+     * @return Collection
+     */
+    public function findForSelection(User $user) : Collection {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery("SELECT t FROM DigiHelfer\EspTBundle\Entity\Timeslot t JOIN DigiHelfer\EspTBundle\Entity\TeacherGroupSelection s WHERE t.group MEMBER OF s.groups AND s.user = :user");
+        $query->setParameter('user', $user);
+
+        return new ArrayCollection($query->getResult());
     }
 
 }

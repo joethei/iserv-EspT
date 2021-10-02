@@ -32,9 +32,11 @@ class AdminController extends AbstractPageController {
      * @param EntityManagerInterface $entityManager
      * @param TeacherGroupRepository $groupRepository
      * @param TimeslotRepository $timeslotRepository
+     * @param CreationSettingsRepository $settingsRepository
      * @return array
      * @throws Exception
      * @throws NonUniqueResultException
+     * @throws \Exception
      * @Route("/settings", name="_settings")
      * @Template("@DH_EspT/AdminMenu.html.twig")
      */
@@ -58,25 +60,43 @@ class AdminController extends AbstractPageController {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /**@var CreationSettings $settings*/
+            $settings = $form->getData();
 
             //reset timeslots from last time
             $timeslotRepository->truncate();
 
-            //create timeslots for all groups according to template
+            //create timeslots for all groups according to templates
             $groups = $groupRepository->findAll();
 
             foreach ($groups as $group) {
-                $templates = $group->getTimeslotTemplate()->getTimeslots();
-                foreach ($templates as $template) {
+                $templates = $group->getTimeslotTemplates();
+                foreach($templates as $template) {
+                    foreach ($template->getTimeslots() as $timeslotTemplate) {
+                        $startDate = $settings->getStart();
+                        $startDate->add(new \DateInterval('P' . ($template->getDay() - 1) . 'D'));
 
-                    /** @var TimeslotTemplate $template */
-                    $timeslot = new Timeslot();
-                    $timeslot->setStart($template->getStart());
-                    $timeslot->setEnd($template->getEnd());
-                    $timeslot->setType($template->getType());
-                    $timeslot->setGroup($group);
+                        $day = (int)$startDate->format("j");
+                        $month = (int)$startDate->format("m");
+                        $year = (int)$startDate->format("Y");
 
-                    $entityManager->persist($timeslot);
+                        /** @var TimeslotTemplate $timeslotTemplate */
+                        $timeslot = new Timeslot();
+                        $startDate = new \DateTimeImmutable();
+                        $startDate->setDate($year, $month, $day);
+                        $startDate->setTime((int)$timeslotTemplate->getStart()->format("H"), (int)$timeslotTemplate->getStart()->format("i"));
+
+                        $endDate = new \DateTimeImmutable();
+                        $endDate->setDate($year, $month, $day);
+                        $endDate->setTime((int)$timeslotTemplate->getEnd()->format('H'), (int)$timeslotTemplate->getEnd()->format('i'));
+
+                        $timeslot->setStart($startDate);
+                        $timeslot->setEnd($endDate);
+                        $timeslot->setType($timeslotTemplate->getType());
+                        $timeslot->setGroup($group);
+
+                        $entityManager->persist($timeslot);
+                    }
                 }
             }
             $entityManager->persist($settings);

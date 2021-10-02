@@ -191,12 +191,20 @@ final class PrintController extends AbstractPageController {
         $header = array(_('Room'), _('Teacher'));
 
         $groups = $teacherGroupRepository->findAll();
+        usort($groups, function ($a, $b) {
+            /**@var TeacherGroup $a */
+            /** @var TeacherGroup $b */
+            return $a->getRoom() <=> $b->getRoom();
+        });
         $data = array();
 
         /** @var TeacherGroup $group */
         foreach ($groups as $group) {
             $data[] = array($group->getRoom(), $group);
         }
+
+        //Sort by name, check by setting
+        //sort by roomname afterwards
 
         $pdf = $this->buildPdf($settings, 15);
         $pdf->setCustomFooterText("");

@@ -1,10 +1,10 @@
 {% extends "@DH_EspT/Default/base.html.twig" %}
 
-{# @var event \DigiHelfer\EspTBundle\Entity\Timeslot #}
-
 {% block page_title _('EspT') %}
 
 {% block content %}
+
+    <a role="button" class="btn btn-primary" href="{{ path('espt_filter_groups') }}">{{ _('espt_back_to_filter') }}</a>
 
     <div class="jumbotron">
         <p class="text-center">{{ __('espt_registration_open_till', regEnd|ldatetime) }}</p>
