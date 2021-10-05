@@ -190,3 +190,9 @@ msgstr ""
 
 msgid "espt_timeslot_group_duplicate"
 msgstr ""
+
+msgid "espt_groups"
+msgstr ""
+
+msgid "espt_filter_groups_help"
+msgstr ""

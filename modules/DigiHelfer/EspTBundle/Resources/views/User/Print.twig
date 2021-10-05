@@ -7,7 +7,7 @@
 {% block content %}
 
     <div class="jumbotron">
-        <p class="text-center">{{ _('espt_next_event') }}{{ __('espt_start_end_time', startTime|ldatetime, endTime|ltime) }}</p>
+        <p class="text-center">{{ _('espt_next_event') }}{{ __('espt_start_end_time', startTime|ldatetime, endTime|ldatetime) }}</p>
    </div>
 
     {% if is_granted('PRIV_ESPT_TEACHER') %}

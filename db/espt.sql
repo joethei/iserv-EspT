@@ -48,12 +48,20 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON espt_timeslot_template TO "symfony";
 CREATE TABLE espt_teacher_group
 (
     id                BIGSERIAL PRIMARY KEY NOT NULL,
-    room              TEXT,
-    timeslot_template BIGINT
+    room              TEXT
 );
 
 GRANT USAGE, SELECT ON espt_teacher_group_id_seq to "symfony";
 GRANT SELECT, INSERT, UPDATE, DELETE ON espt_teacher_group TO "symfony";
+
+CREATE TABLE espt_timeslot_templates(
+    template_id BIGINT REFERENCES espt_timeslot_template_collection(id),
+    group_id BIGINT REFERENCES espt_teacher_group(id),
+    PRIMARY KEY (template_id, group_id)
+);
+
+GRANT USAGE, SELECT ON espt_timeslot_templates_id_seq to "symfony";
+GRANT SELECT, INSERT, UPDATE, DELETE ON espt_timeslot_templates TO "symfony";
 
 CREATE TABLE espt_teacher_groups
 (
@@ -77,7 +85,7 @@ CREATE TABLE espt_timeslot
 GRANT USAGE, SELECT ON espt_timeslot_id_seq to "symfony";
 GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON espt_timeslot TO "symfony";
 
-CREATE TABLE espt_teacher_group_section(
+CREATE TABLE espt_teacher_group_selection(
     id BIGSERIAL PRIMARY KEY NOT NULL,
     user_id TEXT REFERENCES users(act)
 );
@@ -86,10 +94,9 @@ GRANT USAGE, SELECT ON espt_teacher_group_selection_id_seq to "symfony";
 GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON espt_teacher_group_selection TO "symfony";
 
 CREATE TABLE espt_teacher_group_selections(
-    selection_id BIGINT REFERENCES espt_teacher_group_section(id),
+    selection_id BIGINT REFERENCES espt_teacher_group_selection(id),
     group_id BIGINT REFERENCES espt_teacher_group(id),
     PRIMARY KEY (selection_id, group_id)
 );
 
-GRANT USAGE, SELECT ON espt_teacher_group_selections_id_seq to "symfony";
 GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE ON espt_teacher_group_selections TO "symfony";

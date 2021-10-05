@@ -4,12 +4,12 @@
 
 {% block content %}
 
-    <a role="button" class="btn btn-primary" href="{{ path('espt_filter_groups') }}">{{ _('espt_back_to_filter') }}</a>
-
     <div class="jumbotron">
         <p class="text-center">{{ __('espt_registration_open_till', regEnd|ldatetime) }}</p>
         <p class="text-center">{{ _('espt_next_event') }}{{ __('espt_start_end_time', startTime|ldatetime, endTime|ltime) }}</p>
     </div>
+
+    {{ form(form) }}
 
     <div id="espt-table">
         <!--Vue component inserted here-->

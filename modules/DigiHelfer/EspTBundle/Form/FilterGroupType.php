@@ -26,10 +26,13 @@ class FilterGroupType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
             ->add('groups', EntityType::class, [
-                'label' => '',
-                'help' => '',
+                'label' => _('espt_groups'),
+                'help' => _('espt_filter_groups_help'),
                 'class' => TeacherGroup::class,
                 'by_reference' => true,
+                'multiple' => true,
+                'select2' => true,
+                'select2-icon' => 'fugue-user',
                 'choice_label' => function(TeacherGroup $group) {
                     $names = array();
                     /**@var User $user*/
@@ -44,7 +47,7 @@ class FilterGroupType extends AbstractType {
                     return implode(', ', $names);
                 }
             ])
-        ->add('filter', SubmitType::class, [
+        ->add('submit', SubmitType::class, [
             'label' => _('Filter'),
             'icon' => 'filter',
             'buttonClass' => 'btn-default'

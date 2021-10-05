@@ -3,6 +3,7 @@
 namespace DigiHelfer\EspTBundle\Repository;
 
 use DigiHelfer\EspTBundle\Entity\TeacherGroup;
+use DigiHelfer\EspTBundle\Entity\TeacherGroupSelection;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -23,7 +24,7 @@ class TeacherGroupRepository extends ServiceEntityRepository {
      * @return int|mixed|object|string|null
      * @throws NonUniqueResultException
      */
-    public function find($id, $lockMode = null, $lockVersion = null) {
+    public function find($id, $lockMode = null, $lockVersion = null) : TeacherGroup {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\TeacherGroup s WHERE s.id = :id");
         $query->setParameter('id', $id);
@@ -53,14 +54,15 @@ class TeacherGroupRepository extends ServiceEntityRepository {
     }
 
     /**
-     * return Collection|TeacherGroup
+     * return TeacherGroupSelection
+     * @throws NonUniqueResultException
      */
-    public function findForSelection(User $user) : Collection {
+    public function findForSelection(User $user) : ?TeacherGroupSelection {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\TeacherGroupSelection s WHERE s.user = :user");
         $query->setParameter('user', $user);
 
-        return new ArrayCollection($query->getResult());
+        return $query->getOneOrNullResult();
     }
 
 }

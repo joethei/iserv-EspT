@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\JoinColumn;
-use IServ\CoreBundle\Entity\Group;
 use IServ\CoreBundle\Entity\User;
 use IServ\CrudBundle\Entity\CrudInterface;
 
@@ -62,7 +61,7 @@ class TeacherGroup implements CrudInterface {
 
     /**
      * @var Timeslot[]
-     * @ORM\OneToMany(targetEntity="DigiHelfer\EspTBundle\Entity\Timeslot", mappedBy="group")
+     * @ORM\OneToMany(targetEntity="DigiHelfer\EspTBundle\Entity\Timeslot", mappedBy="group", cascade={"all"})
      */
     private $timeslots;
 
@@ -118,7 +117,7 @@ class TeacherGroup implements CrudInterface {
     }
 
     /**
-     * @return TimeslotTemplateCollection|Collection|null
+     * @return Collection|TimeslotTemplateCollection[]|null
      */
     public function getTimeslotTemplates() {
         return $this->timeslotTemplates;

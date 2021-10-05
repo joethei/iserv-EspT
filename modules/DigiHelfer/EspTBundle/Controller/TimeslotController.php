@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class TimeslotController
  * @package DigiHelfer\EspTBundle\Controller
- * @Route("/timeslots")
+ * @Route("/espt/timeslots")
  */
 class TimeslotController extends AbstractPageController {
 

@@ -62,7 +62,7 @@ class TeacherGroupCrud extends AdminServiceCrud {
                     return $repository->createPrivilegeQueryBuilder(Privilege::TEACHER);
                 }
             ])
-            ->add('timeslotTemplate', EntityType::class, [
+            ->add('timeslotTemplates', EntityType::class, [
                 'class' => TimeslotTemplateCollection::class,
                 'label' => _('espt_timeslot_template'),
                 'help' => _('espt_timeslot_template_help'),
