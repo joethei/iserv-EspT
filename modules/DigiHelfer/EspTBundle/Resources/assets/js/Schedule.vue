@@ -1,5 +1,9 @@
 <template>
-  <ScheduleView v-for="schedule in schedules" v-bind:schedules="schedule.schedules" v-bind:settings="schedule.settings" @onClickEvent="(event) => onClick(event)"/>
+  <div>
+    <div v-for="schedule in schedules">
+      <ScheduleView v-bind:schedules="schedule.schedules" v-bind:settings="schedule.settings" @onClickEvent="(event) => onClick(event)"/>
+    </div>
+  </div>
 </template>
 
 <script>
