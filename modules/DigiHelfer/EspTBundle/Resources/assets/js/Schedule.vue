@@ -85,7 +85,7 @@ export default {
       $.getJSON(Routing.generate('espt_timeslots')).done(data => {
           data.schedules.forEach((schedule) => {
             schedule.events.forEach((event) => {
-              let diff = moment.duration(moment(data.settings.start()).diff(moment(event.start))).asDays();
+              let diff = moment.duration(moment(data.settings.start).diff(moment(event.start))).asDays();
               this.schedules[diff].id = schedule.id;
               this.schedules[diff].title = schedule.title;
               this.schedules[diff].subtitle = schedule.subtitle;

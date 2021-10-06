@@ -47,6 +47,7 @@ class CreationSettingsType extends AbstractType {
             'label' => _("espt_save"),
             'icon' => 'ok',
             'buttonClass' => 'btn-success',
+            'attr' => array('onclick' => 'return confirm(' . _('espt_confirm_creation') . ')'),
         ]);
     }
 

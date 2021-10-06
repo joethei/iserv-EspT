@@ -64,8 +64,8 @@ class TeacherGroupCrud extends AdminServiceCrud {
             ])
             ->add('timeslotTemplates', EntityType::class, [
                 'class' => TimeslotTemplateCollection::class,
-                'label' => _('espt_timeslot_template'),
-                'help' => _('espt_timeslot_template_help'),
+                'label' => _('espt_timeslot_templates'),
+                'help' => _('espt_timeslot_templates_help'),
                 'choice_label' => 'name',
                 'multiple' => true,
                 'crud_create_remote' => $this->router()->generate('espt_admin_timeslottemplatecollection_add')
@@ -86,7 +86,7 @@ class TeacherGroupCrud extends AdminServiceCrud {
     }
 
     public function isAuthorized(): bool {
-        return $this->isGranted('PRIV_ESPT_ADMIN');
+        return $this->isGranted(Privilege::ADMIN);
     }
 
     public function prepareBreadcrumbs(): array {

@@ -196,3 +196,6 @@ msgstr ""
 
 msgid "espt_filter_groups_help"
 msgstr ""
+
+msgid "espt_confirm_creation"
+msgstr ""

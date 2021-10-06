@@ -30,5 +30,11 @@
         <a role="button" class="btn btn-primary" href="{{ path('espt_print_student') }}">{{ _('espt_generate_print') }}</a>
     {% endif %}
 
+    {% if is_granted('PRIV_ESPT_TEACHER') and allowEdit %}
+        <div id="espt-schedule">
+            <!--Vue component inserted here-->
+        </div>
+    {% endif %}
+
 
 {% endblock %}

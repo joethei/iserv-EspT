@@ -14,6 +14,7 @@ use DigiHelfer\EspTBundle\Security\Privilege;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use IServ\CoreBundle\Controller\AbstractPageController;
+use IServ\Library\Config\Config;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,11 +32,13 @@ final class MainController extends AbstractPageController {
      * @param CreationSettingsRepository $creationSettingsRepository
      * @param TimeslotRepository $timeslotRepository
      * @param TeacherGroupRepository $groupRepository
+     * @param EntityManagerInterface $entityManager
+     * @param Config $config
      * @return Response
      * @throws NonUniqueResultException
      * @Route("/", name="espt_index")
      */
-    public function index(Request $request, CreationSettingsRepository $creationSettingsRepository, TimeslotRepository $timeslotRepository, TeacherGroupRepository $groupRepository, EntityManagerInterface $entityManager): Response {
+    public function index(Request $request, CreationSettingsRepository $creationSettingsRepository, TimeslotRepository $timeslotRepository, TeacherGroupRepository $groupRepository, EntityManagerInterface $entityManager, Config $config): Response {
         $this->addBreadcrumb(_("EspT"));
 
         $settings = $creationSettingsRepository->findFirst();
@@ -110,7 +113,9 @@ final class MainController extends AbstractPageController {
                 return $this->render("@DH_EspT/User/Print.twig", [
                     "groups" => $groups->toArray(),
                     "startTime" => $settings->getStart(),
-                    "endTime" => $settings->getEnd()
+                    "endTime" => $settings->getEnd(),
+                    "allowEdit" => $config->get("EspTAllowEditByTeacher"),
+                    "timeslots" => $timeslotRepository->findForTeacher($this->authenticatedUser()),
                 ]);
             }
             return $this->render("@DH_EspT/User/Print.twig", [

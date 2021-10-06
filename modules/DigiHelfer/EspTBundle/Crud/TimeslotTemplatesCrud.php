@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace DigiHelfer\EspTBundle\Crud;
 
+use DigiHelfer\EspTBundle\Entity\TeacherGroup;
 use DigiHelfer\EspTBundle\Entity\TimeslotTemplateCollection;
 use DigiHelfer\EspTBundle\Form\TimeslotTemplateType;
+use DigiHelfer\EspTBundle\Security\Privilege;
 use IServ\AdminBundle\Admin\AdminServiceCrud;
 use IServ\BootstrapBundle\Form\Type\BootstrapCollectionType;
 use IServ\CrudBundle\Mapper\FormMapper;
@@ -13,6 +15,7 @@ use IServ\CrudBundle\Mapper\ListMapper;
 use IServ\CrudBundle\Mapper\ShowMapper;
 use IServ\CrudBundle\Model\Breadcrumb;
 use IServ\CrudBundle\Routing\RoutingDefinition;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use function Webmozart\Assert\Tests\StaticAnalysis\null;
 
 class TimeslotTemplatesCrud extends AdminServiceCrud {
@@ -58,11 +61,21 @@ class TimeslotTemplatesCrud extends AdminServiceCrud {
                 'delete_button_text' => _('espt_timeslot_remove'),
                 'sub_widget_col'     => 9,
                 'button_col'         => 3,
-            ]);
+            ])
+        ->add('groups', EntityType::class, [
+                'class' => TeacherGroup::class,
+                'label'=> _('espt_groups'),
+                'choice_label' => function(TeacherGroup $group) {
+                    return $group;
+                },
+                'multiple' => true
+            ]
+        );
+
     }
 
     public function isAuthorized(): bool {
-        return $this->isGranted('PRIV_ESPT_ADMIN');
+        return $this->isGranted(Privilege::ADMIN);
     }
 
     public function prepareBreadcrumbs(): array {

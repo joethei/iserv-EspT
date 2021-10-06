@@ -67,8 +67,8 @@ msgstr "Zeitfenster Vorlagen"
 msgid "espt_timeslot_template"
 msgstr "Zeitfenster Vorlage"
 
-msgid "espt_timeslot_template_help"
-msgstr "Welche Vorlage soll verwendet werden?"
+msgid "espt_timeslot_templates_help"
+msgstr "Welche Vorlagen soll verwendet werden?"
 
 msgid "espt_teacher"
 msgstr "Lehrkraft"
@@ -186,3 +186,6 @@ msgstr "Gruppen"
 
 msgid "espt_filter_groups_help"
 msgstr "Welche Gruppen sollen angezeigt werden?"
+
+msgid "espt_confirm_creation"
+msgstr "Sind Sie sich sicher das Sie alle Zeitfenster löschen und neue erstellen möchten?"

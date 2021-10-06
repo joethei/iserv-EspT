@@ -6,6 +6,7 @@ namespace DigiHelfer\EspTBundle\Crud;
 
 use DigiHelfer\EspTBundle\Entity\TeacherGroup;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
+use DigiHelfer\EspTBundle\Security\Privilege;
 use IServ\AdminBundle\Admin\AdminServiceCrud;
 use IServ\CrudBundle\Mapper\FormMapper;
 use IServ\CrudBundle\Mapper\ListMapper;
@@ -56,7 +57,7 @@ class TimeslotCrud extends AdminServiceCrud {
     }
 
     public function isAuthorized(): bool {
-        return $this->isGranted('PRIV_ESPT_ADMIN');
+        return ($this->isGranted(Privilege::ADMIN));
     }
 
     public function prepareBreadcrumbs(): array {

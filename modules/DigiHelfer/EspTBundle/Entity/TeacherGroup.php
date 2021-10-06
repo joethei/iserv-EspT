@@ -44,11 +44,6 @@ class TeacherGroup implements CrudInterface {
      */
     private $users;
 
-    //TODO: associate user group with teacher group, only show to those, but only if setting is set
-    //TODO: Allow for two different days, in same booking period
-    //TODO: Allow for editing timeslots by teacher
-    //TODO: Warning that it overwrites on create
-
     /**
      * @var Collection|TimeslotTemplateCollection[]|null
      * @ORM\ManyToMany(targetEntity="DigiHelfer\EspTBundle\Entity\TimeslotTemplateCollection")
