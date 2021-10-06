@@ -26,7 +26,7 @@ class FilterGroupType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
             ->add('groups', EntityType::class, [
-                'label' => _('espt_groups'),
+                'label' => _('espt_teachers'),
                 'help' => _('espt_filter_groups_help'),
                 'class' => TeacherGroup::class,
                 'by_reference' => true,

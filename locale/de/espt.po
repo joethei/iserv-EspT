@@ -185,7 +185,7 @@ msgid "espt_groups"
 msgstr "Gruppen"
 
 msgid "espt_filter_groups_help"
-msgstr "Welche Gruppen sollen angezeigt werden?"
+msgstr "Welche Lehrkräfte sollen angezeigt werden?"
 
 msgid "espt_confirm_creation"
 msgstr "Sind Sie sich sicher das Sie alle Zeitfenster löschen und neue erstellen möchten?"

@@ -83,14 +83,21 @@ export default {
     },
     updateData() {
       $.getJSON(Routing.generate('espt_timeslots')).done(data => {
+        //split data into multiple copies, one for each day.
           data.schedules.forEach((schedule) => {
             schedule.events.forEach((event) => {
               let diff = moment.duration(moment(data.settings.start).diff(moment(event.start))).asDays();
-              this.schedules[diff].id = schedule.id;
-              this.schedules[diff].title = schedule.title;
-              this.schedules[diff].subtitle = schedule.subtitle;
               if(this.schedules[diff] === undefined) {
-                this.schedules[diff].events = [];
+                this.schedules[diff] = {
+                  settings: {},
+                  schedules: {},
+                };
+                this.schedules[diff].schedules = {
+                  id: schedule.id,
+                  title: schedule.title,
+                  subtitle: schedule.subtitle,
+                  events: []
+                };
               }
               this.schedules[diff].events.push(event);
             });

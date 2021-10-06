@@ -82,7 +82,7 @@ class TimeslotController extends AbstractPageController {
             if($timeslot->getUser() != null) {
                 $result[] = array(
                     'start' => $timeslot->getStart()->format("d.m G:i"),
-                    'end' => $timeslot->getEnd()->format("d.m G:i"),
+                    'end' => $timeslot->getEnd()->format("G:i"),
                     'type' => $timeslot->getType()->getName(),
                     'user' => $timeslot->getUser()->getNameByFirstname(),
                     'group' => implode(', ', $timeslot->getGroup()->getUsers()->toArray()),
