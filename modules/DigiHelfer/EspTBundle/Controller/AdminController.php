@@ -83,12 +83,12 @@ class AdminController extends AbstractPageController {
                         /** @var TimeslotTemplate $timeslotTemplate */
                         $timeslot = new Timeslot();
                         $startDate = new \DateTimeImmutable();
-                        $startDate->setDate($year, $month, $day);
-                        $startDate->setTime((int)$timeslotTemplate->getStart()->format("H"), (int)$timeslotTemplate->getStart()->format("i"));
+                        $startDate = $startDate->setDate($year, $month, $day);
+                        $startDate = $startDate->setTime((int)$timeslotTemplate->getStart()->format("H"), (int)$timeslotTemplate->getStart()->format("i"));
 
                         $endDate = new \DateTimeImmutable();
-                        $endDate->setDate($year, $month, $day);
-                        $endDate->setTime((int)$timeslotTemplate->getEnd()->format('H'), (int)$timeslotTemplate->getEnd()->format('i'));
+                        $endDate = $endDate->setDate($year, $month, $day);
+                        $endDate = $endDate->setTime((int)$timeslotTemplate->getEnd()->format('H'), (int)$timeslotTemplate->getEnd()->format('i'));
 
                         $timeslot->setStart($startDate);
                         $timeslot->setEnd($endDate);

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DigiHelfer\EspTBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\JoinColumn;
@@ -76,7 +77,7 @@ class TeacherGroupSelection {
     /**
      * @return ArrayCollection
      */
-    public function getGroups() : ArrayCollection {
+    public function getGroups() : Collection {
         return $this->groups;
     }
 

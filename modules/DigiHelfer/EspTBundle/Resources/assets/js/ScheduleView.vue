@@ -1,5 +1,6 @@
 <template>
   <div class="ScheduleView">
+    <p>{{ settings.start.format('dd.mm') }}</p>
     <div class="timeline">
       <div class="hour" :style="timelineWidth" v-for="hour in hours" :key="hour">
         {{ hour }}

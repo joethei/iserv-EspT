@@ -1,5 +1,5 @@
 <template>
-  <ScheduleView v-bind:schedules="this.schedules" v-bind:settings="this.settings" @onClickEvent="(event) => onClick(event)"/>
+  <ScheduleView v-for="schedule in schedules" v-bind:schedules="schedule.schedules" v-bind:settings="schedule.settings" @onClickEvent="(event) => onClick(event)"/>
 </template>
 
 <script>
@@ -8,6 +8,8 @@ import Confirm from 'IServ.Confirm';
 import Routing from 'IServ.Routing';
 import Message from 'IServ.Message';
 import ScheduleView from "./ScheduleView";
+
+import moment from "moment";
 
 import Vue from 'vue';
 import vToolTip from "v-tooltip";
@@ -40,7 +42,7 @@ export default {
         //inviteModal.show();
         window.location.href = Routing.generate('espt_invite', {'id': event.id});
       }else {
-        //only confirmation if is allowed to book
+        //only show confirmation dialog if is allowed to book
         if(event.color !== 'green' && event.color !== 'yellow') {
           return;
         }
@@ -77,8 +79,23 @@ export default {
     },
     updateData() {
       $.getJSON(Routing.generate('espt_timeslots')).done(data => {
-          this.settings = data.settings;
-          this.schedules = data.schedules;
+          data.schedules.forEach((schedule) => {
+            schedule.events.forEach((event) => {
+              let diff = moment.duration(moment(data.settings.start()).diff(moment(event.start))).asDays();
+              this.schedules[diff].id = schedule.id;
+              this.schedules[diff].title = schedule.title;
+              this.schedules[diff].subtitle = schedule.subtitle;
+              if(this.schedules[diff] === undefined) {
+                this.schedules[diff].events = [];
+              }
+              this.schedules[diff].events.push(event);
+            });
+          });
+          this.schedules.forEach((schedule) => {
+            schedule.settings.scaleFactor = data.settings.scaleFactor;
+            schedule.settings.start = moment.min(schedule.events.map(event => event.start));
+            schedule.settings.end = moment.max(schedule.events.map(event => event.end));
+          })
       });
     }
   },
@@ -87,10 +104,10 @@ export default {
     document.addEventListener("updateData", () => {
       this.updateData();
     });
-    //update data every minute
+    //update data every two minutes
     this.timer = setInterval(() => {
       this.updateData();
-    }, 1000 * 60)
+    }, 2 * 1000 * 60)
   },
   beforeDestroy: function () {
     clearInterval(this.timer);
@@ -98,14 +115,7 @@ export default {
   data: () => {
     return {
       timer: null,
-      settings: {
-        start: new Date(2021, 8, 20, 15, 30, 0),
-        end: new Date(2021, 8, 20, 18, 0, 0),
-        scaleFactor: 2
-      },
-      schedules: [
-        {},
-      ]
+      schedules: [],
     };
   }
 }

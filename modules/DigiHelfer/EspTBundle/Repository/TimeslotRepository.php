@@ -91,7 +91,7 @@ class TimeslotRepository extends ServiceEntityRepository {
      */
     public function findForSelection(User $user) : Collection {
         $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery("SELECT t FROM DigiHelfer\EspTBundle\Entity\Timeslot t JOIN DigiHelfer\EspTBundle\Entity\TeacherGroupSelection s WHERE t.group MEMBER OF s.groups AND s.user = :user");
+        $query = $entityManager->createQuery("SELECT t FROM DigiHelfer\EspTBundle\Entity\Timeslot t JOIN DigiHelfer\EspTBundle\Entity\TeacherGroupSelection s WITH t.group MEMBER OF s.groups WHERE s.user = :user");
         $query->setParameter('user', $user);
 
         return new ArrayCollection($query->getResult());

@@ -21,7 +21,7 @@ class MenuListener implements MainMenuListenerInterface {
 
 
         $event->getMenu()
-            ->addChild('espt', ['route' => 'espt_filter_groups', 'label' => _('EspT')])
+            ->addChild('espt', ['route' => 'espt_index', 'label' => _('EspT')])
             ->setExtra('icon', 'espt')
             ->setExtra('icon_style', 'iserv')
             ->setExtra('icon_fallback', 'users')

@@ -48,7 +48,7 @@ class TimeslotController extends AbstractPageController {
 
         if ($this->isGranted("ROLE_STUDENT") || $this->isGranted("ROLE_PARENT")) {
             if ($state == EventState::REGISTRATION) {
-                $timeslots = $timeslotRepository->findAll();
+                $timeslots = $timeslotRepository->findForSelection($this->authenticatedUser());
 
                 $timeslots = $timeslots->filter(function ($entry) {
                     /** @var Timeslot $entry */
@@ -81,8 +81,8 @@ class TimeslotController extends AbstractPageController {
             //don't show timeslots without bookings
             if($timeslot->getUser() != null) {
                 $result[] = array(
-                    'start' => $timeslot->getStart()->format("G:i"),
-                    'end' => $timeslot->getEnd()->format("G:i"),
+                    'start' => $timeslot->getStart()->format("d.m G:i"),
+                    'end' => $timeslot->getEnd()->format("d.m G:i"),
                     'type' => $timeslot->getType()->getName(),
                     'user' => $timeslot->getUser()->getNameByFirstname(),
                     'group' => implode(', ', $timeslot->getGroup()->getUsers()->toArray()),
