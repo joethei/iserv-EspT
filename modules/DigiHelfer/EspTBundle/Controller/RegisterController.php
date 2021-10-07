@@ -2,10 +2,12 @@
 
 namespace DigiHelfer\EspTBundle\Controller;
 
+use DigiHelfer\EspTBundle\Config\Configuration;
 use DigiHelfer\EspTBundle\Entity\EventType;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
 use DigiHelfer\EspTBundle\Repository\TimeslotRepository;
 use DigiHelfer\EspTBundle\Helpers\DateUtils;
+use DigiHelfer\EspTBundle\Security\Privilege;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use IServ\CoreBundle\Controller\AbstractPageController;
@@ -34,7 +36,7 @@ class RegisterController extends AbstractPageController {
         $id = $request->request->get('id');
         if($id == null) return $this->json(array('success' => false, 'error'=> 'no id'));
 
-        if (!$this->isGranted("ROLE_STUDENT") && !$this->isGranted("ROLE_PARENT")) {
+        if (!$this->isGranted(Privilege::STUDENT)) {
             return $this->json(array('success' => false, 'error' => 'no perms'));
         }
 
@@ -60,12 +62,12 @@ class RegisterController extends AbstractPageController {
         $timeslots = $timeslotRepository->findForUser($this->authenticatedUser());
         /** @var Timeslot $otherTimeslot*/
         foreach ($timeslots as $otherTimeslot) {
-            if(!$config->get('EspTAllowOverlap')) {
+            if(!$config->get(Configuration::ALLOW_OVERLAP)) {
                 if(DateUtils::datesOverlap($timeslot->getStart(), $timeslot->getEnd(), $otherTimeslot->getStart(), $otherTimeslot->getEnd())) {
                     return $this->json(array('success' => false, 'error' => _('espt_timeslot_overlap')));
                 }
             }
-            if(!$config->get('EspTAllowDuplicates')) {
+            if(!$config->get(Configuration::ALLOW_DUPLICATES)) {
                 if($timeslot->getGroup()->getId() == $otherTimeslot->getGroup()->getId()) {
                     return $this->json(array('success' => false, 'error' => _('espt_timeslot_group_duplicate')));
                 }

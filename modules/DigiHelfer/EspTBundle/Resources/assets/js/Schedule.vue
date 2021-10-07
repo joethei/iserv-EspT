@@ -90,22 +90,27 @@ export default {
               if(this.schedules[diff] === undefined) {
                 this.schedules[diff] = {
                   settings: {},
-                  schedules: {},
+                  schedules: [],
                 };
-                this.schedules[diff].schedules = {
+                this.schedules[diff].schedules.push({
                   id: schedule.id,
                   title: schedule.title,
                   subtitle: schedule.subtitle,
                   events: []
-                };
+                });
               }
-              this.schedules[diff].events.push(event);
+              this.schedules[diff].schedules.forEach((localSchedule) => {
+                if(localSchedule.id === schedule.id) {
+                  localSchedule.events.push(event);
+                }
+              });
+
             });
           });
           this.schedules.forEach((schedule) => {
             schedule.settings.scaleFactor = data.settings.scaleFactor;
-            schedule.settings.start = moment.min(schedule.events.map(event => event.start));
-            schedule.settings.end = moment.max(schedule.events.map(event => event.end));
+            schedule.settings.start = moment.min(schedule.schedules.map(schedule => schedule.events).map(event => event.start));
+            schedule.settings.end = moment.max(schedule.schedules.map(schedule => schedule.events).map(event => event.end));
           })
       });
     }

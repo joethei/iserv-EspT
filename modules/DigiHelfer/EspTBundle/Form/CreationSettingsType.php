@@ -27,7 +27,7 @@ class CreationSettingsType extends AbstractType {
                 'help' => _('espt_endtime_help'),
                 'input' => 'datetime_immutable',
                 'constraints' => [
-                    new GreaterThanOrEqual (  ['value'=>"today",'message'=>"error message"] )
+                    new GreaterThanOrEqual (  ['value'=>"now",'message'=>"error message"] )
                 ]
             ])
             ->add('regStart', DateTimeType::class, [
@@ -35,7 +35,7 @@ class CreationSettingsType extends AbstractType {
                 'help' => _('espt_registration_start_help'),
                 'input' => 'datetime_immutable',
                 'constraints' => [
-                    new GreaterThanOrEqual (  ['value'=>"today",'message'=>"error message"] )
+                    new GreaterThanOrEqual (  ['value'=>"now",'message'=>"error message"] )
                 ]
             ])
             ->add('regEnd', DateTimeType::class, [
@@ -47,7 +47,6 @@ class CreationSettingsType extends AbstractType {
             'label' => _("espt_save"),
             'icon' => 'ok',
             'buttonClass' => 'btn-success',
-            'attr' => array('onclick' => 'return confirm(' . _('espt_confirm_creation') . ')'),
         ]);
     }
 

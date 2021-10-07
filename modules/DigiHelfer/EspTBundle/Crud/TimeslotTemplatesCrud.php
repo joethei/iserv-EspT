@@ -16,7 +16,6 @@ use IServ\CrudBundle\Mapper\ShowMapper;
 use IServ\CrudBundle\Model\Breadcrumb;
 use IServ\CrudBundle\Routing\RoutingDefinition;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use function Webmozart\Assert\Tests\StaticAnalysis\null;
 
 class TimeslotTemplatesCrud extends AdminServiceCrud {
 

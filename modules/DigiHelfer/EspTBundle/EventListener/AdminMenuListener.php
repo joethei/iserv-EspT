@@ -2,6 +2,7 @@
 
 namespace DigiHelfer\EspTBundle\EventListener;
 
+use DigiHelfer\EspTBundle\Security\Privilege;
 use IServ\AdminBundle\EventListener\AdminMenuListenerInterface;
 use IServ\CoreBundle\Event\MenuEvent;
 
@@ -11,7 +12,7 @@ class AdminMenuListener implements AdminMenuListenerInterface {
      * {@inheritDoc}
      */
     public function onBuildAdminMenu(MenuEvent $event) : void {
-        if(!$event->getAuthorizationChecker()->isGranted("PRIV_ESPT_ADMIN"))
+        if(!$event->getAuthorizationChecker()->isGranted(Privilege::ADMIN))
             return;
 
         $event->getMenu()->getChild(self::ADMIN_MODULES)->addChild('espt_config', [

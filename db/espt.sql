@@ -60,6 +60,8 @@ CREATE TABLE espt_timeslot_templates(
     PRIMARY KEY (template_id, group_id)
 );
 
+GRANT SELECT, INSERT, UPDATE, DELETE ON espt_timeslot_templates TO "symfony";
+
 CREATE TABLE espt_teacher_groups
 (
     user_id  TEXT REFERENCES users (act),

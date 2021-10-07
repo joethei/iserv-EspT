@@ -59,7 +59,7 @@ final class MainController extends AbstractPageController {
                     ]);
             }
 
-            if ($this->isGranted("ROLE_STUDENT") || $this->isGranted("ROLE_PARENT")) {
+            if ($this->isGranted(Privilege::STUDENT)) {
                 return $this->render("@DH_EspT/User/UserInvite.twig", [
                     "startTime" => $settings->getStart(),
                     "endTime" => $settings->getEnd(),
@@ -77,7 +77,7 @@ final class MainController extends AbstractPageController {
                     ]);
             }
 
-            if ($this->isGranted("ROLE_STUDENT") || $this->isGranted("ROLE_PARENT")) {
+            if ($this->isGranted(Privilege::STUDENT)) {
                 $groups = $groupRepository->findForSelection($this->authenticatedUser());
                 if($groups === null) {
                     $groups = new TeacherGroupSelection();

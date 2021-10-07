@@ -144,7 +144,7 @@ final class PrintController extends AbstractPageController {
      * @Route("/student", name="espt_print_student")
      */
     public function printStudent(CreationSettingsRepository $settingsRepository, TimeslotRepository $timeslotRepository) : Response {
-        $this->denyAccessUnlessGranted("ROLE_STUDENT");
+        $this->denyAccessUnlessGranted(Privilege::STUDENT);
         $settings = $settingsRepository->findFirst();
 
         // column titles

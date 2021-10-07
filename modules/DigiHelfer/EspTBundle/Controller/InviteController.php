@@ -2,6 +2,7 @@
 
 namespace DigiHelfer\EspTBundle\Controller;
 
+use DigiHelfer\EspTBundle\Config\Configuration;
 use DigiHelfer\EspTBundle\Entity\EventType;
 use DigiHelfer\EspTBundle\Repository\EventTypeRepository;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
@@ -11,6 +12,7 @@ use DigiHelfer\EspTBundle\Helpers\DateUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use IServ\CoreBundle\Controller\AbstractPageController;
+use IServ\Library\Config\Config;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,11 +32,12 @@ class InviteController extends AbstractPageController {
      * @param EntityManagerInterface $entityManager
      * @param TimeslotRepository $timeslotRepository
      * @param EventTypeRepository $typeRepository
+     * @param Config $config
      * @return Response|JsonResponse
      * @throws NonUniqueResultException
      * @Route("/invite/{id}", name="espt_invite", options={"expose": true})
      */
-    public function invite(int $id, Request $request, EntityManagerInterface $entityManager, TimeslotRepository $timeslotRepository, EventTypeRepository $typeRepository): Response {
+    public function invite(int $id, Request $request, EntityManagerInterface $entityManager, TimeslotRepository $timeslotRepository, EventTypeRepository $typeRepository, Config $config): Response {
         $timeslot = $timeslotRepository->find($id);
         $form = $this->createForm(InviteStudentType::class, $timeslot);
 
@@ -45,7 +48,7 @@ class InviteController extends AbstractPageController {
             $timeslot = $form->getData();
 
             //only save if timeslot is correct type
-            if($timeslot->getType()->getName() == EventType::INVITE) {
+            if($timeslot->getType()->getName() == EventType::INVITE || $config->get(Configuration::ALLOW_EDIT)) {
 
                 //block all timeslots that overlap for this group
                 //if the teacher decides to remove this invite this will be rolled back

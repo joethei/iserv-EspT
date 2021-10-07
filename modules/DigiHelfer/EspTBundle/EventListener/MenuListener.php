@@ -15,8 +15,7 @@ class MenuListener implements MainMenuListenerInterface {
     public function onBuildMainMenu(MenuEvent $event) {
         if(!$event->getAuthorizationChecker()->isGranted(Privilege::ADMIN)
         && !$event->getAuthorizationChecker()->isGranted(Privilege::TEACHER)
-        && !$event->getAuthorizationChecker()->isGranted("ROLE_STUDENT")
-        && !$event->getAuthorizationChecker()->isGranted("ROLE_PARENT"))
+        && !$event->getAuthorizationChecker()->isGranted(Privilege::STUDENT))
             return;
 
 

@@ -46,7 +46,7 @@ class TimeslotController extends AbstractPageController {
             }
         }
 
-        if ($this->isGranted("ROLE_STUDENT") || $this->isGranted("ROLE_PARENT")) {
+        if ($this->isGranted(Privilege::STUDENT)) {
             if ($state == EventState::REGISTRATION) {
                 $timeslots = $timeslotRepository->findForSelection($this->authenticatedUser());
 

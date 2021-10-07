@@ -46,3 +46,6 @@ msgstr "Fehler"
 
 msgid "Student"
 msgstr "Schüler"
+
+msgid "espt_confirm_creation"
+msgstr "Sind Sie sich sicher das Sie alle Zeitfenster löschen und neue erstellen möchten?"

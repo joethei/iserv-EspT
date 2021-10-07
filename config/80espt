@@ -1,5 +1,5 @@
 EspTAllowDuplicates:
-name        Erlaube Duplikate
+name        Erlaube Mehrfachbuchungen
 description Schüler können mehrere Termine bei einer Gruppe buchen.
 type        bool
 group	    Modul: Elternsprechtag
@@ -13,7 +13,7 @@ group	    Modul: Elternsprechtag
 default	    false
 
 EspTAllowEditByTeacher:
-name        Erlaube Bearbeitung
+name        Erlaube Bearbeitung durch Lehrkräfte
 description Lehrkräfte können ihre eigenen Termine bearbeiten
 type        bool
 group	    Modul: Elternsprechtag

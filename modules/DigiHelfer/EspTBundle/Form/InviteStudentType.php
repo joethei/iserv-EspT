@@ -2,8 +2,10 @@
 
 namespace DigiHelfer\EspTBundle\Form;
 
+use DigiHelfer\EspTBundle\Config\Configuration;
 use DigiHelfer\EspTBundle\Entity\EventType;
 use DigiHelfer\EspTBundle\Entity\Timeslot;
+use DigiHelfer\EspTBundle\Security\Privilege;
 use IServ\CoreBundle\Repository\UserRepository;
 use IServ\Library\Config\Config;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -32,9 +34,9 @@ class InviteStudentType extends AbstractType {
                     $queryBuilder = $repository->createDeletedAwareQueryBuilder('users');
                     $queryBuilder->join('users.roles', 'roles');
                     $queryBuilder->orderBy("users.firstname, users.lastname");
-                    $queryBuilder->setParameter("role", "ROLE_STUDENT");
+                    $queryBuilder->setParameter("privilege", Privilege::STUDENT);
 
-                    $where = $queryBuilder->expr()->in('roles', ':role');
+                    $where = $queryBuilder->expr()->in('privileges', ':privilege');
 
                     $queryBuilder->andWhere($where);
 
@@ -44,7 +46,7 @@ class InviteStudentType extends AbstractType {
             ]);
 
             //allow teachers to edit event type
-            if($this->config->get("EspTAllowEditByTeacher")) {
+            if($this->config->get(Configuration::ALLOW_EDIT)) {
                 $builder->add('type', EntityType::class, [
                     'label' => _('espt_timeslot_type'),
                     'help' => _('espt_timeslot_type_help'),

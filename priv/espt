@@ -7,3 +7,8 @@ priv.espt_teacher:
 module      EspT
 title       Als Lehrkraft an Elternsprechtagen teilnehmen
 description Darf an Elternsprechtagen Schüler einladen und kann von Verwalter als Lehrkraft einer Gruppe zugeordnet werden
+
+priv.espt_student:
+module      EspT
+title       Als Schüler an Elternsprechtagen teilnehmen
+description Darf an Elternsprechtagen Termine buchen
