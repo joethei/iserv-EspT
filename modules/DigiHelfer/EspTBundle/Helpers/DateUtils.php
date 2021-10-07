@@ -79,15 +79,16 @@ class DateUtils {
 
             if(!array_key_exists($diff, $schedules)) {
                 $schedules[$diff] = array();
+                $schedules[$diff]['schedules'] = array();
             }
 
             dump($schedules);
 
             $groupExists = false;
-            for ($i = 0; $i < count($schedules[$diff]); ++$i) {
+            for ($i = 0; $i < count($schedules[$diff]['schedules']); ++$i) {
                 dump($i . " / " . $diff . " / " . $id);
-                if($id === $schedules[$diff][$i]['id']) {
-                    $schedules[$diff][$i]['events'][] = $data_timeslot;
+                if($id === $schedules[$diff]['schedules'][$i]['id']) {
+                    $schedules[$diff]['schedules'][$i]['events'][] = $data_timeslot;
                     $groupExists = true;
                 }
             }
@@ -100,35 +101,48 @@ class DateUtils {
                 $data_event['title'] = $usernames;
                 $data_event['subtitle'] = _('Room') . " " . $timeslot->getGroup()->getRoom();
 
-                $schedules[$diff][] = $data_event;
+                $schedules[$diff]['schedules'][] = $data_event;
             }
 
             //events need to be sorted for correct display in ScheduleView
-            for ($i = 0; $i < sizeof($schedules[$diff]); ++$i) {
-                usort($schedules[$diff][$i]['events'], function ($a, $b) {
+            for ($i = 0; $i < sizeof($schedules[$diff]['schedules']); ++$i) {
+                usort($schedules[$diff]['schedules'][$i]['events'], function ($a, $b) {
                     return $a['start'] <=> $b['start'];
                 });
             }
             //sort groups by name
-            usort($schedules[$diff], function ($a, $b) {
+            usort($schedules[$diff]['schedules'], function ($a, $b) {
                 return $a['title'] <=> $b['title'];
             });
 
+            //TODO: don't hardcode scaleFactor
+            $scaleFactor = 2;
+            //if diff.hours <> 2 then = 2;
+            //if diff.hours > 2 then < 2;
+            //if diff.hours < 2 then > 2;
+
+            $start = new DateTimeImmutable("first day of January 3000");
+            $end = new DateTimeImmutable();
+
+            foreach($schedules[$diff]['schedules'] as $schedule) {
+                foreach($schedule['events'] as $event) {
+                    if($start > $event['start']) {
+                        $start = $event['start'];
+                    }
+                    if($end < $event['end']) {
+                        $end = $event['end'];
+                    }
+                }
+            }
+
+
+            $schedules[$diff]['settings'] = array('start' => $start, 'end' => $end, 'scaleFactor' => $scaleFactor);
         }
         $result = array();
 
 
 
         $result['schedules'] = $schedules;
-
-        //TODO: don't hardcode scaleFactor
-        $scaleFactor = 2;
-        //if diff.hours <> 2 then = 2;
-        //if diff.hours > 2 then < 2;
-        //if diff.hours < 2 then > 2;
-
-        $settings = array('start' => $settings->getStart(), 'end' => $settings->getEnd(), 'scaleFactor' => $scaleFactor);
-        $result['settings'] = $settings;
 
 
 
