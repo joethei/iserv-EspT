@@ -43,13 +43,10 @@ class DateUtils {
 
             $data_timeslot = array();
 
-            $startDate = $settings->getStart();
-            $startYear = (int)$startDate->format("Y");
-            $startMonth = (int)$startDate->format("m");
-            $startDay = (int)$startDate->format("d");
+            $diff = $settings->getStart()->diff($timeslot->getStart())->days;
 
-            $data_timeslot['start'] = $timeslot->getStart()->setDate($startYear, $startMonth, $startDay);
-            $data_timeslot['end'] = $timeslot->getEnd()->setDate($startYear, $startMonth, $startDay);
+            $data_timeslot['start'] = $timeslot->getStart();
+            $data_timeslot['end'] = $timeslot->getEnd();
             $data_timeslot['id'] = $timeslot->getId();
 
             $color = 'red';
@@ -80,11 +77,17 @@ class DateUtils {
 
             $id = $timeslot->getGroup()->getId();
 
-            $groupExists = false;
+            if(!array_key_exists($diff, $schedules)) {
+                $schedules[$diff] = array();
+            }
 
-            for ($i = 0; $i < sizeof($schedules); ++$i) {
-                if($id === $schedules[$i]['id']) {
-                    $schedules[$i]['events'][] = $data_timeslot;
+            dump($schedules);
+
+            $groupExists = false;
+            for ($i = 0; $i < count($schedules[$diff]); ++$i) {
+                dump($i . " / " . $diff . " / " . $id);
+                if($id === $schedules[$diff][$i]['id']) {
+                    $schedules[$diff][$i]['events'][] = $data_timeslot;
                     $groupExists = true;
                 }
             }
@@ -97,23 +100,19 @@ class DateUtils {
                 $data_event['title'] = $usernames;
                 $data_event['subtitle'] = _('Room') . " " . $timeslot->getGroup()->getRoom();
 
-                $schedules[] = $data_event;
+                $schedules[$diff][] = $data_event;
             }
 
             //events need to be sorted for correct display in ScheduleView
-            for ($i = 0; $i < sizeof($schedules); ++$i) {
-                usort($schedules[$i]['events'], function ($a, $b) {
+            for ($i = 0; $i < sizeof($schedules[$diff]); ++$i) {
+                usort($schedules[$diff][$i]['events'], function ($a, $b) {
                     return $a['start'] <=> $b['start'];
                 });
             }
-
             //sort groups by name
-            for ($i = 0; $i < sizeof($schedules); ++$i) {
-                usort($schedules, function ($a, $b) {
-                    return $a['title'] <=> $b['title'];
-                });
-            }
-
+            usort($schedules[$diff], function ($a, $b) {
+                return $a['title'] <=> $b['title'];
+            });
 
         }
         $result = array();
@@ -130,6 +129,8 @@ class DateUtils {
 
         $settings = array('start' => $settings->getStart(), 'end' => $settings->getEnd(), 'scaleFactor' => $scaleFactor);
         $result['settings'] = $settings;
+
+
 
         return $result;
     }

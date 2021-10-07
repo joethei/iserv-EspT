@@ -36,7 +36,7 @@ export default {
     },
     updateData() {
       $.getJSON(Routing.generate('espt_timeslots_user')).done(data => {
-        this.timeslots = data
+        this.timeslots = data;
         DataTable.create($('.table'));
       });
     },

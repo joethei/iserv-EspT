@@ -83,44 +83,7 @@ export default {
     },
     updateData() {
       $.getJSON(Routing.generate('espt_timeslots')).done(data => {
-        //split data into multiple copies, one for each day.
-          data.schedules.forEach((schedule) => {
-            schedule.events.forEach((event) => {
-              let diff = moment.duration(moment(data.settings.start).diff(moment(event.start))).asDays();
-              if(this.schedules[diff] === undefined) {
-                this.schedules[diff] = {
-                  settings: {},
-                  schedules: [],
-                };
-              }
-
-              //push schedule if not already existing
-              let foundSchedule = false;
-              this.schedules[diff].schedules.forEach((localSchedule) => {
-                if(localSchedule.id === schedule.id) foundSchedule = true;
-              });
-
-              if(!foundSchedule) {
-                this.schedules[diff].schedules.push({
-                  id: schedule.id,
-                  title: schedule.title,
-                  subtitle: schedule.subtitle,
-                  events: []
-                });
-              }
-
-              this.schedules[diff].schedules.forEach((localSchedule) => {
-                if(localSchedule.id === schedule.id) {
-                  localSchedule.events.push(event);
-                }
-              });
-            });
-          });
-          this.schedules.forEach((schedule) => {
-            schedule.settings.scaleFactor = data.settings.scaleFactor;
-            schedule.settings.start = moment.min(schedule.schedules.map(schedule => schedule.events).map(event => event.start));
-            schedule.settings.end = moment.max(schedule.schedules.map(schedule => schedule.events).map(event => event.end));
-          })
+        this.schedules = data;
       });
     }
   },
