@@ -7,3 +7,12 @@
     {{ form(form, {'attr': {'id': 'creation_form'}}) }}
 
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if app.environment != 'prod' %}
+        <!-- {{ _self }} => espt.js -->
+    {% endif %}
+    <script src="{{ asset('js/espt.js', 'espt') }}"></script>
+{% endblock %}

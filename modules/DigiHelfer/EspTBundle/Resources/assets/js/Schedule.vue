@@ -92,6 +92,15 @@ export default {
                   settings: {},
                   schedules: [],
                 };
+              }
+
+              //push schedule if not already existing
+              let foundSchedule = false;
+              this.schedules[diff].schedules.forEach((localSchedule) => {
+                if(localSchedule.id === schedule.id) foundSchedule = true;
+              });
+
+              if(!foundSchedule) {
                 this.schedules[diff].schedules.push({
                   id: schedule.id,
                   title: schedule.title,
@@ -99,12 +108,12 @@ export default {
                   events: []
                 });
               }
+
               this.schedules[diff].schedules.forEach((localSchedule) => {
                 if(localSchedule.id === schedule.id) {
                   localSchedule.events.push(event);
                 }
               });
-
             });
           });
           this.schedules.forEach((schedule) => {
