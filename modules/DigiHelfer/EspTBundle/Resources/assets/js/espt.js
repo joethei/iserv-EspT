@@ -6,20 +6,20 @@ import Vue from 'vue';
 import Confirm from 'IServ.Confirm';
 
 
-if($('#espt-table')) {
+if($('#espt-table').length) {
     new Vue({
         el: '#espt-table',
         render: h => h(TimeslotTable)
     });
 }
 
-if($('#espt-schedule')) {
+if($('#espt-schedule').length) {
     new Vue({
         el: '#espt-schedule',
         render: h => h(Schedule)
     });
 }
-if($('#creation_form')) {
+if($('#creation_form').length) {
     $('#creation_form').on('submit', function(e) {
         e.preventDefault();
         Confirm.confirm('confirm_creation', {
