@@ -1,6 +1,6 @@
 <template>
   <div class="ScheduleView">
-    <h3 class="text-center">{{ moment(settings.start).format('dddd D. MMMM') }}</h3>
+    <h3 class="text-center">{{ formatDate(settings.start) }}</h3>
     <div class="timeline">
       <div class="hour" :style="timelineWidth" v-for="hour in hours" :key="hour">
         {{ hour }}
@@ -40,6 +40,9 @@ export default {
     }
   },
   methods: {
+    formatDate: function(date) {
+      return moment(date).format('dddd D. MMMM');
+    },
     click: function (event) {
       this.$emit('onClickEvent', event);
     },
