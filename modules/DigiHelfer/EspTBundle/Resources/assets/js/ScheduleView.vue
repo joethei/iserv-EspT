@@ -1,6 +1,6 @@
 <template>
   <div class="ScheduleView">
-    <p>{{ settings.start.format('dd.mm') }}</p>
+    <h3 class="text-center">{{ moment(settings.start).format('dddd D. MMMM') }}</h3>
     <div class="timeline">
       <div class="hour" :style="timelineWidth" v-for="hour in hours" :key="hour">
         {{ hour }}

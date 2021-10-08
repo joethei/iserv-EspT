@@ -59,6 +59,7 @@ class TimeslotTemplateCollection implements CrudInterface {
 
     public function __construct() {
         $this->timeslots = new ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
     public function __toString() : string {

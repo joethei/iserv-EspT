@@ -54,11 +54,11 @@ class DateUtils {
             switch ($timeslot->getType()->getName()) {
                 case EventType::BOOK:
                 case EventType::INVITE :
-                    $color = 'green';
+                    $color = 'lightgreen';
                     $name = _('espt_timeslot_type_free');
                     break;
                 case EventType::BREAK :
-                    $color = 'gray';
+                    $color = 'lightgray';
                     $name = _('espt_timeslot_type_break');
                     break;
             }
@@ -115,12 +115,6 @@ class DateUtils {
                 return $a['title'] <=> $b['title'];
             });
 
-            //TODO: don't hardcode scaleFactor
-            $scaleFactor = 2;
-            //if diff.hours <> 2 then = 2;
-            //if diff.hours > 2 then < 2;
-            //if diff.hours < 2 then > 2;
-
             $start = new DateTimeImmutable("first day of January 3000");
             $end = new DateTimeImmutable();
 
@@ -133,20 +127,12 @@ class DateUtils {
                         $end = $event['end'];
                     }
                 }
+
             }
-
-
-            $schedules[$diff]['settings'] = array('start' => $start, 'end' => $end, 'scaleFactor' => $scaleFactor);
+            $diffHours = $start->diff($end)->h;
+            $schedules[$diff]['settings'] = array('start' => $start, 'end' => $end, 'scaleFactor' => $diffHours);
         }
-        $result = array();
-
-
-
-        $result['schedules'] = $schedules;
-
-
-
-        return $result;
+        return $schedules;
     }
 
 }

@@ -1,7 +1,9 @@
 <template>
   <div>
     <div v-for="schedule in schedules">
-      <ScheduleView v-bind:schedules="schedule.schedules" v-bind:settings="schedule.settings" @onClickEvent="(event) => onClick(event)"/>
+      <div v-if="schedule">
+        <ScheduleView v-bind:schedules="schedule.schedules" v-bind:settings="schedule.settings" @onClickEvent="(event) => onClick(event)"/>
+      </div>
     </div>
   </div>
 </template>
@@ -47,13 +49,13 @@ export default {
         window.location.href = Routing.generate('espt_invite', {'id': event.id});
       }else {
         //only show confirmation dialog if is allowed to book
-        if(event.color !== 'green' && event.color !== 'yellow') {
+        if(event.color !== 'lightgreen' && event.color !== 'yellow') {
           return;
         }
 
         Confirm.confirm({
           title: _('espt_confirm'),
-          content: event.color === 'green' ? _('espt_confirm_text') : _('espt_confirm_cancel_text'),
+          content: event.color === 'lightgreen' ? _('espt_confirm_text') : _('espt_confirm_cancel_text'),
           buttons: {
             confirmButton: {
               text: _('OK'),
@@ -66,7 +68,7 @@ export default {
                     let event = new Event("updateData", {bubbles: true});
                     document.dispatchEvent(event);
                   }else {
-                    Message.error(_('Error') + " " + data.error, false);
+                    Message.error(_('Error') + " " + data.error, 50000, false);
                     this.updateData();
                   }
                 });

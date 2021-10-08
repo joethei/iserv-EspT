@@ -71,10 +71,10 @@ class AdminController extends AbstractPageController {
 
             foreach ($groups as $group) {
                 $templates = $group->getTimeslotTemplates();
-                foreach($templates as $template) {
-                    foreach ($template->getTimeslots() as $timeslotTemplate) {
+                foreach($templates as $templateCollection) {
+                    foreach ($templateCollection->getTimeslots() as $timeslotTemplate) {
                         $startDate = $settings->getStart();
-                        $startDate->add(new \DateInterval('P' . ($template->getDay() - 1) . 'D'));
+                        $startDate = $startDate->add(new \DateInterval('P' . ($templateCollection->getDay() - 1) . 'D'));
 
                         $day = (int)$startDate->format("j");
                         $month = (int)$startDate->format("m");
