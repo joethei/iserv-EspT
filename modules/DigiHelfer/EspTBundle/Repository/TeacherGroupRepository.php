@@ -48,7 +48,7 @@ class TeacherGroupRepository extends ServiceEntityRepository {
      */
     public function findAll(): Collection {
         $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\TeacherGroup s");
+        $query = $entityManager->createQuery("SELECT s FROM DigiHelfer\EspTBundle\Entity\TeacherGroup s ORDER BY s.room");
 
         return new ArrayCollection($query->getResult());
     }

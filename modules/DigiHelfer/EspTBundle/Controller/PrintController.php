@@ -28,10 +28,12 @@ final class PrintController extends AbstractPageController {
     private function buildPdf(CreationSettings $settings, int $logoWidth = 30) : PdfCreator {
         $pdf = new PdfCreator(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-        $subject = _('espt_on') . " " . strftime('%A %e.%B %G', $settings->getStart()->getTimestamp())
+        $diffDays = $settings->getStart()->diff($settings->getEnd())->days;
+
+        $subject = _('espt_on') . " " .   $diffDays > 0 ? strftime('%A %e.%B', $settings->getStart()->getTimestamp()) : strftime('%A %e.%B %G', $settings->getStart()->getTimestamp())
             . " " . __('espt_start_end_time',
                 $settings->getStart()->format('G:i'),
-                $settings->getEnd()->format('G:i'));
+                $diffDays > 0 ?  strftime('%A %e.%B %G %H:%M', $settings->getEnd()->getTimestamp()) : $settings->getEnd()->format(' G:i'));
 
         // set document information
         $pdf->SetCreator(PDF_CREATOR);
@@ -60,6 +62,7 @@ final class PrintController extends AbstractPageController {
         $pdf->SetFont('helvetica', '', 12);
 
         $pdf->AddPage();
+        $pdf->Ln();
 
         return $pdf;
     }
@@ -165,8 +168,8 @@ final class PrintController extends AbstractPageController {
             );
         }
 
-        $pdf = $this->buildPdf($settings, 15);
-        $pdf->Ln();
+        $pdf = $this->buildPdf($settings, 20);
+        $pdf->Ln(5);
         $pdf->Table($header, $data, $headerWidth);
 
         $filename = '/tmp/espt_temp' .$this->authenticatedUser()->getUuid() . '.pdf';
@@ -188,14 +191,9 @@ final class PrintController extends AbstractPageController {
         $settings = $settingsRepository->findFirst();
 
         // column titles
-        $header = array(_('Room'), _('Teacher'));
+        $header = array(_('Room'), _('espt_teacher'));
 
         $groups = $teacherGroupRepository->findAll();
-        usort($groups, function ($a, $b) {
-            /**@var TeacherGroup $a */
-            /** @var TeacherGroup $b */
-            return $a->getRoom() <=> $b->getRoom();
-        });
         $data = array();
 
         /** @var TeacherGroup $group */
@@ -206,9 +204,9 @@ final class PrintController extends AbstractPageController {
         //Sort by name, check by setting
         //sort by roomname afterwards
 
-        $pdf = $this->buildPdf($settings, 15);
+        $pdf = $this->buildPdf($settings, 20);
+        $pdf->Ln(5);
         $pdf->setCustomFooterText("");
-        $pdf->Ln();
         $pdf->Table($header, $data, array(30, 130));
 
         $filename = '/tmp/espt_temp' .$this->authenticatedUser()->getUuid() . '.pdf';
