@@ -107,18 +107,20 @@ final class PrintController extends AbstractPageController {
         /** @var Timeslot $timeslot */
         foreach ($timeslots as $timeslot) {
             $user = $timeslot->getUser();
+            $startFormatted = strftime('%e.%B %H:%M', $timeslot->getStart()->getTimestamp());
+            $endFormatted = $timeslot->getEnd()->format('G:i');
             if($user != null) {
                 $groups = array();
                 foreach ($user->getGroups() as $group) {
                     $groups[] = $group->getName();
                 }
                 $data[] = array(
-                    __('espt_start_end_time', $timeslot->getStart()->format('G:i'), $timeslot->getEnd()->format('G:i')),
+                    __('espt_start_end_time', $startFormatted, $endFormatted),
                     $user->getNameByFirstname() . ": " . implode(', ', $groups)
                 );
             }else {
                 $data[] = array(
-                    __('espt_start_end_time', $timeslot->getStart()->format('G:i'), $timeslot->getEnd()->format('G:i')),
+                    __('espt_start_end_time', $startFormatted, $endFormatted),
                     ''
                 );
             }
@@ -160,9 +162,10 @@ final class PrintController extends AbstractPageController {
         /** @var Timeslot $timeslot */
         foreach ($timeslots as $timeslot) {
             $group = $timeslot->getGroup();
-
+            $startFormatted = strftime('%e.%B %H:%M', $timeslot->getStart()->getTimestamp());
+            $endFormatted = $timeslot->getEnd()->format('G:i');
             $data[] = array(
-                __('espt_start_end_time', $timeslot->getStart()->format('G:i'), $timeslot->getEnd()->format('G:i')),
+                __('espt_start_end_time', $startFormatted, $endFormatted),
                 $group,
                 $group->getRoom()
             );

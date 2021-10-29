@@ -83,6 +83,7 @@ class TimeslotRepository extends ServiceEntityRepository {
 
         $connection->executeStatement('TRUNCATE espt_timeslot RESTART IDENTITY CASCADE');
         $connection->executeStatement('TRUNCATE espt_teacher_group_selections RESTART IDENTITY CASCADE');
+        $connection->executeStatement('TRUNCATE espt_teacher_group_selection RESTART IDENTITY CASCADE');
     }
 
     /**

@@ -199,3 +199,6 @@ msgstr ""
 
 msgid "espt_confirm_creation"
 msgstr ""
+
+msgid "espt_date_future"
+msgstr ""

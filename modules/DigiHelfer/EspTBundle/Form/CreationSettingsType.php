@@ -19,7 +19,7 @@ class CreationSettingsType extends AbstractType {
                 'help' => _('espt_starttime_help'),
                 'input' => 'datetime_immutable',
                 'constraints' => [
-                    new GreaterThanOrEqual (  ['value'=>"today",'message'=>"error message"] )
+                    new GreaterThanOrEqual (  ['value'=>"today",'message'=>_('espt_date_future')] )
                 ]
             ])
             ->add('end', DateTimeType::class, [
@@ -27,7 +27,7 @@ class CreationSettingsType extends AbstractType {
                 'help' => _('espt_endtime_help'),
                 'input' => 'datetime_immutable',
                 'constraints' => [
-                    new GreaterThanOrEqual (  ['value'=>"now",'message'=>"error message"] )
+                    new GreaterThanOrEqual (  ['value'=>"today",'message'=>_('espt_date_future')] )
                 ]
             ])
             ->add('regStart', DateTimeType::class, [
@@ -35,13 +35,16 @@ class CreationSettingsType extends AbstractType {
                 'help' => _('espt_registration_start_help'),
                 'input' => 'datetime_immutable',
                 'constraints' => [
-                    new GreaterThanOrEqual (  ['value'=>"now",'message'=>"error message"] )
+                    new GreaterThanOrEqual (  ['value'=>"today",'message'=>_('espt_date_future')] )
                 ]
             ])
             ->add('regEnd', DateTimeType::class, [
                 'label' => _("espt_registration_end"),
                 'help' => _('espt_registration_end_help'),
                 'input' => 'datetime_immutable',
+                'constraints' => [
+                    new GreaterThanOrEqual (  ['value'=>"today",'message'=>_('espt_date_future')] )
+                ]
             ])
         ->add('save', SubmitType::class, [
             'label' => _("espt_save"),

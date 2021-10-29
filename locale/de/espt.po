@@ -186,3 +186,6 @@ msgstr "Gruppen"
 
 msgid "espt_filter_groups_help"
 msgstr "Welche Lehrkräfte sollen angezeigt werden?"
+
+msgid "espt_date_future"
+msgstr "Das Datum muss in der Zukunft liegen"

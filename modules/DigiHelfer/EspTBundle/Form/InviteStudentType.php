@@ -31,16 +31,7 @@ class InviteStudentType extends AbstractType {
                 'by_reference' => true,
                 'query_builder' => function(UserRepository $repository) {
                     //only show students in list
-                    $queryBuilder = $repository->createDeletedAwareQueryBuilder('users');
-                    $queryBuilder->join('users.roles', 'roles');
-                    $queryBuilder->orderBy("users.firstname, users.lastname");
-                    $queryBuilder->setParameter("privilege", Privilege::STUDENT);
-
-                    $where = $queryBuilder->expr()->in('privileges', ':privilege');
-
-                    $queryBuilder->andWhere($where);
-
-                    return $queryBuilder;
+                    return $repository->createPrivilegeQueryBuilder(Privilege::STUDENT);
                 }
 
             ]);
