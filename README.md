@@ -1,8 +1,6 @@
 # Elternsprechtagsterminvereinbarung für IServ
 [![Build Status](https://teamcity.joethei.xyz/app/rest/builds/buildType:(id:Studium_Programming_DigiHelferElternsprechtag)/statusIcon)](https://teamcity.joethei.xyz/viewType.html?buildTypeId=Studium_Programming_DigiHelferElternsprechtag&guest=1)
 
-> ⚠️**In Entwicklung, nicht für den Produktivbetrieb geeignet**
-
 |Buchung|Bearbeitung|Ausdruck|
 :-------:|:--------:|:------:|
 ![](images/booking.png) |![](images/edit_timeslots.png) |![](images/pdf_rooms.png)
