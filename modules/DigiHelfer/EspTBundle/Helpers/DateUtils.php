@@ -82,11 +82,9 @@ class DateUtils {
                 $schedules[$diff]['schedules'] = array();
             }
 
-            dump($schedules);
-
+            //if the groups is not already present in the array, add them
             $groupExists = false;
             for ($i = 0; $i < count($schedules[$diff]['schedules']); ++$i) {
-                dump($i . " / " . $diff . " / " . $id);
                 if($id === $schedules[$diff]['schedules'][$i]['id']) {
                     $schedules[$diff]['schedules'][$i]['events'][] = $data_timeslot;
                     $groupExists = true;
@@ -118,6 +116,7 @@ class DateUtils {
             $start = new DateTimeImmutable("first day of January 3000");
             $end = new DateTimeImmutable();
 
+            //find start/end time for group events
             foreach($schedules[$diff]['schedules'] as $schedule) {
                 foreach($schedule['events'] as $event) {
                     if($start > $event['start']) {
