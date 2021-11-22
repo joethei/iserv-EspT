@@ -49,13 +49,13 @@ export default {
         window.location.href = Routing.generate('espt_invite', {'id': event.id});
       }else {
         //only show confirmation dialog if is allowed to book
-        if(event.color !== 'lightgreen' && event.color !== 'yellow') {
+        if(event.color !== 'free' && event.color !== 'booked') {
           return;
         }
 
         Confirm.confirm({
           title: _('espt_confirm'),
-          content: event.color === 'lightgreen' ? _('espt_confirm_text') : _('espt_confirm_cancel_text'),
+          content: event.color === 'free' ? _('espt_confirm_text') : _('espt_confirm_cancel_text'),
           buttons: {
             confirmButton: {
               text: _('OK'),
