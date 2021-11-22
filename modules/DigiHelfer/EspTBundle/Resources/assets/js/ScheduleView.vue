@@ -7,16 +7,16 @@
       </div>
     </div>
     <div class="schedule" v-for="schedule in schedules" :key="schedule.id">
-      <div class="info">
+      <div class="info text-center">
         <b>{{ schedule.title }}</b>
         <br>
         <span>{{ schedule.subtitle }}</span>
       </div>
       <div class="events">
-        <div class="event" v-bind:style="{width: firstMinute, backgroundColor: 'lightgray'}">
+        <div class="event break" v-bind:style="{width: firstMinute}">
         </div>
-        <div class="event" v-for="event in schedule.events" :key="event.id"
-             v-bind:style="{width: (duration(event) / settings.scaleFactor) + '%', backgroundColor: event.color}"
+        <div class="event {{event.color}}" v-for="event in schedule.events" :key="event.id"
+             v-bind:style="{width: (duration(event) / settings.scaleFactor) + '%'}"
              @click="click(event)"
              v-tooltip="format(event)">
           <p>{{ event.name }}</p>

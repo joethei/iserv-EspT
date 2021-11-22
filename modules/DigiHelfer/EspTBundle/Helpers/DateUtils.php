@@ -43,7 +43,9 @@ class DateUtils {
 
             $data_timeslot = array();
 
-            $diff = $settings->getStart()->diff($timeslot->getStart())->days;
+            $diff = $timeslot->getStart()->format("z");
+            //$settings->getStart()->diff($timeslot->getStart())->days;
+
 
             $data_timeslot['start'] = $timeslot->getStart();
             $data_timeslot['end'] = $timeslot->getEnd();
@@ -54,21 +56,21 @@ class DateUtils {
             switch ($timeslot->getType()->getName()) {
                 case EventType::BOOK:
                 case EventType::INVITE :
-                    $color = 'lightgreen';
+                    $color = 'free';
                     $name = _('espt_timeslot_type_free');
                     break;
                 case EventType::BREAK :
-                    $color = 'lightgray';
+                    $color = 'break';
                     $name = _('espt_timeslot_type_break');
                     break;
             }
 
             if ($timeslot->getUser() != null) {
                 $name = _('espt_timeslot_type_blocked');
-                $color = 'red';
+                $color = 'blocked';
                 if ($timeslot->getUser() === $user) {
                     $name = _('espt_timeslot_type_booked');
-                    $color = 'yellow';
+                    $color = 'booked';
                 }
             }
 

@@ -69,8 +69,6 @@ export default {
                     document.dispatchEvent(event);
                   }else {
                     Message.error(_('Error') + ": " + data.error, 50000, false);
-                    let event = new Event("updateData", {bubbles: true});
-                    document.dispatchEvent(event);
                   }
                 });
               }

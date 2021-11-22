@@ -1,14 +1,18 @@
+.espt-info {
+  background-color: var(--action-background-color);
+}
+
 .schedule {
   overflow: hidden;
   position: relative;
   clear: both;
+  display: grid;
 }
 
 .schedule .info {
-  background-color: lightgray;
-  float: left;
-  width: 10%;
-  height: 70px;
+  background-color: var(--link-hover-bg);
+  width: 100%;
+  height: 100%;
   border-bottom: 2px solid black;
   border-top: 2px solid black;
   border-left: 2px solid black;
@@ -24,10 +28,26 @@
   min-height: 70px;
   box-sizing: border-box;
   border: 2px solid black;
+  height: 100%;
+}
+
+.schedule .events .event .free {
+  background-color: var(--brand-success);
+}
+
+.schedule .events .event .booked {
+  background-color: var(--brand-primary);
+}
+
+.schedule .events .event .blocked {
+  background-color: var(--brand-danger);
+}
+
+.schedule .events .event .break {
+  background-color: var(--state-info-bg);
 }
 
 .timeline {
-  padding-left: 10%;
   padding-bottom: 60px;
   position: relative;
   clear: both;

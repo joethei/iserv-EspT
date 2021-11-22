@@ -205,7 +205,7 @@ final class PrintController extends AbstractPageController {
         }
 
         //Sort by name, check by setting
-        //sort by roomname afterwards
+        //sort by room name afterwards
 
         $pdf = $this->buildPdf($settings, 20);
         $pdf->Ln(5);

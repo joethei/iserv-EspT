@@ -24,8 +24,6 @@
 
 <script>
 
-
-import DataTable from 'IServ.DataTable';
 import Routing from 'IServ.Routing';
 
 export default {
@@ -37,7 +35,6 @@ export default {
     updateData() {
       $.getJSON(Routing.generate('espt_timeslots_user')).done(data => {
         this.timeslots = data;
-        DataTable.create($('.table'));
       });
     },
   },
